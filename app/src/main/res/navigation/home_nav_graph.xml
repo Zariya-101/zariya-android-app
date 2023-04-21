@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.zariya.zariya.auth.presentation.fragment.SplashFragment"
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/actionSplashToLogin"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.zariya.zariya.auth.presentation.fragment.LoginFragment"
+        android:label="LoginFragment" />
+</navigation>
