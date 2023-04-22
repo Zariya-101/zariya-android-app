@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.zariya.zariya.R
-import com.zariya.zariya.activity.WelcomeActivity
 import com.zariya.zariya.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -26,7 +25,5 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val intent = Intent(activity, WelcomeActivity::class.java)
-        startActivity(intent)
     }
 }

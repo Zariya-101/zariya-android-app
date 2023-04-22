@@ -27,5 +27,9 @@ class SplashFragment : Fragment() {
         binding.btnLogin.setOnClickListener {
             it.findNavController().navigate(SplashFragmentDirections.actionSplashToLogin())
         }
+        binding.root.setOnClickListener{
+            it.findNavController().navigate(SplashFragmentDirections.actionSplashToWelcome())
+        }
+
     }
 }

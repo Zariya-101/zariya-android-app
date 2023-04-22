@@ -1,45 +1,38 @@
-package com.zariya.zariya.activity
+package com.zariya.zariya.auth.presentation.fragment
 
-import android.app.Activity
+import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.text.Html
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import androidx.viewpager.widget.ViewPager
 import com.zariya.zariya.R
-import com.zariya.zariya.databinding.ActivityWelcomeBinding
+import com.zariya.zariya.databinding.FragmentWelcomeBinding
 
-class WelcomeActivity : AppCompatActivity() {
+
+class WelcomeFragment : Fragment() {
     private lateinit var layouts: IntArray
     private lateinit var dots: Array<TextView?>
     private var myViewPagerAdapter: MyViewPagerAdapter? = null
-    private var binding: ActivityWelcomeBinding? = null
+    private lateinit var binding: FragmentWelcomeBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentWelcomeBinding.inflate(inflater)
+        return binding.root
+    }
 
-        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
-            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true)
-        }
-        if (Build.VERSION.SDK_INT >= 19) {
-            window.decorView.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        }
-        if (Build.VERSION.SDK_INT >= 21) {
-            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
-            window.statusBarColor = Color.TRANSPARENT
-        }
-        binding = ActivityWelcomeBinding.inflate(
-            layoutInflater
-        )
-        setContentView(binding!!.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         initialization()
     }
 
@@ -69,24 +62,14 @@ class WelcomeActivity : AppCompatActivity() {
             } else {
             }
         }
-//        binding!!.btnSkip.setOnClickListener { }
-    }
+        binding!!.btnSkip.setOnClickListener {
 
-    fun setWindowFlag(activity: Activity, bits: Int, on: Boolean) {
-        val win = activity.window
-        val winParams = win.attributes
-        if (on) {
-            winParams.flags = winParams.flags or bits
-        } else {
-            winParams.flags = winParams.flags and bits.inv()
         }
-        win.attributes = winParams
     }
-
     inner class MyViewPagerAdapter : PagerAdapter() {
         private var layoutInflater: LayoutInflater? = null
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
-            layoutInflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            layoutInflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val view = layoutInflater!!.inflate(layouts[position], container, false)
             container.addView(view)
             return view
@@ -116,7 +99,7 @@ class WelcomeActivity : AppCompatActivity() {
         val colorsInactive = resources.getIntArray(R.array.array_dot_inactive)
         binding!!.layoutDots.removeAllViews()
         for (i in dots.indices) {
-            dots[i] = TextView(this)
+            dots[i] = TextView(context)
             dots[i]!!.text = Html.fromHtml("&#8226;")
             dots[i]!!.textSize = 35f
             dots[i]!!.setTextColor(colorsInactive[currentPage])
@@ -125,7 +108,8 @@ class WelcomeActivity : AppCompatActivity() {
         if (dots.size > 0) dots[currentPage]!!.setTextColor(colorsActive[currentPage])
     }
 
-    var viewPagerPageChangeListener: OnPageChangeListener = object : OnPageChangeListener {
+    var viewPagerPageChangeListener: ViewPager.OnPageChangeListener = object :
+        ViewPager.OnPageChangeListener {
         override fun onPageScrolled(
             position: Int,
             positionOffset: Float,
@@ -136,10 +120,9 @@ class WelcomeActivity : AppCompatActivity() {
         override fun onPageSelected(position: Int) {
             addBottomDots(position)
             if (position == 0) {
-//                binding!!.btnSkip.setTextColor(resources.getColor(R.color.white))
+                binding!!.btnSkip.setTextColor(resources.getColor(R.color.dark_blue))
                 binding!!.btnNext.setTextColor(resources.getColor(R.color.white))
             } else {
-//                binding!!.btnSkip.setTextColor(Color.WHITE)
                 binding!!.btnNext.setTextColor(Color.WHITE)
             }
             // changing the next button text 'NEXT' / 'GOT IT'
@@ -147,11 +130,11 @@ class WelcomeActivity : AppCompatActivity() {
                 // last page. make button text to GOT IT
                 binding!!.btnNext.setTextColor(resources.getColor(R.color.white))
                 binding!!.btnNext.text = "Start"
-//                binding!!.btnSkip.visibility = View.GONE
+                binding!!.btnSkip.visibility = View.GONE
             } else {
                 // still pages are left
                 binding!!.btnNext.text = getString(R.string.next)
-//                binding!!.btnSkip.visibility = View.VISIBLE
+                binding!!.btnSkip.visibility = View.VISIBLE
             }
         }
 
