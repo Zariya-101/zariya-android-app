@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:text="@string/login_sub_heading"
+            android:text="@string/signup_sub_heading"
             android:textColor="@color/blue_500"
             app:layout_constraintBottom_toTopOf="@id/tilName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
             android:layout_marginBottom="@dimen/_20sdp"
             android:background="@drawable/bg_edit_text"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/tilPhone">
+            app:layout_constraintBottom_toTopOf="@+id/tilDOB">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -53,6 +53,29 @@
                 android:drawablePadding="@dimen/_10sdp"
                 android:drawableTint="@color/blue_500"
                 android:hint="@string/name"
+                android:textColorHint="@color/blue_500" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDOB"
+            style="@style/roundedTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/bg_edit_text"
+            app:hintEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/tilPhone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/blue_500"
+                android:hint="@string/dob"
                 android:textColorHint="@color/blue_500" />
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -9,6 +9,7 @@
     <string name="password">Password</string>
     <string name="phone">Phone Number</string>
     <string name="name">Name</string>
+    <string name="dob">Date of Birth</string>
 
     <!--    CTA-->
     <string name="login_via_otp">Login via OTP</string>
