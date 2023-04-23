@@ -3,13 +3,16 @@
 
     <string name="login_heading">Let\'s get started</string>
     <string name="login_sub_heading">Please enter your phone number and password to login</string>
+    <string name="signup_sub_heading">Please enter your phone number and password to register</string>
 
-<!--    Hint-->
+    <!--    Hint-->
     <string name="password">Password</string>
     <string name="phone">Phone Number</string>
+    <string name="name">Name</string>
 
-<!--    CTA-->
+    <!--    CTA-->
     <string name="login_via_otp">Login via OTP</string>
+    <string name="signup_via_otp">Signup via OTP</string>
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
 </resources>

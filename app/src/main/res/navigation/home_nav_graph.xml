@@ -11,9 +11,16 @@
         <action
             android:id="@+id/actionSplashToLogin"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/actionSplashToSignUp"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.LoginFragment"
         android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.zariya.zariya.auth.presentation.fragment.SignUpFragment"
+        android:label="SignUpFragment" />
 </navigation>
