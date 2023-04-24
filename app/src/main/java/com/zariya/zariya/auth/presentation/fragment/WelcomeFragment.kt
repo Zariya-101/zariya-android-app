@@ -58,7 +58,7 @@ class WelcomeFragment : Fragment() {
             }
         }
         binding.btnSkip.setOnClickListener {
-
+           binding.viewPager.currentItem = 3
         }
     }
 
@@ -127,10 +127,12 @@ class WelcomeFragment : Fragment() {
                 binding.btnNext.setTextColor(resources.getColor(R.color.white))
                 binding.btnNext.setText(resources.getString(R.string.start))
                 binding.btnSkip.visibility = View.GONE
+                binding.btnNext.visibility=View.GONE
             } else {
                 // still pages are left
                 binding.btnNext.text = getString(R.string.next)
                 binding.btnSkip.visibility = View.VISIBLE
+                binding.btnNext.visibility=View.VISIBLE
             }
         }
 
