@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mainlayout"
-    android:background="@drawable/sliderbg" />
+    android:background="@drawable/sliderbg" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginTop="@dimen/_20sdp"/>
+        <TextView
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/blue_400"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Where talent meets opportunities"
+            android:layout_marginTop="@dimen/_20sdp"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

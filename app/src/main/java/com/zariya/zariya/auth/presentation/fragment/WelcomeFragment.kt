@@ -33,11 +33,6 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initialization()
-    }
-
-    private fun initialization() {
-
         layouts = intArrayOf(
             R.layout.welcome_slide1,
             R.layout.welcome_slide2,
@@ -50,22 +45,23 @@ class WelcomeFragment : Fragment() {
 
         //setup viewpager
         myViewPagerAdapter = MyViewPagerAdapter()
-        binding!!.viewPager.adapter = myViewPagerAdapter
-        binding!!.viewPager.addOnPageChangeListener(viewPagerPageChangeListener)
+        binding.viewPager.adapter = myViewPagerAdapter
+        binding.viewPager.addOnPageChangeListener(viewPagerPageChangeListener)
 
         //click events
-        binding!!.btnNext.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             val current = getItem(+1)
             if (current < layouts.size) {
                 // move to next screen
-                binding!!.viewPager.currentItem = current
+                binding.viewPager.currentItem = current
             } else {
             }
         }
-        binding!!.btnSkip.setOnClickListener {
+        binding.btnSkip.setOnClickListener {
 
         }
     }
+
     inner class MyViewPagerAdapter : PagerAdapter() {
         private var layoutInflater: LayoutInflater? = null
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -90,20 +86,20 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun getItem(i: Int): Int {
-        return binding!!.viewPager.currentItem + i
+        return binding.viewPager.currentItem + i
     }
 
     private fun addBottomDots(currentPage: Int) {
         dots = arrayOfNulls(layouts.size)
         val colorsActive = resources.getIntArray(R.array.array_dot_active)
         val colorsInactive = resources.getIntArray(R.array.array_dot_inactive)
-        binding!!.layoutDots.removeAllViews()
+        binding.layoutDots.removeAllViews()
         for (i in dots.indices) {
             dots[i] = TextView(context)
             dots[i]!!.text = Html.fromHtml("&#8226;")
             dots[i]!!.textSize = 35f
             dots[i]!!.setTextColor(colorsInactive[currentPage])
-            binding!!.layoutDots.addView(dots[i])
+            binding.layoutDots.addView(dots[i])
         }
         if (dots.size > 0) dots[currentPage]!!.setTextColor(colorsActive[currentPage])
     }
@@ -120,21 +116,21 @@ class WelcomeFragment : Fragment() {
         override fun onPageSelected(position: Int) {
             addBottomDots(position)
             if (position == 0) {
-                binding!!.btnSkip.setTextColor(resources.getColor(R.color.dark_blue))
-                binding!!.btnNext.setTextColor(resources.getColor(R.color.white))
+                binding.btnSkip.setTextColor(resources.getColor(R.color.dark_blue))
+                binding.btnNext.setTextColor(resources.getColor(R.color.white))
             } else {
-                binding!!.btnNext.setTextColor(Color.WHITE)
+                binding.btnNext.setTextColor(Color.WHITE)
             }
             // changing the next button text 'NEXT' / 'GOT IT'
             if (position == layouts.size - 1) {
                 // last page. make button text to GOT IT
-                binding!!.btnNext.setTextColor(resources.getColor(R.color.white))
-                binding!!.btnNext.text = "Start"
-                binding!!.btnSkip.visibility = View.GONE
+                binding.btnNext.setTextColor(resources.getColor(R.color.white))
+                binding.btnNext.setText(resources.getString(R.string.start))
+                binding.btnSkip.visibility = View.GONE
             } else {
                 // still pages are left
-                binding!!.btnNext.text = getString(R.string.next)
-                binding!!.btnSkip.visibility = View.VISIBLE
+                binding.btnNext.text = getString(R.string.next)
+                binding.btnSkip.visibility = View.VISIBLE
             }
         }
 
