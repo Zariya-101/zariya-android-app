@@ -5,17 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zariya.zariya.databinding.FragmentLoginBinding
+import com.zariya.zariya.databinding.FragmentSignUpBinding
 
-class LoginFragment : Fragment() {
+class SignUpFragment : Fragment() {
 
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: FragmentSignUpBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLoginBinding.inflate(inflater)
+        binding = FragmentSignUpBinding.inflate(layoutInflater)
         return binding.root
     }
 }
