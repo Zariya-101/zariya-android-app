@@ -1,11 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Zariya" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Base.Theme.Zariya" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/blue</item>
         <item name="android:colorPrimaryDark">@color/dark_blue</item>
-        <item name="android:colorAccent">@color/yellow_light</item>
+        <item name="android:colorAccent">@color/light_yellow</item>
     </style>
 
     <style name="Theme.Zariya" parent="Base.Theme.Zariya" />
+
+    <style name="roundedTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded
+        </item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
 </resources>
