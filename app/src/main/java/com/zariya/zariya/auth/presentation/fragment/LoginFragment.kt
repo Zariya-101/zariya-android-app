@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.zariya.zariya.R
 import com.zariya.zariya.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -17,5 +18,41 @@ class LoginFragment : Fragment() {
     ): View {
         binding = FragmentLoginBinding.inflate(inflater)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setUpListeners()
+    }
+
+    private fun setUpListeners() {
+        binding.btnLogin.setOnClickListener {
+            if (validate()) {
+
+            }
+        }
+    }
+
+    private fun validate(): Boolean {
+        if (binding.countryCodePicker.selectedCountryCode.isNullOrEmpty()) {
+            binding.tilPhone.error = getString(R.string.validation_select_country)
+            return false
+        }
+        binding.tilPhone.error = ""
+
+        if (binding.tilPhone.editText?.text?.isEmpty() == true) {
+            binding.tilPhone.error = getString(R.string.validation_empty_phone)
+            return false
+        }
+        binding.tilPhone.error = ""
+
+        if (binding.tilPhone.editText?.text?.toString()?.length != 10) {
+            binding.tilPhone.error = getString(R.string.validation_invalid_phone)
+            return false
+        }
+        binding.tilPhone.error = ""
+
+        return true
     }
 }
