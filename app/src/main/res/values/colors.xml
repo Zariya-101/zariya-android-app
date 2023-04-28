@@ -2,6 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+
+
     <color name="dark_blue">#FF12263A</color>
     <color name="blue">#FF0C717E</color>
     <color name="blue_500">#FF0997A0</color>
@@ -10,7 +13,22 @@
     <color name="blue_200">#FFC5D8D1</color>
     <color name="blue_100">#FFDDE3DE</color>
 
+    <array name="array_dot_active">
+        <item>@color/dark_blue</item>
+        <item>@color/blue</item>
+        <item>@color/blue_500</item>
+        <item>@color/blue_400</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dark_yellow</item>
+        <item>@color/light_yellow</item>
+        <item>@color/yellow_light</item>
+        <item>@color/blue_100</item>
+    </array>
+
     <color name="dark_yellow">#FFF4D1AE</color>
     <color name="light_yellow">#FFEFDDC9</color>
     <color name="yellow_light">#FFE9E8E4</color>
+    <color name="yellow_background">#FFE9E8E4</color>
 </resources>

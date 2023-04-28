@@ -1,5 +1,41 @@
 <resources>
     <string name="app_name">zariya</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="slder1" >Your next big break is just a profile away</string>
+    <string name="start">Start</string>
+    =======
+
+    <string name="login_heading">Let\'s get started</string>
+    <string name="login_sub_heading">Please enter your phone number and password to login</string>
+
+    <!--    Hint-->
+    <string name="password">Password</string>
+    <string name="phone">Phone Number</string>
+
+    <!--    CTA-->
+    <string name="login_via_otp">Login via OTP</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
+
+    <string name="pick_a_region">Pick A Region</string>
+    <string name="search_for_your_city">Search for your city</string>
+    <string name="auto_detect_my_location">Auto Detect My Location</string>
+
+
+    <!--    Popular Cities-->
+    <string name="delhi">Delhi</string>
+    <string name="ahmedabad">Ahemedabad</string>
+    <string name="chennai">Chennai</string>
+    <string name="mumbai">Mumbai </string>
+    <string name="banglore">Banglore</string>
+    <string name="hyderbad">Hyderabad</string>
+    <string name="pune">Pune</string>
+    <string name="kolkata">Kolkata</string>
+    <string name="chandigarh">Chandigarh</string>
+    <string name="kochi">Kochi</string>
+    
+    <!--    Other Cities-->
 </resources>

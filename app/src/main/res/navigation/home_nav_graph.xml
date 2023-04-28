@@ -24,6 +24,15 @@
         android:id="@+id/welcomeFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.WelcomeFragment"
         android:label="WelcomeFragment">
+        <action
+            android:id="@+id/actionWelcomeToLocation"
+            app:destination="@id/locationFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.zariya.zariya.auth.presentation.fragment.LocationFragment"
+        android:label="LocationFragment">
+
+    </fragment>
 </navigation>
