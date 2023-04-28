@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import com.zariya.zariya.R
 import com.zariya.zariya.databinding.FragmentSplashBinding
 
 class SplashFragment : Fragment() {
@@ -27,8 +26,14 @@ class SplashFragment : Fragment() {
         binding.btnLogin.setOnClickListener {
             it.findNavController().navigate(SplashFragmentDirections.actionSplashToLogin())
         }
+
         binding.root.setOnClickListener{
             it.findNavController().navigate(SplashFragmentDirections.actionSplashToWelcome())
+        }
+
+
+        binding.btnSignUP.setOnClickListener {
+            it.findNavController().navigate(SplashFragmentDirections.actionSplashToSignUp())
         }
 
     }
