@@ -8,7 +8,6 @@ import com.zariya.zariya.adapter.PopularCitiesAdapter.MyViewHolder
 import com.zariya.zariya.databinding.PopularCityItemBinding
 
 class PopularCitiesAdapter(
-    private val context: Context,
     private val cityNames: IntArray,
     private val cityImages: IntArray
 
@@ -17,7 +16,7 @@ class PopularCitiesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val mBinding = PopularCityItemBinding.inflate(
             LayoutInflater.from(
-                context
+                parent.context
             ), parent, false
         )
         return MyViewHolder(mBinding)

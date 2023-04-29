@@ -8,7 +8,6 @@ import com.zariya.zariya.databinding.OtherCityItemBinding
 
 
 class OtherCitiesAdapter (
-    private val context: Context,
     private val cityNames: IntArray,
 
 ) : RecyclerView.Adapter<OtherCitiesAdapter.MyViewHolder>() {
@@ -16,7 +15,7 @@ class OtherCitiesAdapter (
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val mBinding = OtherCityItemBinding.inflate(
             LayoutInflater.from(
-                context
+                parent.context
             ), parent, false
         )
         return MyViewHolder(mBinding)

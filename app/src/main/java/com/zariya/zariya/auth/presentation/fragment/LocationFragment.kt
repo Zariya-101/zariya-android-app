@@ -71,12 +71,12 @@ class LocationFragment : Fragment() {
 
         val layoutManager = GridLayoutManager(activity, 4)
         binding.rvPopularCities.setLayoutManager(layoutManager)
-        popularCitiesAdapter =  PopularCitiesAdapter(requireActivity(), cityNames,cityImages)
+        popularCitiesAdapter =  PopularCitiesAdapter(cityNames,cityImages)
         binding.rvPopularCities.setAdapter(popularCitiesAdapter)
 
 
         binding.rvOtherCities.setLayoutManager(LinearLayoutManager(context))
-        otherCitiesAdapter = OtherCitiesAdapter(requireActivity(),otherCityNames)
+        otherCitiesAdapter = OtherCitiesAdapter(otherCityNames)
         binding.rvOtherCities.setAdapter(otherCitiesAdapter)
 
     }
