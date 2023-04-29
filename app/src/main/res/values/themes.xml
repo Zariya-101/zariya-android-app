@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Zariya" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Base.Theme.Zariya" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/blue</item>
         <item name="android:colorPrimaryDark">@color/dark_blue</item>
@@ -9,7 +9,7 @@
 
     <style name="Theme.Zariya" parent="Base.Theme.Zariya" />
 
-    <style name="roundedTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+    <style name="roundedTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="shapeAppearanceOverlay">
             @style/ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded
         </item>
@@ -18,5 +18,12 @@
     <style name="ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="NavFabShapeAppearance" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="strokeWidth">@dimen/_10sdp</item>
+        <item name="strokeColor">@color/white</item>
     </style>
 </resources>

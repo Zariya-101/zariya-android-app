@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
     app:startDestination="@id/splashFragment">
 
@@ -12,10 +13,9 @@
             android:id="@+id/actionSplashToLogin"
             app:destination="@id/loginFragment" />
         <action
-
             android:id="@+id/actionSplashToWelcome"
-            app:destination="@id/welcomeFragment"/>
-
+            app:destination="@id/welcomeFragment" />
+        <action
             android:id="@+id/actionSplashToSignUp"
             app:destination="@id/signUpFragment" />
 
@@ -28,13 +28,36 @@
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.WelcomeFragment"
-        android:label="WelcomeFragment">
-    </fragment>
+        android:label="WelcomeFragment"></fragment>
 
 
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.SignUpFragment"
-        android:label="SignUpFragment" />
+        android:label="SignUpFragment">
+        <action
+            android:id="@+id/actionSignUpToHome"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.zariya.zariya.home.presentation.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/messagesFragment"
+        android:name="com.zariya.zariya.message.presentation.fragment.MessagesFragment"
+        android:label="MessagesFragment"
+        tools:layout="@layout/fragment_messages"/>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.zariya.zariya.search.presentation.fragment.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.zariya.zariya.profile.presentation.fragment.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
 
 </navigation>
