@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">zariya</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="slder1" >Your next big break is just a profile away</string>
+    <string name="start">Start</string>
+
+
     <string name="login_heading">Let\'s get started</string>
     <string name="login_sub_heading">Please enter your phone number and password to login</string>
     <string name="signup_sub_heading">Please enter your phone number and password to register</string>
@@ -16,4 +24,5 @@
     <string name="signup_via_otp">Signup via OTP</string>
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
+
 </resources>
