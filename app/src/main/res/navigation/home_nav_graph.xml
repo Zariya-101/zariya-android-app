@@ -14,8 +14,10 @@
             android:id="@+id/actionSplashToLogin"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/actionSplashToSignUp"
-            app:destination="@id/signUpFragment" />
+
+            android:id="@+id/actionSplashToWelcome"
+            app:destination="@id/welcomeFragment"/>
+
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -39,5 +41,11 @@
         <argument
             android:name="link"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.zariya.zariya.auth.presentation.fragment.WelcomeFragment"
+        android:label="WelcomeFragment">
     </fragment>
 </navigation>
