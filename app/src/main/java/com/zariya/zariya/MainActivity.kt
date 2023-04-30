@@ -32,10 +32,22 @@ class MainActivity : AppCompatActivity() {
 
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment -> showBottomNav(true)
-                R.id.messagesFragment -> showBottomNav(true)
-                R.id.searchFragment -> showBottomNav(true)
-                R.id.profileFragment -> showBottomNav(true)
+                R.id.homeFragment -> {
+                    showBottomNav(true)
+                    binding.fab.setImageResource(R.drawable.ic_add)
+                }
+                R.id.messagesFragment -> {
+                    showBottomNav(true)
+                    binding.fab.setImageResource(R.drawable.ic_add)
+                }
+                R.id.searchFragment -> {
+                    showBottomNav(true)
+                    binding.fab.setImageResource(R.drawable.ic_add)
+                }
+                R.id.profileFragment -> {
+                    showBottomNav(true)
+                    binding.fab.setImageResource(R.drawable.ic_question_mark)
+                }
                 else -> showBottomNav(false)
             }
         }
