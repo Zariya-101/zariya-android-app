@@ -8,36 +8,54 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.SplashFragment"
-        android:label="SplashFragment">
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/actionSplashToLogin"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/actionSplashToWelcome"
-            app:destination="@id/welcomeFragment" />
-        <action
             android:id="@+id/actionSplashToSignUp"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/actionSplashToWelcome"
+            app:destination="@id/welcomeFragment" />
 
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.zariya.zariya.auth.presentation.fragment.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/actionSignUpToWebView"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.zariya.zariya.webview.presentation.fragment.WebViewFragment"
+        android:label="WebViewFragment"
+        tools:layout="@layout/fragment_web_view">
+        <argument
+            android:name="link"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.WelcomeFragment"
-        android:label="WelcomeFragment"></fragment>
-
-
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.zariya.zariya.auth.presentation.fragment.SignUpFragment"
-        android:label="SignUpFragment">
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome">
         <action
-            android:id="@+id/actionSignUpToHome"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/actionWelcomeToLogin"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/actionWelcomeToSignUp"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -48,16 +66,15 @@
         android:id="@+id/messagesFragment"
         android:name="com.zariya.zariya.message.presentation.fragment.MessagesFragment"
         android:label="MessagesFragment"
-        tools:layout="@layout/fragment_messages"/>
+        tools:layout="@layout/fragment_messages" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.zariya.zariya.search.presentation.fragment.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/fragment_search"/>
+        tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.zariya.zariya.profile.presentation.fragment.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
-
+        tools:layout="@layout/fragment_profile" />
 </navigation>

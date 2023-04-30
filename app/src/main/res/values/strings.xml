@@ -6,11 +6,14 @@
     <string name="skip">Skip</string>
     <string name="slder1">Your next big break is just a profile away</string>
     <string name="start">Start</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign up</string>
 
 
     <string name="login_heading">Let\'s get started</string>
     <string name="login_sub_heading">Please enter your phone number and password to login</string>
     <string name="signup_sub_heading">Please enter your phone number and password to register</string>
+    <string name="agree_terms">I agree to Terms &amp; Conditions</string>
 
     <!--    Hint-->
     <string name="password">Password</string>
@@ -24,4 +27,11 @@
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
 
+    <!--    Validations-->
+    <string name="validation_empty_name">Please enter name</string>
+    <string name="validation_empty_dob">Please select Date of birth</string>
+    <string name="validation_invalid_name">Please enter valid name</string>
+    <string name="validation_select_country">Please select country code</string>
+    <string name="validation_empty_phone">Please enter phone</string>
+    <string name="validation_invalid_phone">Please enter valid phone</string>
 </resources>

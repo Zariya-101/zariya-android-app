@@ -54,18 +54,24 @@ class WelcomeFragment : Fragment() {
             if (current < layouts.size) {
                 // move to next screen
                 binding.viewPager.currentItem = current
-            } else {
             }
         }
         binding.btnSkip.setOnClickListener {
-           binding.viewPager.currentItem = 3
+            binding.viewPager.currentItem = 3
+        }
+        binding.btnLogin.setOnClickListener {
+            it.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeToLogin())
+        }
+        binding.btnSignUp.setOnClickListener {
+            it.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeToSignUp())
         }
     }
 
     inner class MyViewPagerAdapter : PagerAdapter() {
         private var layoutInflater: LayoutInflater? = null
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
-            layoutInflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            layoutInflater =
+                activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val view = layoutInflater!!.inflate(layouts[position], container, false)
             container.addView(view)
             return view
@@ -101,10 +107,10 @@ class WelcomeFragment : Fragment() {
             dots[i]!!.setTextColor(colorsInactive[currentPage])
             binding.layoutDots.addView(dots[i])
         }
-        if (dots.size > 0) dots[currentPage]!!.setTextColor(colorsActive[currentPage])
+        if (dots.isNotEmpty()) dots[currentPage]!!.setTextColor(colorsActive[currentPage])
     }
 
-    var viewPagerPageChangeListener: ViewPager.OnPageChangeListener = object :
+    private var viewPagerPageChangeListener: ViewPager.OnPageChangeListener = object :
         ViewPager.OnPageChangeListener {
         override fun onPageScrolled(
             position: Int,
@@ -125,14 +131,18 @@ class WelcomeFragment : Fragment() {
             if (position == layouts.size - 1) {
                 // last page. make button text to GOT IT
                 binding.btnNext.setTextColor(resources.getColor(R.color.white))
-                binding.btnNext.setText(resources.getString(R.string.start))
+                binding.btnNext.text = resources.getString(R.string.start)
                 binding.btnSkip.visibility = View.GONE
-                binding.btnNext.visibility=View.GONE
+                binding.btnNext.visibility = View.GONE
+                binding.btnLogin.visibility = View.VISIBLE
+                binding.btnSignUp.visibility = View.VISIBLE
             } else {
                 // still pages are left
                 binding.btnNext.text = getString(R.string.next)
                 binding.btnSkip.visibility = View.VISIBLE
-                binding.btnNext.visibility=View.VISIBLE
+                binding.btnNext.visibility = View.VISIBLE
+                binding.btnLogin.visibility = View.GONE
+                binding.btnSignUp.visibility = View.GONE
             }
         }
 
