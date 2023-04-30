@@ -9,7 +9,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
-import androidx.core.view.isEmpty
 import androidx.navigation.findNavController
 import com.zariya.zariya.R
 import com.zariya.zariya.databinding.FragmentSignUpBinding
@@ -74,6 +73,10 @@ class SignUpFragment : Fragment() {
             if (validate()) {
 
             }
+        }
+
+        binding.btnFacebook.setOnClickListener {
+            it.findNavController().navigate(SignUpFragmentDirections.actionSignUpToHome())
         }
     }
 

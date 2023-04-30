@@ -25,7 +25,11 @@
         android:id="@+id/loginFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/actionLoginToHome"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.SignUpFragment"
@@ -34,6 +38,9 @@
         <action
             android:id="@+id/actionSignUpToWebView"
             app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/actionSignUpToHome"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
