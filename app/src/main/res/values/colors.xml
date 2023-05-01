@@ -15,6 +15,7 @@
 
     <color name="dark_yellow">#FFF4D1AE</color>
     <color name="light_yellow">#FFEFDDC9</color>
+    <color name="yellow_background">#FFE9E8E4</color>
 
     <color name="yellow_light">#FFE9E8E4</color>
 
@@ -27,11 +28,9 @@
 
     <array name="array_dot_inactive">
         <item>@color/dark_yellow</item>
-        <item>@color/light_yellow</item>
+        <item>@color/yellow_light</item>
         <item>@color/yellow_light</item>
         <item>@color/blue_100</item>
     </array>
-
-    <color name="yellow_background">#FFE9E8E4</color>
 
 </resources>
