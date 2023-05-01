@@ -29,19 +29,8 @@
     <string name="pick_a_region">Pick A Region</string>
     <string name="search_for_your_city">Search for your city</string>
     <string name="auto_detect_my_location">Auto Detect My Location</string>
+    <string name="popular_cities">POPULAR CITIES</string>
+    <string name="other_cities">OTHER CITIES</string>
 
 
-    <!--    Popular Cities-->
-    <string name="delhi">Delhi</string>
-    <string name="ahmedabad">Ahemedabad</string>
-    <string name="chennai">Chennai</string>
-    <string name="mumbai">Mumbai </string>
-    <string name="banglore">Banglore</string>
-    <string name="hyderbad">Hyderabad</string>
-    <string name="pune">Pune</string>
-    <string name="kolkata">Kolkata</string>
-    <string name="chandigarh">Chandigarh</string>
-    <string name="kochi">Kochi</string>
-
-    <!--    Other Cities-->
 </resources>

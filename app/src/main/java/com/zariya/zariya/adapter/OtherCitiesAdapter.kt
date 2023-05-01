@@ -8,7 +8,7 @@ import com.zariya.zariya.databinding.OtherCityItemBinding
 
 
 class OtherCitiesAdapter (
-    private val cityNames: IntArray,
+    private val cityNames: Array<String>,
 
 ) : RecyclerView.Adapter<OtherCitiesAdapter.MyViewHolder>() {
 

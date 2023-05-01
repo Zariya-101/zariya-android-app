@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.zariya.zariya.R
 import com.zariya.zariya.adapter.OtherCitiesAdapter
 import com.zariya.zariya.adapter.PopularCitiesAdapter
@@ -27,11 +25,11 @@ class LocationFragment : Fragment() {
         )
 
     private val cityNames =
-        intArrayOf(R.string.ahmedabad,R.string.banglore,R.string.mumbai,R.string.chennai,R.string.hyderbad,R.string.ahmedabad,R.string.banglore,R.string.mumbai,R.string.chennai,R.string.hyderbad)
+        arrayOf<String>("Ahmedabad","Banglore","Mumbai","Chennai","Hyderabad","Ahmedabad","Banglore","Mumbai","Chennai","Hyderabad")
     private lateinit var popularCitiesAdapter: PopularCitiesAdapter
 
     private val otherCityNames =
-        intArrayOf(R.string.hyderbad,R.string.banglore,R.string.ahmedabad,R.string.banglore,R.string.mumbai,R.string.chennai,R.string.hyderbad)
+        arrayOf<String>("Ahmedabad","Banglore")
 
     private lateinit var otherCitiesAdapter: OtherCitiesAdapter
 
@@ -61,23 +59,19 @@ class LocationFragment : Fragment() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable) {
-                val search = s.toString()
+
 
             }
-        });
+        })
     }
 
     private fun showCitiesList() {
 
-        val layoutManager = GridLayoutManager(activity, 4)
-        binding.rvPopularCities.setLayoutManager(layoutManager)
         popularCitiesAdapter =  PopularCitiesAdapter(cityNames,cityImages)
-        binding.rvPopularCities.setAdapter(popularCitiesAdapter)
+        binding.rvPopularCities.adapter = popularCitiesAdapter
 
-
-        binding.rvOtherCities.setLayoutManager(LinearLayoutManager(context))
         otherCitiesAdapter = OtherCitiesAdapter(otherCityNames)
-        binding.rvOtherCities.setAdapter(otherCitiesAdapter)
+        binding.rvOtherCities.adapter = otherCitiesAdapter
 
     }
 
