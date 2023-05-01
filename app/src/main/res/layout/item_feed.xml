@@ -1,0 +1,133 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="feed"
+            type="com.zariya.zariya.home.data.model.Feed" />
+    </data>
+
+    <!--    <com.google.android.material.card.MaterialCardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="@dimen/_10sdp"-->
+    <!--        android:backgroundTint="@color/transparent"-->
+    <!--        >-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                showFeedFromDrawable="@{feed.profilePic}"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@{feed.userName}"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvLocation"
+            app:layout_constraintStart_toEndOf="@id/cvProfile"
+            app:layout_constraintTop_toTopOf="@+id/cvProfile"
+            tools:text="Pomelo_78" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@{feed.location}"
+            android:textColor="@color/dark_blue"
+            app:layout_constraintBottom_toBottomOf="@id/cvProfile"
+            app:layout_constraintStart_toEndOf="@id/cvProfile"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserName"
+            tools:text="Pomelo_78" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvPost"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toBottomOf="@id/cvProfile">
+
+            <ImageView
+                android:id="@+id/ivPost"
+                showFeedFromDrawable="@{feed.feedImage}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:id="@+id/ivLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/ic_heart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cvPost"
+            app:tint="@color/dark_blue" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@{Integer.toString(feed.likes)}"
+            app:layout_constraintBottom_toBottomOf="@id/ivLike"
+            app:layout_constraintStart_toEndOf="@id/ivLike"
+            app:layout_constraintTop_toTopOf="@id/ivLike"
+            tools:text="1132" />
+
+        <ImageView
+            android:id="@+id/ivComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/ic_message"
+            app:layout_constraintBottom_toBottomOf="@id/ivLike"
+            app:layout_constraintStart_toEndOf="@id/tvLike" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@{Integer.toString(feed.comments)}"
+            app:layout_constraintBottom_toBottomOf="@id/ivComment"
+            app:layout_constraintStart_toEndOf="@id/ivComment"
+            app:layout_constraintTop_toTopOf="@id/ivComment"
+            app:tint="@color/dark_blue"
+            tools:text="489" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    </com.google.android.material.card.MaterialCardView>-->
+</layout>

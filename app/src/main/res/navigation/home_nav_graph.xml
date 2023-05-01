@@ -70,15 +70,15 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/messagesFragment"
-        android:name="com.zariya.zariya.message.presentation.fragment.MessagesFragment"
-        android:label="MessagesFragment"
-        tools:layout="@layout/fragment_messages" />
+        android:id="@+id/myServicesFragment"
+        android:name="com.zariya.zariya.services.presentation.fragment.MyServicesFragment"
+        android:label="MyServicesFragment"
+        tools:layout="@layout/fragment_my_services" />
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.zariya.zariya.search.presentation.fragment.SearchFragment"
-        android:label="SearchFragment"
-        tools:layout="@layout/fragment_search" />
+        android:id="@+id/merchandiseFragment"
+        android:name="com.zariya.zariya.merchandise.presentation.fragment.MerchandiseFragment"
+        android:label="MerchandiseFragment"
+        tools:layout="@layout/fragment_merchandise" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.zariya.zariya.profile.presentation.fragment.ProfileFragment"

@@ -8,8 +8,8 @@
         tools:ignore="MenuTitle" />
 
     <item
-        android:id="@+id/messagesFragment"
-        android:icon="@drawable/ic_send"
+        android:id="@+id/myServicesFragment"
+        android:icon="@drawable/ic_cart"
         tools:ignore="MenuTitle" />
 
     <item
@@ -17,8 +17,8 @@
         android:title="" />
 
     <item
-        android:id="@+id/searchFragment"
-        android:icon="@drawable/ic_search"
+        android:id="@+id/merchandiseFragment"
+        android:icon="@drawable/ic_merchandise"
         tools:ignore="MenuTitle" />
 
     <item

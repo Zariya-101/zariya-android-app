@@ -36,18 +36,22 @@ class MainActivity : AppCompatActivity() {
                     showBottomNav(true)
                     binding.fab.setImageResource(R.drawable.ic_add)
                 }
-                R.id.messagesFragment -> {
+
+                R.id.myServicesFragment -> {
                     showBottomNav(true)
                     binding.fab.setImageResource(R.drawable.ic_add)
                 }
-                R.id.searchFragment -> {
+
+                R.id.merchandiseFragment -> {
                     showBottomNav(true)
                     binding.fab.setImageResource(R.drawable.ic_add)
                 }
+
                 R.id.profileFragment -> {
                     showBottomNav(true)
                     binding.fab.setImageResource(R.drawable.ic_question_mark)
                 }
+
                 else -> showBottomNav(false)
             }
         }
