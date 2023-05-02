@@ -57,7 +57,7 @@ class WelcomeFragment : Fragment() {
             }
         }
         binding.btnSkip.setOnClickListener {
-            binding.viewPager.currentItem = 3
+           binding.viewPager.currentItem = 3
         }
         binding.btnLogin.setOnClickListener {
             it.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeToLogin())

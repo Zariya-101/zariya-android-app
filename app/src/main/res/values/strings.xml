@@ -28,6 +28,14 @@
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
 
+
+    <string name="pick_a_region">Pick A Region</string>
+    <string name="search_for_your_city">Search for your city</string>
+    <string name="auto_detect_my_location">Auto Detect My Location</string>
+    <string name="popular_cities">POPULAR CITIES</string>
+    <string name="other_cities">OTHER CITIES</string>
+
+
     <!--    Validations-->
     <string name="validation_empty_name">Please enter name</string>
     <string name="validation_empty_dob">Please select Date of birth</string>

@@ -19,7 +19,6 @@
         <action
             android:id="@+id/actionSplashToWelcome"
             app:destination="@id/welcomeFragment" />
-
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -52,6 +51,7 @@
             app:argType="string" />
     </fragment>
 
+
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.WelcomeFragment"
@@ -63,6 +63,15 @@
         <action
             android:id="@+id/actionWelcomeToSignUp"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/actionWelcomeToLocation"
+            app:destination="@id/locationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.zariya.zariya.auth.presentation.fragment.LocationFragment"
+        android:label="LocationFragment">
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
