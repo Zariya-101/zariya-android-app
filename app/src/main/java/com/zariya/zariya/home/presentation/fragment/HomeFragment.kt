@@ -35,16 +35,6 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initView() {
-//        binding.rvServices.apply {
-//            adapter = ServicesHomeAdapter(
-//                listOf(
-//                    "Acting Workshops",
-//                    "Casting Requirements",
-//                    "Wellness Workshops"
-//                )
-//            )
-//        }
-
         binding.rvFeed.apply {
             adapter = FeedAdapter(
                 listOf(
