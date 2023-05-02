@@ -1,0 +1,112 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/_50sdp"
+            tools:context=".home.presentation.fragment.HomeFragment">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:drawableStart="@drawable/ic_search"
+                android:drawableEnd="@drawable/ic_filter"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/dark_blue"
+                android:hint="@string/search"
+                android:padding="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@id/ivNotification"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/ivSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/ic_search"
+                app:layout_constraintEnd_toStartOf="@id/ivNotification"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/dark_blue" />
+
+            <ImageButton
+                android:id="@+id/ivNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/ic_notification"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/dark_blue" />
+
+            <include
+                android:id="@+id/layoutActing"
+                layout="@layout/layout_card_services_home"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@id/layoutCasting"
+                app:layout_constraintEnd_toStartOf="@id/layoutCasting" />
+
+            <include
+                android:id="@+id/layoutCasting"
+                layout="@layout/layout_card_services_home"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivNotification" />
+
+            <include
+                android:id="@+id/layoutWellness"
+                layout="@layout/layout_card_services_home"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@id/layoutCasting"
+                app:layout_constraintStart_toEndOf="@id/layoutCasting" />
+
+            <View
+                android:id="@+id/glCardsMid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/layoutCasting"
+                app:layout_constraintTop_toTopOf="@id/layoutCasting" />
+
+            <View
+                android:id="@+id/bg"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_home"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/glCardsMid" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFeed"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/layoutCasting"
+                tools:itemCount="3"
+                tools:layout="@layout/item_feed" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

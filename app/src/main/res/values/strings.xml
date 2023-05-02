@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">zariya</string>
 
+
     <string name="next">Next</string>
     <string name="skip">Skip</string>
-    <string name="slder1" >Your next big break is just a profile away</string>
+    <string name="slder1">Your next big break is just a profile away</string>
     <string name="start">Start</string>
     <string name="login">Login</string>
     <string name="signup">Sign up</string>
@@ -19,6 +20,7 @@
     <string name="phone">Phone Number</string>
     <string name="name">Name</string>
     <string name="dob">Date of Birth</string>
+    <string name="search">Search</string>
 
     <!--    CTA-->
     <string name="login_via_otp">Login via OTP</string>

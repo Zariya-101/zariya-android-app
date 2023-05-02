@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import com.zariya.zariya.R
 import com.zariya.zariya.databinding.FragmentLoginBinding
 
@@ -31,6 +32,10 @@ class LoginFragment : Fragment() {
             if (validate()) {
 
             }
+        }
+
+        binding.btnFacebook.setOnClickListener {
+            it.findNavController().navigate(LoginFragmentDirections.actionLoginToHome())
         }
     }
 

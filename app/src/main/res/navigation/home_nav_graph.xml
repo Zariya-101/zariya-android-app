@@ -24,7 +24,11 @@
         android:id="@+id/loginFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/actionLoginToHome"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.SignUpFragment"
@@ -33,6 +37,9 @@
         <action
             android:id="@+id/actionSignUpToWebView"
             app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/actionSignUpToHome"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
@@ -66,4 +73,24 @@
         android:name="com.zariya.zariya.auth.presentation.fragment.LocationFragment"
         android:label="LocationFragment">
     </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.zariya.zariya.home.presentation.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/myServicesFragment"
+        android:name="com.zariya.zariya.services.presentation.fragment.MyServicesFragment"
+        android:label="MyServicesFragment"
+        tools:layout="@layout/fragment_my_services" />
+    <fragment
+        android:id="@+id/merchandiseFragment"
+        android:name="com.zariya.zariya.merchandise.presentation.fragment.MerchandiseFragment"
+        android:label="MerchandiseFragment"
+        tools:layout="@layout/fragment_merchandise" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.zariya.zariya.profile.presentation.fragment.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
