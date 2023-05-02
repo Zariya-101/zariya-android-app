@@ -41,18 +41,19 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:background="@drawable/bg_edit_text"
             app:hintEnabled="false"
             app:layout_constraintBottom_toTopOf="@+id/tilDOB">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent"
+                android:background="@drawable/bg_edit_text"
                 android:drawableStart="@drawable/ic_profile"
                 android:drawablePadding="@dimen/_10sdp"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:drawableTint="@color/blue_500"
                 android:hint="@string/name"
+                android:inputType="textPersonName"
                 android:textColorHint="@color/blue_500" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -64,55 +65,90 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:background="@drawable/bg_edit_text"
             app:hintEnabled="false"
             app:layout_constraintBottom_toTopOf="@+id/tilPhone">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent"
+                android:background="@drawable/bg_edit_text"
+                android:clickable="false"
                 android:drawableStart="@drawable/ic_calendar"
                 android:drawablePadding="@dimen/_10sdp"
                 android:drawableTint="@color/blue_500"
+                android:focusable="false"
                 android:hint="@string/dob"
                 android:textColorHint="@color/blue_500" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/countryCodePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ccp_showFlag="false"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tilPhone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tilPhone" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPhone"
             style="@style/roundedTextInputLayout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:background="@drawable/bg_edit_text"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/btnLogin">
+            app:layout_constraintBottom_toTopOf="@+id/cbTerms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/countryCodePicker">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent"
+                android:background="@drawable/bg_edit_text"
                 android:drawableStart="@drawable/ic_call"
                 android:drawablePadding="@dimen/_10sdp"
+                android:maxLength="10"
                 android:drawableTint="@color/blue_500"
                 android:hint="@string/phone"
+                android:inputType="number"
                 android:textColorHint="@color/blue_500" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTerms"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:text="@string/agree_terms"
+            android:textColor="@color/blue_500"
+            app:layout_constraintBottom_toBottomOf="@id/cbTerms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cbTerms"
+            app:layout_constraintTop_toTopOf="@id/cbTerms" />
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:enabled="false"
             android:paddingHorizontal="@dimen/_50sdp"
             android:paddingVertical="@dimen/_20sdp"
             android:text="@string/signup_via_otp"
-            android:textColor="@color/yellow_background"
+            android:textColor="@color/white"
             app:cornerRadius="@dimen/_30sdp"
             app:layout_constraintBottom_toTopOf="@id/btnGoogle"
             app:layout_constraintEnd_toEndOf="parent"
