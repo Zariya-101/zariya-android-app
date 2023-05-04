@@ -43,4 +43,9 @@
     <string name="validation_select_country">Please select country code</string>
     <string name="validation_empty_phone">Please enter phone</string>
     <string name="validation_invalid_phone">Please enter valid phone</string>
+    <string name="edit_my_profile">Edit My Profile</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="privacy_and_settings">Privacy and Settings</string>
+    <string name="help_and_support">Help And Support</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
