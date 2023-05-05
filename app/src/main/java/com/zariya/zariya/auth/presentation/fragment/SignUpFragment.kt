@@ -71,7 +71,7 @@ class SignUpFragment : Fragment() {
 
         binding.btnSignUp.setOnClickListener {
             if (validate()) {
-
+                it.findNavController().navigate(SignUpFragmentDirections.actionSignUpToLocation())
             }
         }
 
