@@ -40,6 +40,9 @@
         <action
             android:id="@+id/actionSignUpToHome"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/actionSignUpToLocation"
+            app:destination="@id/locationFragment" />
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
@@ -63,21 +66,26 @@
         <action
             android:id="@+id/actionWelcomeToSignUp"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/actionWelcomeToLocation"
-            app:destination="@id/locationFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.LocationFragment"
-        android:label="LocationFragment">
+        android:label="LocationFragment"
+        tools:layout="@layout/fragment_location">
+        <action
+            android:id="@+id/actionLocationToHome"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.zariya.zariya.home.presentation.fragment.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/actionHomeToWorkshops"
+            app:destination="@id/workshopsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myServicesFragment"
         android:name="com.zariya.zariya.services.presentation.fragment.MyServicesFragment"
@@ -93,4 +101,18 @@
         android:name="com.zariya.zariya.profile.presentation.fragment.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/workshopsFragment"
+        android:name="com.zariya.zariya.workshop.presentation.fragment.WorkshopsFragment"
+        android:label="WorkshopsFragment"
+        tools:layout="@layout/fragment_workshops">
+        <action
+            android:id="@+id/actionWorkshopDetail"
+            app:destination="@id/workshopDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workshopDetailsFragment"
+        android:name="com.zariya.zariya.workshop.presentation.fragment.WorkshopDetailsFragment"
+        android:label="WorkshopDetailsFragment"
+        tools:layout="@layout/fragment_workshop_details" />
 </navigation>

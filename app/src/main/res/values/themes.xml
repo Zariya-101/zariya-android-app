@@ -26,4 +26,13 @@
         <item name="strokeWidth">@dimen/_10sdp</item>
         <item name="strokeColor">@color/white</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/bright_yellow</item>
+        <item name="android:colorControlNormal">@color/yellow_background</item>
+    </style>
 </resources>
