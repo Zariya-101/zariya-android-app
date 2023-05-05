@@ -63,4 +63,13 @@ The situations may be same for all, but reactions differ so the characters diffe
 That is the major difference between an actor which fits into reality and an actor which does not fit into reality.\n\n\n
 ~Zariya Theatre Group\n
     </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="almost_there">Almost there!</string>
+    <string name="contact_details">Contact Details</string>
+    <string name="offers">Offers</string>
+    <string name="select_a_promo_code">Select a promo code</string>
+    <string name="view_offers">View Offers</string>
+    <string name="choose_payment_method">Choose Payment Method</string>
+    <string name="checkout_consent">By Proceeding, I express my consent to complete this transaction</string>
 </resources>
