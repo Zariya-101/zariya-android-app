@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.findNavController
 import com.zariya.zariya.R
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentHomeBinding
@@ -73,7 +74,6 @@ class HomeFragment : BaseFragment() {
                 )
             )
         }
-        animateCards()
     }
 
     private fun setUpListeners() {
@@ -81,27 +81,9 @@ class HomeFragment : BaseFragment() {
             it.isVisible = false
             binding.etSearch.isVisible = true
         }
-    }
 
-    private fun animateCards() = launch {
-        delay(1000)
-
-        AnimatorInflater.loadAnimator(context, R.animator.anim_horizontal_flip).apply {
-            setTarget(binding.layoutActing.cv)
-            duration = 1000
-            start()
-        }
-
-        AnimatorInflater.loadAnimator(context, R.animator.anim_vertical_flip_ahead).apply {
-            setTarget(binding.layoutCasting.cv)
-            duration = 1000
-            start()
-        }
-
-        AnimatorInflater.loadAnimator(context, R.animator.anim_vertical_flip_behind).apply {
-            setTarget(binding.layoutWellness.cv)
-            duration = 1000
-            start()
+        binding.layoutActing.cv.setOnClickListener {
+            it.findNavController().navigate(HomeFragmentDirections.actionHomeToWorkshops())
         }
     }
 }
