@@ -46,7 +46,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvTotalAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -73,7 +73,7 @@
         android:textSize="@dimen/_14sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalAmount" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPopularCities"
