@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.zariya.zariya.databinding.FragmentWorkshopDetailsBinding
 
 class WorkshopDetailsFragment : Fragment() {
@@ -29,6 +30,12 @@ class WorkshopDetailsFragment : Fragment() {
         activity?.actionBar?.title = "An Actor's Mosiac"
         binding.workshopToolbar.setNavigationOnClickListener {
             Navigation.findNavController(it).popBackStack()
+
+
+            }
+
+        binding.btnAddToCart.setOnClickListener{
+            it.findNavController().navigate(WorkshopDetailsFragmentDirections.actionWorkshopDetailtoCheckout())
         }
     }
 }
