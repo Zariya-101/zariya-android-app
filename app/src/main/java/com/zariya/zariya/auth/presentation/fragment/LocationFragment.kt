@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.zariya.zariya.R
-import com.zariya.zariya.adapter.OtherCitiesAdapter
-import com.zariya.zariya.adapter.PopularCitiesAdapter
+import com.zariya.zariya.auth.presentation.adapter.OtherCitiesAdapter
+import com.zariya.zariya.auth.presentation.adapter.PopularCitiesAdapter
 import com.zariya.zariya.databinding.FragmentLocationBinding
 
 
