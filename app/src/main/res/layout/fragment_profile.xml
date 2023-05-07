@@ -39,32 +39,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-
-
-<!--        <com.google.android.material.imageview.ShapeableImageView-->
-<!--            android:id="@+id/ivProfile"-->
-<!--            android:layout_width="@dimen/_72sdp"-->
-<!--            android:layout_height="@dimen/_72sdp"-->
-<!--            android:background="@drawable/ic_profile_img_bg"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/ivUserBg"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/ivUserBg"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/ivUserBg"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/ivUserBg" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/selectImage"-->
-<!--            android:layout_width="@dimen/_25sdp"-->
-<!--            android:layout_height="@dimen/_25sdp"-->
-<!--            android:src="@drawable/ic_edit_profile_img"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/ivUserBg"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/ivUserBg"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.textview.MaterialTextView
