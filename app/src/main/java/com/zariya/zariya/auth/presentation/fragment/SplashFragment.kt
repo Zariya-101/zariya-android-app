@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.zariya.zariya.app
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentSplashBinding
 import kotlinx.coroutines.delay
@@ -25,11 +26,17 @@ class SplashFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        proceedToLogin()
+        proceed()
     }
 
-    private fun proceedToLogin() = launch {
+    private fun proceed() = launch {
         delay(1000)
-        Navigation.findNavController(binding.root).navigate(SplashFragmentDirections.actionSplashToWelcome())
+        app.currentUser?.let {
+            Navigation.findNavController(binding.root)
+                .navigate(SplashFragmentDirections.actionSplashToHome())
+        } ?: run {
+            Navigation.findNavController(binding.root)
+                .navigate(SplashFragmentDirections.actionSplashToWelcome())
+        }
     }
 }

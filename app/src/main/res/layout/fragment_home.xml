@@ -13,7 +13,7 @@
             tools:context=".home.presentation.fragment.HomeFragment">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvToolBar"
+                android:id="@+id/cvToolBarHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/dark_blue"
@@ -71,26 +71,26 @@
             <include
                 android:id="@+id/layoutActing"
                 layout="@layout/layout_card_services_home"
-                android:layout_width="@dimen/_70sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cvToolBar" />
+                app:layout_constraintTop_toBottomOf="@id/cvToolBarHome" />
 
             <include
                 android:id="@+id/layoutCasting"
                 layout="@layout/layout_card_services_home"
-                android:layout_width="@dimen/_70sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/layoutActing"
-                app:layout_constraintTop_toBottomOf="@id/cvToolBar" />
+                app:layout_constraintTop_toBottomOf="@id/cvToolBarHome" />
 
             <include
                 android:id="@+id/layoutWellness"
                 layout="@layout/layout_card_services_home"
-                android:layout_width="@dimen/_70sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/layoutCasting"
-                app:layout_constraintStart_toEndOf="@id/layoutCasting" />
+                app:layout_constraintStart_toEndOf="@id/layoutCasting"
+                app:layout_constraintTop_toBottomOf="@id/cvToolBarHome" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFeed"
