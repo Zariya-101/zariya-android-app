@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">zariya</string>
 
-
     <string name="next">Next</string>
     <string name="skip">Skip</string>
     <string name="slder1">Your next big break is just a profile away</string>
@@ -21,6 +20,11 @@
     <string name="name">Name</string>
     <string name="dob">Date of Birth</string>
     <string name="search">Search</string>
+    <string name="actor">Actor</string>
+    <string name="casting_agency">Casting Agency</string>
+    <string name="age">Age</string>
+    <string name="height">Height</string>
+    <string name="complexion">Complexion</string>
 
     <!--    CTA-->
     <string name="login_via_otp">Login via OTP</string>
@@ -70,4 +74,44 @@ That is the major difference between an actor which fits into reality and an act
     <string name="view_offers">View Offers</string>
     <string name="choose_payment_method">Choose Payment Method</string>
     <string name="checkout_consent">By Proceeding, I express my consent to complete this transaction</string>
+
+    <string-array name="actor_height">
+        <item>Select your Height</item>
+        <item>4 ft 0 inches</item>
+        <item>4 ft 1 inches</item>
+        <item>4 ft 2 inches</item>
+        <item>4 ft 3 inches</item>
+        <item>4 ft 4 inches</item>
+        <item>4 ft 5 inches</item>
+        <item>4 ft 6 inches</item>
+        <item>4 ft 7 inches</item>
+        <item>4 ft 8 inches</item>
+        <item>4 ft 9 inches</item>
+        <item>4 ft 10 inches</item>
+        <item>4 ft 11 inches</item>
+        <item>5 ft 0 inches</item>
+        <item>5 ft 1 inches</item>
+        <item>5 ft 2 inches</item>
+        <item>5 ft 3 inches</item>
+        <item>5 ft 4 inches</item>
+        <item>5 ft 5 inches</item>
+        <item>5 ft 6 inches</item>
+        <item>5 ft 7 inches</item>
+        <item>5 ft 8 inches</item>
+        <item>5 ft 9 inches</item>
+        <item>5 ft 10 inches</item>
+        <item>5 ft 11 inches</item>
+        <item>6 ft 0 inches</item>
+    </string-array>
+
+    <string-array name="actor_complexion">
+        <item>Select your Complexion</item>
+        <item>Extremely Fair</item>
+        <item>Fair</item>
+        <item>Pale</item>
+        <item>Medium</item>
+        <item>Olive</item>
+        <item>Naturally Brown</item>
+        <item>Dark Brown</item>
+    </string-array>
 </resources>

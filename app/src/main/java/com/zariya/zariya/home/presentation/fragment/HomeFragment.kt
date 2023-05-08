@@ -36,6 +36,9 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initView() {
+        binding.layoutActing.service = "Acting \nWorkshops"
+        binding.layoutCasting.service = "Casting \nRequirements"
+        binding.layoutWellness.service = "Wellness \nWorkshops"
         binding.rvFeed.apply {
             adapter = FeedAdapter(
                 listOf(
@@ -84,6 +87,10 @@ class HomeFragment : BaseFragment() {
 
         binding.layoutActing.cv.setOnClickListener {
             it.findNavController().navigate(HomeFragmentDirections.actionHomeToWorkshops())
+        }
+
+        binding.layoutCasting.cv.setOnClickListener {
+            it.findNavController().navigate(HomeFragmentDirections.actionHomeToSelectRoleFragment())
         }
     }
 }

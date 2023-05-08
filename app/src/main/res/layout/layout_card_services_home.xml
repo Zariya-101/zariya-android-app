@@ -2,9 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="service"
+            type="String" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cv"
-        android:layout_width="@dimen/_70sdp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_10sdp"
         android:padding="@dimen/_10sdp">
@@ -29,15 +36,16 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvService"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Acting Workshops"
+            android:text="@{service}"
             android:textColor="@color/dark_blue"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivService" />
+            app:layout_constraintTop_toBottomOf="@id/ivService"
+            tools:text="Acting \nWorkshops" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

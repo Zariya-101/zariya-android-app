@@ -1,19 +1,19 @@
-package com.zariya.zariya.adapter
+package com.zariya.zariya.auth.presentation.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.zariya.zariya.adapter.PopularCitiesAdapter.MyViewHolder
-import com.zariya.zariya.databinding.PopularCityItemBinding
+import com.zariya.zariya.databinding.OtherCityItemBinding
 
-class PopularCitiesAdapter(
+
+class OtherCitiesAdapter (
     private val cityNames: Array<String>,
-    private val cityImages: IntArray
 
-) : RecyclerView.Adapter<MyViewHolder>() {
+) : RecyclerView.Adapter<OtherCitiesAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val mBinding = PopularCityItemBinding.inflate(
+        val mBinding = OtherCityItemBinding.inflate(
             LayoutInflater.from(
                 parent.context
             ), parent, false
@@ -23,15 +23,14 @@ class PopularCitiesAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        holder.mBinding.cityImageView.setImageResource(cityImages.get(position))
         holder.mBinding.cityNameTextView.setText(cityNames.get(position))
     }
 
     override fun getItemCount(): Int {
-        return cityImages.size
+        return cityNames.size
     }
 
-    inner class MyViewHolder(var mBinding: PopularCityItemBinding) :
+    inner class MyViewHolder(var mBinding: OtherCityItemBinding) :
         RecyclerView.ViewHolder(
             mBinding.root
         )

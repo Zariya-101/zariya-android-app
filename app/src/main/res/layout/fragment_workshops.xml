@@ -9,7 +9,7 @@
         tools:context=".workshop.presentation.fragment.WorkshopsFragment">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvToolBar"
+            android:id="@+id/cvToolBarWorkshop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/dark_blue"
@@ -81,7 +81,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/cvToolBar"
+            app:layout_constraintTop_toBottomOf="@id/cvToolBarWorkshop"
             tools:itemCount="4"
             tools:listitem="@layout/item_filter_workshop" />
 

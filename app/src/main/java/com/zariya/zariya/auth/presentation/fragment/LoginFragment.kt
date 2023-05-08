@@ -5,13 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.zariya.zariya.R
+import com.zariya.zariya.auth.presentation.viewmodel.AuthViewModel
+import com.zariya.zariya.core.ui.UIEvents
 import com.zariya.zariya.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
+    private val authViewModel by viewModels<AuthViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,14 +34,41 @@ class LoginFragment : Fragment() {
     }
 
     private fun setUpListeners() {
+        uiEventListener()
         binding.btnLogin.setOnClickListener {
             if (validate()) {
-
+                authViewModel.login(binding.tilPhone.editText?.text.toString(), null)
             }
         }
 
         binding.btnFacebook.setOnClickListener {
             it.findNavController().navigate(LoginFragmentDirections.actionLoginToHome())
+        }
+    }
+
+    private fun uiEventListener() {
+        authViewModel.uiEvents.observe(viewLifecycleOwner) { uiEvent ->
+            when (uiEvent) {
+                is UIEvents.Loading -> {
+                    // Handle Loading
+                }
+
+                is UIEvents.ShowError -> {
+                    Toast.makeText(
+                        context,
+                        uiEvent.message ?: "Something went wrong",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                is UIEvents.Navigate -> {
+                    uiEvent.navDirections?.let {
+                        Navigation.findNavController(binding.root).navigate(
+                            it
+                        )
+                    }
+                }
+            }
         }
     }
 
