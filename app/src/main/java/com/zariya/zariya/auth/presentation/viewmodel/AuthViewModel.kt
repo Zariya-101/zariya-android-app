@@ -1,9 +1,10 @@
 package com.zariya.zariya.auth.presentation.viewmodel
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zariya.zariya.app
 import com.zariya.zariya.auth.data.model.Customers
 import com.zariya.zariya.auth.data.repository.AuthRepositoryImpl
 import com.zariya.zariya.remote.SyncRepositoryImpl
@@ -11,16 +12,20 @@ import com.zariya.zariya.auth.domain.repository.AuthRepository
 import com.zariya.zariya.remote.SyncRepository
 import com.zariya.zariya.auth.presentation.fragment.LoginFragmentDirections
 import com.zariya.zariya.auth.presentation.fragment.SignUpFragmentDirections
+import com.zariya.zariya.core.local.AppSharedPreference
 import com.zariya.zariya.core.network.SingleLiveEvent
+import com.zariya.zariya.core.ui.BaseViewModel
 import com.zariya.zariya.core.ui.UIEvents
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AuthViewModel : ViewModel() {
+class AuthViewModel(private val application: Application) : BaseViewModel(application) {
 
     private val authRepository: AuthRepository = AuthRepositoryImpl()
     private lateinit var syncRepository: SyncRepository
+
+    val preference = AppSharedPreference.getInstance(application)
 
     private val _uiEvents = SingleLiveEvent<UIEvents>()
     val uiEvents: LiveData<UIEvents> = _uiEvents
@@ -80,12 +85,15 @@ class AuthViewModel : ViewModel() {
     }
 
     fun createCustomer(customer: Customers) {
+        customer.fcmToken = preference?.getFcmToken() ?: ""
         syncRepository = SyncRepositoryImpl()
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
                 syncRepository.createCustomer(customer)
             }.onSuccess {
                 Log.v("AuthViewModel", "Customer Creation Success")
+                customer.owner_id = app.currentUser?.id ?: ""
+                preference?.setCustomerData(customer)
                 withContext(Dispatchers.Main) {
                     _uiEvents.value = UIEvents.Loading(false)
                     _uiEvents.value =
