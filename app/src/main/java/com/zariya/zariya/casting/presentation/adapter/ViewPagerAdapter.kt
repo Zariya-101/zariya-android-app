@@ -1,28 +1,34 @@
 package com.zariya.zariya.casting.presentation.adapter
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.zariya.zariya.casting.presentation.fragment.viewpager.SelectAgeFragment
+import com.zariya.zariya.casting.presentation.fragment.viewpager.SelectHeightFragment
+import com.zariya.zariya.casting.presentation.fragment.viewpager.SelectUserTypeFragment
 
-class ViewPagerAdapter(private val introSliders: List<IntroSlide>) :
-    RecyclerView.Adapter<ViewPagerAdapter.IntroSliderViewHolder>() {
+class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    class ViewPagerViewHolder(binding: ItemIntroSliderBinding) :
-        RecyclerView.ViewHolder(binding.root)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IntroSliderViewHolder {
-        return IntroSliderViewHolder(
-            ItemIntroSliderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
+    override fun getItemCount(): Int {
+        return 3
     }
 
-    override fun onBindViewHolder(holder: IntroSliderViewHolder, position: Int) {
-        holder.itemView.apply {
-            findViewById<TextView>(R.id.tvSliderHeading).text = introSliders[position].title
-            findViewById<TextView>(R.id.tvSliderText).text = introSliders[position].description
-            findViewById<ImageView>(R.id.ivSlider).setImageResource(introSliders[position].icon)
+    override fun createFragment(position: Int): Fragment {
+        val bundle = Bundle()
+//        bundle.putParcelable("course", course)
+        val fragment = when (position) {
+//            1 -> CourseScheduleFragment()
+//            2 -> CourseSyllabusFragment()
+//            3 -> CourseReviewFragment()
+//            else -> AboutCourseFragment()
+            1 -> SelectAgeFragment()
+            2 -> SelectHeightFragment()
+            else -> SelectUserTypeFragment()
         }
+//        fragment.arguments = bundle
+        return fragment
     }
-
-    override fun getItemCount() = introSliders.size
 }

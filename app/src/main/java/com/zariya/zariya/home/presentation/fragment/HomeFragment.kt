@@ -90,7 +90,7 @@ class HomeFragment : BaseFragment() {
         }
 
         binding.layoutCasting.cv.setOnClickListener {
-            it.findNavController().navigate(HomeFragmentDirections.actionHomeToSelectRoleFragment())
+            it.findNavController().navigate(HomeFragmentDirections.actionHomeToCasting())
         }
     }
 }

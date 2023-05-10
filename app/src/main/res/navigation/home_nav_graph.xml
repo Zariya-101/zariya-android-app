@@ -100,6 +100,9 @@
         <action
             android:id="@+id/actionHomeToSelectRoleFragment"
             app:destination="@id/selectRoleFragment" />
+        <action
+            android:id="@+id/actionHomeToCasting"
+            app:destination="@id/castingOnboardingFragment" />
     </fragment>
     <fragment
         android:id="@+id/myServicesFragment"
@@ -129,17 +132,16 @@
         android:id="@+id/workshopDetailsFragment"
         android:name="com.zariya.zariya.workshop.presentation.fragment.WorkshopDetailsFragment"
         android:label="WorkshopDetailsFragment"
-        tools:layout="@layout/fragment_workshop_details" >
-    <action
-        android:id="@+id/actionWorkshopDetailtoCheckout"
-        app:destination="@id/checkoutDetailsFragment"
-        />
+        tools:layout="@layout/fragment_workshop_details">
+        <action
+            android:id="@+id/actionWorkshopDetailtoCheckout"
+            app:destination="@id/checkoutDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/checkoutDetailsFragment"
         android:name="com.zariya.zariya.payment.presentation.fragment.CheckoutFragment"
         android:label="CheckoutFragment"
-        tools:layout="@layout/fragment_checkout"/>
+        tools:layout="@layout/fragment_checkout" />
     <fragment
         android:id="@+id/selectRoleFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.SelectRoleFragment"
@@ -162,4 +164,9 @@
         android:name="com.zariya.zariya.casting.presentation.fragment.AgencyDetailsFormFragment"
         android:label="AgencyDetailsFormFragment"
         tools:layout="@layout/fragment_agency_details_form" />
+    <fragment
+        android:id="@+id/castingOnboardingFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.CastingOnboardingFragment"
+        android:label="CastingOnboardingFragment"
+        tools:layout="@layout/fragment_casting_onboarding" />
 </navigation>
