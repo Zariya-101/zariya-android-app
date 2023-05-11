@@ -1,6 +1,5 @@
 package com.zariya.zariya.home.presentation.fragment
 
-import android.animation.AnimatorInflater
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +11,6 @@ import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentHomeBinding
 import com.zariya.zariya.home.data.model.Feed
 import com.zariya.zariya.home.presentation.adapter.FeedAdapter
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-
 
 class HomeFragment : BaseFragment() {
 
