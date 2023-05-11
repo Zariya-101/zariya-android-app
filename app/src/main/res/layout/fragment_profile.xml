@@ -83,14 +83,14 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/ic_edit_profile" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:text="@string/edit_my_profile"
                 android:textColor="@color/dark_blue"
                 android:textSize="@dimen/_14sdp" />
@@ -111,8 +111,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_white"
                 android:src="@drawable/ic_credit_card"
                 app:tint="@color/dark_blue" />
@@ -120,7 +120,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:text="@string/payment_method"
                 android:textColor="@color/dark_blue"
                 android:textSize="@dimen/_14sdp" />
@@ -140,14 +140,14 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/ic_settings" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:text="@string/privacy_and_settings"
                 android:textColor="@color/dark_blue"
                 android:textSize="@dimen/_14sdp" />
@@ -167,14 +167,14 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/ic_support" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:text="@string/help_and_support"
                 android:textColor="@color/dark_blue"
                 android:textSize="@dimen/_14sdp" />
@@ -195,14 +195,14 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/ic_logout" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:text="@string/sign_out"
                 android:textColor="@color/dark_blue"
                 android:textSize="@dimen/_14sdp" />
