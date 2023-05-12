@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/app_name"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_18sdp"
         android:textColor="@color/dark_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/clear_search_button_content_description"
-        android:textSize="@dimen/_15sdp"
+        android:textSize="@dimen/_14sdp"
         android:textColor="@color/dark_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,8 +76,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -93,19 +93,19 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:text="@string/edit_my_profile"
                 android:textColor="@color/dark_blue"
-                android:textSize="@dimen/_14sdp" />
+                />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_40sdp"
-            android:background="@color/dark_blue"/>
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:background="@color/light_yellow"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_40sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -122,19 +122,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:text="@string/payment_method"
-                android:textColor="@color/dark_blue"
-                android:textSize="@dimen/_14sdp" />
+                android:textColor="@color/dark_blue" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_40sdp"
-            android:background="@color/dark_blue"/>
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:background="@color/light_yellow"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_40sdp"
+          android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -149,19 +148,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:text="@string/privacy_and_settings"
-                android:textColor="@color/dark_blue"
-                android:textSize="@dimen/_14sdp" />
+                android:textColor="@color/dark_blue" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_40sdp"
-            android:background="@color/dark_blue"/>
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:background="@color/light_yellow"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_40sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -176,19 +174,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:text="@string/help_and_support"
-                android:textColor="@color/dark_blue"
-                android:textSize="@dimen/_14sdp" />
+                android:textColor="@color/dark_blue" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_40sdp"
-            android:background="@color/dark_blue"/>
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:background="@color/light_yellow"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_40sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_80sdp"
             android:gravity="center_vertical"
@@ -204,8 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:text="@string/sign_out"
-                android:textColor="@color/dark_blue"
-                android:textSize="@dimen/_14sdp" />
+                android:textColor="@color/dark_blue" />
         </LinearLayout>
     </LinearLayout>
 

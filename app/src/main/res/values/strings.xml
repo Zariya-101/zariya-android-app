@@ -82,7 +82,7 @@ That is the major difference between an actor which fits into reality and an act
 
     <!-- Cart  -->
     <string name="your_cart_is_empty_now_explore_more">Your cart is empty now, Explore more</string>
-    <string name="continue_shopping">Continue Shopping</string>
+    <string name="continue_shopping">Add Items</string>
 
 
     <string-array name="actor_height">
@@ -124,5 +124,6 @@ That is the major difference between an actor which fits into reality and an act
         <item>Naturally Brown</item>
         <item>Dark Brown</item>
     </string-array>
+
 
 </resources>
