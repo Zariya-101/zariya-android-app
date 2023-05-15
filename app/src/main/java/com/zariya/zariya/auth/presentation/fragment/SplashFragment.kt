@@ -26,11 +26,12 @@ class SplashFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.logoImg.animate().alpha(1F).setDuration(2000);
         proceed()
     }
 
     private fun proceed() = launch {
-        delay(1000)
+        delay(2000)
         app.currentUser?.let {
             Navigation.findNavController(binding.root)
                 .navigate(SplashFragmentDirections.actionSplashToHome())
