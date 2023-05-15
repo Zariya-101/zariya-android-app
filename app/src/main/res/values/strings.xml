@@ -38,6 +38,7 @@
     <string name="add_image_subtitle">You can add minimum 2 and maximum 5 images</string>
     <string name="add_audition_video_title">Add Audition Video</string>
     <string name="add_audition_video_subtitle">Make a short audition video to flaunt your skills</string>
+    <string name="click_to_upload">Click to Upload</string>
 
     <!--    CTA-->
     <string name="login_via_otp">Login via OTP</string>
