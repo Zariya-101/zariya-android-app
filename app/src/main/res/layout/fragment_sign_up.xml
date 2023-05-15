@@ -147,13 +147,46 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:enabled="false"
             android:paddingHorizontal="@dimen/_50sdp"
-            android:paddingVertical="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_15sdp"
             android:text="@string/signup_via_otp"
             android:textColor="@color/white"
             app:cornerRadius="@dimen/_30sdp"
-            app:layout_constraintBottom_toTopOf="@id/btnGoogle"
+            app:layout_constraintBottom_toTopOf="@id/tvOr"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="@string/or"
+            android:textColor="@color/blue_300"
+            app:layout_constraintBottom_toTopOf="@+id/btnGoogle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/viewOrLeft"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@color/blue_300"
+            app:layout_constraintBottom_toBottomOf="@id/tvOr"
+            app:layout_constraintEnd_toStartOf="@id/tvOr"
+            app:layout_constraintStart_toStartOf="@id/btnSignUp"
+            app:layout_constraintTop_toTopOf="@id/tvOr" />
+
+        <View
+            android:id="@+id/viewOrRight"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@color/blue_300"
+            app:layout_constraintBottom_toBottomOf="@id/tvOr"
+            app:layout_constraintEnd_toEndOf="@id/btnSignUp"
+            app:layout_constraintStart_toEndOf="@id/tvOr"
+            app:layout_constraintTop_toTopOf="@id/tvOr" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGoogle"
@@ -163,7 +196,7 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             android:backgroundTint="@color/white"
-            android:paddingVertical="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_15sdp"
             android:text="@string/google"
             android:textColor="@color/blue"
             android:textSize="@dimen/_10ssp"
@@ -172,7 +205,7 @@
             app:icon="@drawable/ic_google"
             app:iconGravity="textStart"
             app:iconSize="@dimen/_20sdp"
-            app:iconTint="@color/blue"
+            app:iconTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnFacebook"
             app:layout_constraintStart_toStartOf="parent"
@@ -187,7 +220,7 @@
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             android:backgroundTint="@color/white"
-            android:paddingVertical="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_15sdp"
             android:text="@string/facebook"
             android:textColor="@color/blue"
             android:textSize="@dimen/_10ssp"
@@ -196,7 +229,7 @@
             app:icon="@drawable/ic_facebook"
             app:iconGravity="textStart"
             app:iconSize="@dimen/_20sdp"
-            app:iconTint="@color/blue"
+            app:iconTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnGoogle"
