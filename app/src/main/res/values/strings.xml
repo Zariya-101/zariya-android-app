@@ -31,6 +31,14 @@
     <string name="user_type_subtitle">Choose the type of your account, be careful to change it is impossible</string>
     <string name="age_title">How old are you?</string>
     <string name="age_subtitle">Agencies may need it for specific roles</string>
+    <string name="select_complexion">Please select your Complexion</string>
+    <string name="height_title">How tall are you?</string>
+    <string name="height_subtitle">Agencies may need it for specific roles</string>
+    <string name="add_image_title">Add some images</string>
+    <string name="add_image_subtitle">You can add minimum 2 and maximum 5 images</string>
+    <string name="add_audition_video_title">Add Audition Video</string>
+    <string name="add_audition_video_subtitle">Make a short audition video to flaunt your skills</string>
+    <string name="click_to_upload">Click to Upload</string>
 
     <!--    CTA-->
     <string name="login_via_otp">Login via OTP</string>
@@ -90,6 +98,8 @@ That is the major difference between an actor which fits into reality and an act
     <string name="your_cart_is_empty_now_explore_more">Your cart is empty now, Explore more</string>
     <string name="continue_shopping">Add Items</string>
     <string name="my_cart">My Cart</string>
+    <string name="about">About</string>
+    <string name="casting_calls">Casting Calls</string>
 
 
     <string-array name="actor_height">

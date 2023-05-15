@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayout
+import com.zariya.zariya.R
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentCastingAgencyProfileBinding
 
@@ -23,10 +24,10 @@ class CastingAgencyProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tabLayout = binding.tabLayout
 
-        tabLayout!!.addTab(tabLayout!!.newTab().setText("About"))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText("Casting Calls"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.about)))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.casting_calls)))
+
 
     }
 }
