@@ -6,7 +6,7 @@
 
         <variable
             name="service"
-            type="String" />
+            type="com.zariya.zariya.services.data.model.Service" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
             android:id="@+id/ivService"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_headphones"
+            android:src="@{service.icon}"
             app:layout_constraintBottom_toTopOf="@id/tvService"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{service}"
+            android:text="@{service.name}"
             android:textColor="@color/dark_blue"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintEnd_toEndOf="parent"
