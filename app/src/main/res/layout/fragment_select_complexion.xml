@@ -12,35 +12,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="Please select your Complexion"
+            android:text="@string/select_complexion"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <!--        <com.google.android.material.textfield.TextInputLayout-->
-        <!--            android:id="@+id/tilAge"-->
-        <!--            style="@style/roundedTextInputLayout"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/_20sdp"-->
-        <!--            android:layout_marginEnd="@dimen/_20sdp"-->
-        <!--            app:hintEnabled="false"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/tvSubTitle">-->
-
-        <!--            <com.google.android.material.textfield.TextInputEditText-->
-        <!--                android:layout_width="@dimen/_100sdp"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:background="@drawable/bg_edit_text"-->
-        <!--                android:enabled="false"-->
-        <!--                android:gravity="center"-->
-        <!--                android:textColor="@color/dark_blue" />-->
-
-        <!--        </com.google.android.material.textfield.TextInputLayout>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvComplexion"

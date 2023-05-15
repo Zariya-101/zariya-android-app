@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.zariya.zariya.casting.presentation.fragment.viewpager.AddAuditionVideoFragment
+import com.zariya.zariya.casting.presentation.fragment.viewpager.AddImagesFragment
 import com.zariya.zariya.casting.presentation.fragment.viewpager.SelectAgeFragment
 import com.zariya.zariya.casting.presentation.fragment.viewpager.SelectComplexionFragment
 import com.zariya.zariya.casting.presentation.fragment.viewpager.SelectHeightFragment
@@ -17,14 +19,16 @@ class ViewPagerAdapter(
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
-        return 4
+        return 6
     }
 
     override fun createFragment(position: Int): Fragment {
         val fragment = when (position) {
             1 -> SelectAgeFragment(castingOnboardingViewModel)
-            2 -> SelectComplexionFragment()
+            2 -> SelectComplexionFragment(castingOnboardingViewModel)
             3 -> SelectHeightFragment(castingOnboardingViewModel)
+            4 -> AddImagesFragment(castingOnboardingViewModel)
+            5 -> AddAuditionVideoFragment(castingOnboardingViewModel)
             else -> SelectUserTypeFragment(castingOnboardingViewModel)
         }
         return fragment

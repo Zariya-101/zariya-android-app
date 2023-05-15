@@ -1,11 +1,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="element"
+            type="com.zariya.zariya.common.data.model.SelectableListElement" />
+    </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
+        android:backgroundTint="@{element.isSelected ? @color/yellow_background: @color/white}"
         app:cardCornerRadius="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +30,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:paddingVertical="@dimen/_20sdp"
-            android:text="Naturally Brown" />
+            android:text="@{element.text}"
+            tools:text="Naturally Brown" />
 
     </com.google.android.material.card.MaterialCardView>
 </layout>

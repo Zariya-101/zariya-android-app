@@ -9,6 +9,7 @@ class CastingOnboardingViewModel(private val application: Application) :
     var userType: String? = null
     var userAge: String? = null
     var userComplexion: String? = null
+    var userHeight: String? = null
 
     fun updateUserType(type: String) {
         this.userType = type
@@ -20,5 +21,9 @@ class CastingOnboardingViewModel(private val application: Application) :
 
     fun updateComplexion(complexion: String) {
         userComplexion = complexion
+    }
+
+    fun updateHeight(height: String) {
+        userHeight = height
     }
 }
