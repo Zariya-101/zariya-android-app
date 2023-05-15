@@ -1,0 +1,27 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/yellow_background"
+        app:strokeWidth="1dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvComplexion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_20sdp"
+            android:text="Naturally Brown" />
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
