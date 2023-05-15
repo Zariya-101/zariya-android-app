@@ -98,6 +98,8 @@ That is the major difference between an actor which fits into reality and an act
     <string name="your_cart_is_empty_now_explore_more">Your cart is empty now, Explore more</string>
     <string name="continue_shopping">Add Items</string>
     <string name="my_cart">My Cart</string>
+    <string name="about">About</string>
+    <string name="casting_calls">Casting Calls</string>
 
 
     <string-array name="actor_height">
