@@ -33,6 +33,7 @@ class SelectHeightFragment(private val castingOnboardingViewModel: CastingOnboar
             val height = "$feet' $inch\""
 
             binding.tilHeight.editText?.setText(height)
+            castingOnboardingViewModel.updateHeight(height)
 
             return@setLabelFormatter height
         }
