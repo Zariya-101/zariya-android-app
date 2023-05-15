@@ -1,15 +1,15 @@
 package com.zariya.zariya.casting.presentation.fragment.viewpager
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zariya.zariya.R
+import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewModel
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentSelectAgeBinding
 
-class SelectAgeFragment : BaseFragment() {
+class SelectAgeFragment(private val castingOnboardingViewModel: CastingOnboardingViewModel) :
+    BaseFragment() {
 
     private lateinit var binding: FragmentSelectAgeBinding
 
@@ -29,6 +29,7 @@ class SelectAgeFragment : BaseFragment() {
             val age = "${value.toInt()} years"
 
             binding.tilAge.editText?.setText(age)
+            castingOnboardingViewModel.updateAge(value.toInt().toString())
 
             return@setLabelFormatter age
         }

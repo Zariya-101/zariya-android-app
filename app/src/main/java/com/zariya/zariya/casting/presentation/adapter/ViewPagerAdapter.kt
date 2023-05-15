@@ -1,34 +1,32 @@
 package com.zariya.zariya.casting.presentation.adapter
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.zariya.zariya.casting.presentation.fragment.viewpager.SelectAgeFragment
+import com.zariya.zariya.casting.presentation.fragment.viewpager.SelectComplexionFragment
 import com.zariya.zariya.casting.presentation.fragment.viewpager.SelectHeightFragment
 import com.zariya.zariya.casting.presentation.fragment.viewpager.SelectUserTypeFragment
+import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewModel
 
-class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
-    FragmentStateAdapter(fragmentManager, lifecycle) {
+class ViewPagerAdapter(
+    fragmentManager: FragmentManager,
+    lifecycle: Lifecycle,
+    private val castingOnboardingViewModel: CastingOnboardingViewModel
+) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
-        return 3
+        return 4
     }
 
     override fun createFragment(position: Int): Fragment {
-        val bundle = Bundle()
-//        bundle.putParcelable("course", course)
         val fragment = when (position) {
-//            1 -> CourseScheduleFragment()
-//            2 -> CourseSyllabusFragment()
-//            3 -> CourseReviewFragment()
-//            else -> AboutCourseFragment()
-            1 -> SelectAgeFragment()
-            2 -> SelectHeightFragment()
-            else -> SelectUserTypeFragment()
+            1 -> SelectAgeFragment(castingOnboardingViewModel)
+            2 -> SelectComplexionFragment()
+            3 -> SelectHeightFragment(castingOnboardingViewModel)
+            else -> SelectUserTypeFragment(castingOnboardingViewModel)
         }
-//        fragment.arguments = bundle
         return fragment
     }
 }

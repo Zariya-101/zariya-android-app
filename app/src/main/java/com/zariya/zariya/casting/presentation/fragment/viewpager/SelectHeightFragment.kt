@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zariya.zariya.R
+import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewModel
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentSelectHeightBinding
 
-class SelectHeightFragment : BaseFragment() {
+class SelectHeightFragment(private val castingOnboardingViewModel: CastingOnboardingViewModel) :
+    BaseFragment() {
 
     private lateinit var binding: FragmentSelectHeightBinding
 
@@ -28,7 +30,7 @@ class SelectHeightFragment : BaseFragment() {
             val feet = value.toInt() / 12
             val inch = value.toInt() % 12
 
-            val height = "$feet'$inch\""
+            val height = "$feet' $inch\""
 
             binding.tilHeight.editText?.setText(height)
 
