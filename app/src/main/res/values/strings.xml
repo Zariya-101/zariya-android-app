@@ -60,11 +60,7 @@
     <string name="validation_select_country">Please select country code</string>
     <string name="validation_empty_phone">Please enter phone</string>
     <string name="validation_invalid_phone">Please enter valid phone</string>
-    <string name="edit_my_profile">Edit My Profile</string>
-    <string name="payment_method">Payment Method</string>
-    <string name="privacy_and_settings">Privacy and Settings</string>
-    <string name="help_and_support">Help And Support</string>
-    <string name="sign_out">Sign Out</string>
+
 
     <string name="workshop_details_temp">Realization of the patterns of their brain and that of the character\'s brain is the first thing which makes an actor aware about the reality of the situation/scene.\n\n
 Neglecting these patterns is the first thing to abandon the reality of your character.\n\n
@@ -80,6 +76,15 @@ The situations may be same for all, but reactions differ so the characters diffe
 That is the major difference between an actor which fits into reality and an actor which does not fit into reality.\n\n\n
 ~Zariya Theatre Group\n
     </string>
+
+    <!-- Profile  -->
+    <string name="edit_my_profile">Edit My Profile</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="privacy_and_settings">Privacy and Settings</string>
+    <string name="help_and_support">Help And Support</string>
+    <string name="sign_out">Sign Out</string>
+
+    <!-- Checkout   -->
     <string name="almost_there">Almost there!</string>
     <string name="contact_details">Contact Details</string>
     <string name="offers">Offers</string>
@@ -87,6 +92,12 @@ That is the major difference between an actor which fits into reality and an act
     <string name="view_offers">View Offers</string>
     <string name="choose_payment_method">Choose Payment Method</string>
     <string name="checkout_consent">By Proceeding, I express my consent to complete this transaction</string>
+
+    <!-- Cart  -->
+    <string name="your_cart_is_empty_now_explore_more">Your cart is empty now, Explore more</string>
+    <string name="continue_shopping">Add Items</string>
+    <string name="my_cart">My Cart</string>
+
 
     <string-array name="actor_height">
         <item>Select your Height</item>
@@ -127,4 +138,6 @@ That is the major difference between an actor which fits into reality and an act
         <item>Naturally Brown</item>
         <item>Dark Brown</item>
     </string-array>
+
+
 </resources>
