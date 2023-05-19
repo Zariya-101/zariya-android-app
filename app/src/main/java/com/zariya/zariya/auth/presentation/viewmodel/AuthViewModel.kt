@@ -35,6 +35,7 @@ class AuthViewModel(private val application: Application) : BaseViewModel(applic
     fun register(customer: Customers) {
         _uiEvents.value = UIEvents.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
+            Log.v("AuthViewModel", "Register Start")
             kotlin.runCatching {
                 authRepository.createAccount(
                     email = customer.phone.plus("@zariya.com"),
@@ -60,6 +61,7 @@ class AuthViewModel(private val application: Application) : BaseViewModel(applic
         }
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
+                Log.v("AuthViewModel", "Login Start")
                 authRepository.login(email = mobile.plus("@zariya.com"), password = mobile)
             }.onSuccess {
                 Log.v("AuthViewModel", "Login Success")
@@ -89,6 +91,7 @@ class AuthViewModel(private val application: Application) : BaseViewModel(applic
         syncRepository = SyncRepositoryImpl()
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
+                Log.v("AuthViewModel", "Customer Creation Start")
                 syncRepository.createCustomer(customer)
             }.onSuccess {
                 Log.v("AuthViewModel", "Customer Creation Success")
