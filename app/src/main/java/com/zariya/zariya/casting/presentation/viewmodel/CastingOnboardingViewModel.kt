@@ -1,10 +1,9 @@
 package com.zariya.zariya.casting.presentation.viewmodel
 
 import android.app.Application
-import com.zariya.zariya.core.ui.BaseViewModel
+import androidx.lifecycle.ViewModel
 
-class CastingOnboardingViewModel(private val application: Application) :
-    BaseViewModel(application) {
+class CastingOnboardingViewModel() : ViewModel(){
 
     var userType: String? = null
     var userAge: String? = null

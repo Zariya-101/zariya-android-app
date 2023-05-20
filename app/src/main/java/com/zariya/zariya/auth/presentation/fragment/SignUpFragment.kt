@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -23,21 +22,21 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.zariya.zariya.R
-import com.zariya.zariya.auth.data.model.Customers
 import com.zariya.zariya.auth.presentation.viewmodel.AuthViewModel
+import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.core.ui.UIEvents
 import com.zariya.zariya.databinding.FragmentSignUpBinding
+import com.zariya.zariya.utils.AppUtil
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
-class SignUpFragment : Fragment() {
+class SignUpFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSignUpBinding
     private val authViewModel by viewModels<AuthViewModel>()
     private lateinit var storedVerificationId: String
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
-    private lateinit var auth: FirebaseAuth
-    private var isOtpTriggered = false
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +49,12 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
         setUpListeners()
+    }
+
+    private fun initView() {
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -92,7 +96,7 @@ class SignUpFragment : Fragment() {
         }
 
         binding.btnSignUp.setOnClickListener {
-//            if (validate()) {
+            if (validate()) {
 //                val customer = Customers().apply {
 //                    name = binding.tilName.editText?.text.toString()
 //                    phone = binding.tilPhone.editText?.text.toString()
@@ -100,32 +104,51 @@ class SignUpFragment : Fragment() {
 //                    countryCode = binding.countryCodePicker.selectedCountryCode
 //                }
 //                authViewModel.register(customer)
-//            }
+            }
 
-            if (isOtpTriggered) {
+            if (binding.btnSignUp.text.equals("Verify OTP")) {
                 val credential = PhoneAuthProvider.getCredential(
                     storedVerificationId,
-                    binding.tilName.editText?.text.toString()
+                    binding.tilOTP.editText?.text.toString()
                 )
+                Log.d("SignUpFragment", "signup OTP entered")
                 signInWithPhoneAuthCredential(credential)
             } else {
-                val options = activity?.let { it1 ->
-                    PhoneAuthOptions.newBuilder()
-                        .setPhoneNumber("+91${binding.tilPhone.editText?.text.toString()}")
-                        .setTimeout(60L, TimeUnit.SECONDS)
-                        .setActivity(it1)
-                        .setCallbacks(callbacks)
-                        .build()
-                }
-                if (options != null) {
-                    PhoneAuthProvider.verifyPhoneNumber(options)
-                }
-                isOtpTriggered = true
+                initiateOTPLogin()
             }
         }
 
         binding.btnFacebook.setOnClickListener {
             it.findNavController().navigate(SignUpFragmentDirections.actionSignUpToHome())
+        }
+    }
+
+    private fun initiateOTPLogin() {
+        val phoneNumber =
+            "+${binding.countryCodePicker.selectedCountryCode}${binding.tilPhone.editText?.text.toString()}}"
+        activity?.let {
+            PhoneAuthProvider.verifyPhoneNumber(
+                PhoneAuthOptions.newBuilder()
+                    .setPhoneNumber(phoneNumber)
+                    .setTimeout(60L, TimeUnit.SECONDS)
+                    .setActivity(it)
+                    .setCallbacks(callbacks)
+                    .build()
+            )
+        }
+    }
+
+    private fun showOTPUi(show: Boolean) {
+        binding.apply {
+            AppUtil.setVisibility(show, tilOTP)
+            AppUtil.setVisibility(show.not(), btnGoogle, btnFacebook, tvOr, viewOrLeft, viewOrRight)
+//            tilPhone.isEnabled = show.not()
+//            countryCodePicker.isEnabled = show.not()
+            if (show) {
+                btnSignUp.text = "Verify OTP"
+            } else {
+                btnSignUp.text = "GET OTP"
+            }
         }
     }
 
@@ -168,31 +191,51 @@ class SignUpFragment : Fragment() {
             // Save verification ID and resending token so we can use them later
             storedVerificationId = verificationId
             resendToken = token
+            showOTPUi(true)
         }
 
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        activity?.let {
-            auth.signInWithCredential(credential)
-                .addOnCompleteListener(it) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("SignUpFragment", "signInWithCredential:success")
+//        authViewModel.authenticateWithPhone(credential)
 
-                        val user = task.result?.user
-                    } else {
-                        // Sign in failed, display a message and update the UI
-                        Log.w("SignUpFragment", "signInWithCredential:failure", task.exception)
-                        if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                            // The verification code entered was invalid
-                        }
-                        // Update UI
-                    }
-                }
-        }
+//        activity?.let {
+//            auth.signInWithCredential(credential)
+//                .addOnCompleteListener(it) { task ->
+//                    if (task.isSuccessful) {
+//                        // Sign in success, update UI with the signed-in user's information
+//                        Log.d("SignUpFragment", "signInWithCredential:success")
+//
+//                        val task = task.result
+//                        task?.user?.let {
+//                            val users = User(
+//                                name = binding.tilName.editText?.text.toString(),
+//                                id = it.uid,
+//                                phone = binding.tilPhone.editText?.text.toString(),
+//                                dob = binding.tilDOB.editText?.text.toString(),
+//                                countryCode = binding.countryCodePicker.selectedCountryCode,
+//                                fcmToken = ""
+//                            )
+//                            Firebase.firestore.collection("users")
+//                                .add(users)
+//                                .addOnSuccessListener {
+//                                    Log.w("SignUpFragment", "Creation Success")
+//                                }
+//                                .addOnFailureListener {
+//                                    Log.w("SignUpFragment", "Creation Failure")
+//                                }
+//                        }
+//                    } else {
+//                        // Sign in failed, display a message and update the UI
+//                        Log.w("SignUpFragment", "signInWithCredential:failure", task.exception)
+//                        if (task.exception is FirebaseAuthInvalidCredentialsException) {
+//                            // The verification code entered was invalid
+//                        }
+//                        // Update UI
+//                    }
+//                }
+//        }
     }
-
 
     private fun uiEventListener() {
         authViewModel.uiEvents.observe(viewLifecycleOwner) { uiEvent ->

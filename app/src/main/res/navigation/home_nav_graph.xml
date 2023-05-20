@@ -34,12 +34,20 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/home_nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionLoginToSignup"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.zariya.zariya.auth.presentation.fragment.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up">
+        <argument
+            android:name="user"
+            android:defaultValue="@null"
+            app:argType="com.zariya.zariya.auth.data.model.User"
+            app:nullable="true" />
         <action
             android:id="@+id/actionSignUpToWebView"
             app:destination="@id/webViewFragment" />

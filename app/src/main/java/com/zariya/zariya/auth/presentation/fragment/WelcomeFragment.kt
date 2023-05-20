@@ -63,7 +63,7 @@ class WelcomeFragment : Fragment() {
             it.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeToLogin())
         }
         binding.btnSignUp.setOnClickListener {
-            it.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeToSignUp())
+//            it.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeToSignUp())
         }
     }
 

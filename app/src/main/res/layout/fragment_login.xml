@@ -52,7 +52,7 @@
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+            app:layout_constraintBottom_toTopOf="@+id/tilOTP"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/countryCodePicker">
 
@@ -70,6 +70,33 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilOTP"
+            style="@style/roundedTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:visibility="gone"
+            app:hintEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_edit_text"
+                android:drawableStart="@drawable/ic_call"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/blue_500"
+                android:hint="OTP"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textColorHint="@color/blue_500" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
@@ -78,7 +105,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:paddingHorizontal="@dimen/_50sdp"
             android:paddingVertical="@dimen/_15sdp"
-            android:text="@string/login_via_otp"
+            android:text="GET OTP"
             android:textColor="@color/white"
             app:cornerRadius="@dimen/_30sdp"
             app:layout_constraintBottom_toTopOf="@id/tvOr"

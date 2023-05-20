@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "621456607550-qro5trc9f4q06j0sr1t2i9bh8529emo1.apps.googleusercontent.com",
+          "client_id": "621456607550-cq1kpcapn1oe0kvp8c2qd4i4r1ne2ojk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zariya.zariya",
+            "certificate_hash": "95b20d85aea2f8a891a55d462988236e62ed1c99"
+          }
+        },
+        {
+          "client_id": "621456607550-dcbm7i4lkfdou9pt7ddgdt6qid03drvp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "621456607550-qro5trc9f4q06j0sr1t2i9bh8529emo1.apps.googleusercontent.com",
+              "client_id": "621456607550-dcbm7i4lkfdou9pt7ddgdt6qid03drvp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,5 +1,7 @@
 package com.zariya.zariya.auth.data.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey
 import org.mongodb.kbson.BsonObjectId
@@ -14,4 +16,50 @@ class Customers : RealmObject {
     var dob: String = ""
     var countryCode: String = ""
     var fcmToken: String = ""
+}
+
+data class User(
+    var id: String? = "",
+    var name: String? = "",
+    var phone: String? = "",
+    var dob: String? = "",
+    var countryCode: String? = "",
+    var fcmToken: String? = ""
+) : Parcelable {
+    var isNew: Boolean? = false
+
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    ) {
+        isNew = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
+        parcel.writeString(name)
+        parcel.writeString(phone)
+        parcel.writeString(dob)
+        parcel.writeString(countryCode)
+        parcel.writeString(fcmToken)
+        parcel.writeValue(isNew)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<User> {
+        override fun createFromParcel(parcel: Parcel): User {
+            return User(parcel)
+        }
+
+        override fun newArray(size: Int): Array<User?> {
+            return arrayOfNulls(size)
+        }
+    }
 }

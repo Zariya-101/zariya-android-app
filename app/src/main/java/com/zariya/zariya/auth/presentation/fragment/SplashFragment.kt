@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.zariya.zariya.app
+import com.zariya.zariya.auth.presentation.viewmodel.AuthViewModel
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentSplashBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SplashFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSplashBinding
+    private val authViewModel by viewModels<AuthViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,16 +30,16 @@ class SplashFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.logoImg.animate().alpha(1F).setDuration(2000);
+        binding.logoImg.animate().alpha(1F).duration = 2000
         proceed()
     }
 
     private fun proceed() = launch {
         delay(2000)
-        app.currentUser?.let {
+        if(authViewModel.isUserLoggedIn()) {
             Navigation.findNavController(binding.root)
                 .navigate(SplashFragmentDirections.actionSplashToHome())
-        } ?: run {
+        } else {
             Navigation.findNavController(binding.root)
                 .navigate(SplashFragmentDirections.actionSplashToWelcome())
         }
