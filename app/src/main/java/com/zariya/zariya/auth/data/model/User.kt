@@ -2,6 +2,7 @@ package com.zariya.zariya.auth.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.firebase.firestore.Exclude
 
 data class User(
     var id: String? = "",
@@ -11,6 +12,7 @@ data class User(
     var countryCode: String? = "",
     var fcmToken: String? = ""
 ) : Parcelable {
+    @get:Exclude
     var isNew: Boolean? = false
 
     constructor(parcel: Parcel) : this(

@@ -1,5 +1,6 @@
 package com.zariya.zariya
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
@@ -62,5 +63,9 @@ class MainActivity : AppCompatActivity() {
     private fun showBottomNav(show: Boolean) {
         binding.bottomAppBar.isVisible = show
         binding.fab.isVisible = show
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

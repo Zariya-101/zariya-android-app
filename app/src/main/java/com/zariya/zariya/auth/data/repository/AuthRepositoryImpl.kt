@@ -1,6 +1,7 @@
 package com.zariya.zariya.auth.data.repository
 
 import android.util.Log
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,6 +40,31 @@ class AuthRepositoryImpl @Inject constructor(
                     }
                 } else {
                     Log.e("AuthRepositoryImpl", "Phone Auth Not successful")
+                    NetworkResult.Error(it.exception?.message.toString())
+                }
+                trySend(result)
+            }
+        awaitClose {
+            listener
+        }
+    }
+
+    override suspend fun authenticateWithGoogle(credential: AuthCredential) = callbackFlow {
+        val listener = firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener {
+                val result = if (it.isSuccessful) {
+                    Log.d("AuthRepositoryImpl", it.toString())
+                    val isNewUser = it.result?.additionalUserInfo?.isNewUser
+                    val firebaseUser = firebaseAuth.currentUser
+                    firebaseUser?.let {
+                        val user = User(id = firebaseUser.uid, name = firebaseUser.displayName)
+                        user.isNew = isNewUser
+                        NetworkResult.Success(user)
+                    } ?: run {
+                        NetworkResult.Error("Something went wrong")
+                    }
+                } else {
+                    Log.e("AuthRepositoryImpl", "Google Auth Not successful")
                     NetworkResult.Error(it.exception?.message.toString())
                 }
                 trySend(result)
@@ -88,7 +114,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun signUpUser(authenticatedUser: User): NetworkResult<Boolean> = try {
+    override suspend fun createUser(authenticatedUser: User): NetworkResult<Boolean> = try {
         authenticatedUser.id?.let { id ->
             firestore.collection(COL_USERS)
                 .document(id)

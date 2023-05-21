@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.PhoneAuthCredential
 import com.zariya.zariya.auth.data.model.User
 import com.zariya.zariya.auth.domain.repository.AuthRepository
@@ -54,6 +55,40 @@ class AuthViewModel @Inject constructor(
 
                     is NetworkResult.Error -> {
                         Log.e("AuthViewModel", "Auth with Phone Failed: $it")
+                    }
+
+                    is NetworkResult.Loading -> {
+
+                    }
+                }
+            }
+        }
+    }
+
+    fun authenticateWithGoogle(credential: AuthCredential) {
+        viewModelScope.launch(Dispatchers.IO) {
+            authRepository.authenticateWithGoogle(credential).collect {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        it.data?.let { user ->
+                            if (user.isNew!!) {
+                                withContext(Dispatchers.Main.immediate) {
+                                    val action = LoginFragmentDirections.actionLoginToSignup()
+                                    action.user = user
+                                    _uiEvents.value = UIEvents.Navigate(action)
+                                }
+                            } else {
+                                updateFcmToken(user, true)
+                            }
+                        } ?: run {
+                            withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                            }
+                        }
+                    }
+
+                    is NetworkResult.Error -> {
+                        Log.e("AuthViewModel", "Auth with Google Failed: $it")
                     }
 
                     is NetworkResult.Loading -> {
@@ -116,7 +151,7 @@ class AuthViewModel @Inject constructor(
 
     fun signUpUser(authenticatedUser: User) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (authRepository.signUpUser(authenticatedUser)) {
+            when (authRepository.createUser(authenticatedUser)) {
                 is NetworkResult.Success -> {
                     preference?.setUserData(authenticatedUser)
                     withContext(Dispatchers.Main.immediate) {
