@@ -7,13 +7,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
 
-    suspend fun createAccount(email: String, password: String)
-
-    suspend fun login(email: String, password: String)
-
     suspend fun authenticateWithPhone(credential: PhoneAuthCredential): Flow<NetworkResult<User>>
 
     suspend fun updateFcmToken(user: User): NetworkResult<Boolean>
 
     suspend fun getUserFromDB(authenticatedUser: User): Flow<NetworkResult<User>>
+
+    suspend fun signUpUser(authenticatedUser: User): NetworkResult<Boolean>
 }

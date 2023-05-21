@@ -5,12 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.PhoneAuthCredential
-import com.zariya.zariya.app
-import com.zariya.zariya.auth.data.model.Customers
 import com.zariya.zariya.auth.data.model.User
-import com.zariya.zariya.remote.SyncRepositoryImpl
 import com.zariya.zariya.auth.domain.repository.AuthRepository
-import com.zariya.zariya.remote.SyncRepository
 import com.zariya.zariya.auth.presentation.fragment.LoginFragmentDirections
 import com.zariya.zariya.auth.presentation.fragment.SignUpFragmentDirections
 import com.zariya.zariya.core.local.AppSharedPreference
@@ -29,15 +25,8 @@ class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    private lateinit var syncRepository: SyncRepository
-
-    private val _authenticateWithPhone = SingleLiveEvent<User>()
-    val authenticateWithPhoneLiveData: LiveData<User> = _authenticateWithPhone
-
     private val _uiEvents = SingleLiveEvent<UIEvents>()
     val uiEvents: LiveData<UIEvents> = _uiEvents
-
-    private var isNewUser: Boolean = false
 
     fun authenticateWithPhone(credential: PhoneAuthCredential) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -45,9 +34,10 @@ class AuthViewModel @Inject constructor(
                 when (it) {
                     is NetworkResult.Success -> {
                         it.data?.let { user ->
-//                            _authenticateWithPhone.value = user
                             if (user.isNew!!) {
                                 withContext(Dispatchers.Main.immediate) {
+                                    user.countryCode = user.phone?.substring(0, 3)
+                                    user.phone = user.phone?.substring(3, 13)
                                     val action = LoginFragmentDirections.actionLoginToSignup()
                                     action.user = user
                                     _uiEvents.value = UIEvents.Navigate(action)
@@ -124,87 +114,29 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    fun signUpUser(authenticatedUser: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (authRepository.signUpUser(authenticatedUser)) {
+                is NetworkResult.Success -> {
+                    preference?.setUserData(authenticatedUser)
+                    withContext(Dispatchers.Main.immediate) {
+                        _uiEvents.value =
+                            UIEvents.Navigate(SignUpFragmentDirections.actionSignUpToHome())
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    Log.e("AuthViewModel", "Signup user Failed")
+                }
+
+                is NetworkResult.Loading -> {
+
+                }
+            }
+        }
+    }
+
     fun isUserLoggedIn(): Boolean {
         return preference?.getUserData()?.id.isNullOrEmpty().not()
-    }
-
-    fun register(customer: Customers) {
-        _uiEvents.value = UIEvents.Loading(true)
-        viewModelScope.launch(Dispatchers.IO) {
-            Log.v("AuthViewModel", "Register Start")
-            kotlin.runCatching {
-                authRepository.createAccount(
-                    email = customer.phone.plus("@zariya.com"),
-                    password = customer.phone
-                )
-            }.onSuccess {
-                Log.v("AuthViewModel", "Register Success")
-                login(customer.phone, customer = customer)
-            }.onFailure {
-                Log.e("AuthViewModel", "Register Failed: $it")
-                withContext(Dispatchers.Main) {
-                    _uiEvents.value = UIEvents.ShowError(it.message)
-                    _uiEvents.value = UIEvents.Loading(false)
-                }
-            }
-        }
-    }
-
-    fun login(mobile: String, customer: Customers?) {
-        isNewUser = customer != null
-        if (!isNewUser) {
-            _uiEvents.value = UIEvents.Loading(true)
-        }
-        viewModelScope.launch(Dispatchers.IO) {
-            kotlin.runCatching {
-                Log.v("AuthViewModel", "Login Start")
-                authRepository.login(email = mobile.plus("@zariya.com"), password = mobile)
-            }.onSuccess {
-                Log.v("AuthViewModel", "Login Success")
-                if (isNewUser) {
-                    if (customer != null) {
-                        createCustomer(customer = customer)
-                    }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        _uiEvents.value = UIEvents.Loading(false)
-                        _uiEvents.value =
-                            UIEvents.Navigate(LoginFragmentDirections.actionLoginToHome())
-                    }
-                }
-            }.onFailure {
-                Log.e("AuthViewModel", "Login Failed: $it")
-                withContext(Dispatchers.Main) {
-                    _uiEvents.value = UIEvents.ShowError(it.message)
-                    _uiEvents.value = UIEvents.Loading(false)
-                }
-            }
-        }
-    }
-
-    fun createCustomer(customer: Customers) {
-        customer.fcmToken = preference?.getFcmToken() ?: ""
-        syncRepository = SyncRepositoryImpl()
-        viewModelScope.launch(Dispatchers.IO) {
-            kotlin.runCatching {
-                Log.v("AuthViewModel", "Customer Creation Start")
-                syncRepository.createCustomer(customer)
-            }.onSuccess {
-                Log.v("AuthViewModel", "Customer Creation Success")
-                customer.owner_id = app.currentUser?.id ?: ""
-                preference?.setCustomerData(customer)
-                withContext(Dispatchers.Main) {
-                    _uiEvents.value = UIEvents.Loading(false)
-                    _uiEvents.value =
-                        UIEvents.Navigate(SignUpFragmentDirections.actionSignUpToHome())
-                }
-            }.onFailure {
-                Log.e("AuthViewModel", "Customer Creation Failed: $it")
-                withContext(Dispatchers.Main) {
-                    _uiEvents.value = UIEvents.ShowError(it.message)
-                    _uiEvents.value = UIEvents.Loading(false)
-                }
-            }
-        }
     }
 }

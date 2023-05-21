@@ -70,7 +70,7 @@ class LoginFragment : BaseFragment() {
 
     private fun initiateOTPLogin() {
         val phoneNumber =
-            "+${binding.countryCodePicker.selectedCountryCode}${binding.tilPhone.editText?.text.toString()}}"
+            "${binding.countryCodePicker.selectedCountryCodeWithPlus}${binding.tilPhone.editText?.text.toString()}}"
         activity?.let {
             PhoneAuthProvider.verifyPhoneNumber(
                 PhoneAuthOptions.newBuilder()

@@ -4,14 +4,12 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.firestore.FirebaseFirestore
-import com.zariya.zariya.app
 import com.zariya.zariya.auth.data.model.User
 import com.zariya.zariya.auth.domain.repository.AuthRepository
 import com.zariya.zariya.core.local.AppSharedPreference
 import com.zariya.zariya.core.network.NetworkResult
 import com.zariya.zariya.utils.COL_USERS
 import com.zariya.zariya.utils.FCM_TOKEN
-import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
@@ -24,14 +22,6 @@ class AuthRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val preference: AppSharedPreference?
 ) : AuthRepository {
-
-    override suspend fun createAccount(email: String, password: String) {
-        app.emailPasswordAuth.registerUser(email, password)
-    }
-
-    override suspend fun login(email: String, password: String) {
-        app.login(Credentials.emailPassword(email, password))
-    }
 
     override suspend fun authenticateWithPhone(credential: PhoneAuthCredential) = callbackFlow {
         val listener = firebaseAuth.signInWithCredential(credential)
@@ -96,5 +86,21 @@ class AuthRepositoryImpl @Inject constructor(
         awaitClose {
             listener
         }
+    }
+
+    override suspend fun signUpUser(authenticatedUser: User): NetworkResult<Boolean> = try {
+        authenticatedUser.id?.let { id ->
+            firestore.collection(COL_USERS)
+                .document(id)
+                .set(authenticatedUser)
+                .await()
+
+            NetworkResult.Success(true)
+        } ?: run {
+            NetworkResult.Error("Something went wrong")
+        }
+    } catch (e: Exception) {
+        Log.e("AuthRepositoryImpl", "Signup User Exception")
+        NetworkResult.Error(e.message.toString())
     }
 }
