@@ -14,6 +14,10 @@ interface AuthRepository {
 
     suspend fun authenticateWithFacebook(credential: AuthCredential): Flow<NetworkResult<User>>
 
+    suspend fun checkIfUserExists(authenticatedUser: User): Flow<NetworkResult<User?>>
+
+    suspend fun deleteCurrentFirebaseUser()
+
     suspend fun updateFcmToken(user: User): NetworkResult<Boolean>
 
     suspend fun getUserFromDB(authenticatedUser: User): Flow<NetworkResult<User>>

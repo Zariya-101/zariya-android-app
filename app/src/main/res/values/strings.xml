@@ -23,6 +23,7 @@
     <string name="phone">Phone Number</string>
     <string name="name">Name</string>
     <string name="dob">Date of Birth</string>
+    <string name="email">Email</string>
     <string name="search">Search</string>
     <string name="actor">Actor</string>
     <string name="casting_agency">Casting Agency</string>
@@ -62,6 +63,7 @@
     <string name="validation_empty_name">Please enter name</string>
     <string name="validation_empty_dob">Please select Date of birth</string>
     <string name="validation_invalid_name">Please enter valid name</string>
+    <string name="validation_empty_email">Please enter Email</string>
     <string name="validation_select_country">Please select country code</string>
     <string name="validation_empty_phone">Please enter phone</string>
     <string name="validation_invalid_phone">Please enter valid phone</string>

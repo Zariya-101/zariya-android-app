@@ -66,7 +66,7 @@
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/tilPhone">
+            app:layout_constraintBottom_toTopOf="@+id/tilEmail">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -78,6 +78,29 @@
                 android:drawableTint="@color/blue_500"
                 android:focusable="false"
                 android:hint="@string/dob"
+                android:textColorHint="@color/blue_500" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            style="@style/roundedTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:hintEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/tilPhone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_edit_text"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/blue_500"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 android:textColorHint="@color/blue_500" />
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -4,15 +4,17 @@ import android.util.Log
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.zariya.zariya.auth.data.model.User
 import com.zariya.zariya.auth.domain.repository.AuthRepository
 import com.zariya.zariya.core.local.AppSharedPreference
 import com.zariya.zariya.core.network.NetworkResult
 import com.zariya.zariya.utils.COL_USERS
+import com.zariya.zariya.utils.EMAIL
 import com.zariya.zariya.utils.FCM_TOKEN
+import com.zariya.zariya.utils.PHONE
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -50,6 +52,58 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun checkIfUserExists(authenticatedUser: User) = callbackFlow {
+        val filter: Filter = when {
+            authenticatedUser.phone.isNullOrEmpty().not()
+                    && authenticatedUser.email.isNullOrEmpty().not() -> {
+                Filter.or(
+                    Filter.equalTo(PHONE, authenticatedUser.phone?.substring(3)),
+                    Filter.equalTo(EMAIL, authenticatedUser.email)
+                )
+            }
+
+            authenticatedUser.phone.isNullOrEmpty().not() -> {
+                Filter.equalTo(PHONE, authenticatedUser.phone?.substring(3))
+            }
+
+            authenticatedUser.email.isNullOrEmpty().not() -> {
+                Filter.equalTo(EMAIL, authenticatedUser.email)
+            }
+
+            else -> {
+                Filter()
+            }
+        }
+        val listener = firestore.collection(COL_USERS)
+            .where(filter)
+            .get()
+            .addOnCompleteListener {
+                val result = if (it.isSuccessful) {
+                    if (it.result.documents.size > 0) {
+                        val user = it.result.documents[0].toObject(User::class.java)
+                        NetworkResult.Success(user)
+                    } else {
+                        NetworkResult.Success(null)
+                    }
+                } else {
+                    NetworkResult.Error("Something went wrong")
+                }
+                trySend(result)
+            }
+
+        awaitClose { listener }
+    }
+
+    override suspend fun deleteCurrentFirebaseUser() {
+        firebaseAuth.currentUser?.delete()?.addOnCompleteListener {
+            val result = if (it.isSuccessful) {
+                NetworkResult.Success(true)
+            } else {
+                NetworkResult.Error("Something went wrong")
+            }
+        }
+    }
+
     override suspend fun authenticateWithGoogle(credential: AuthCredential) = callbackFlow {
         val listener = firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener {
@@ -58,7 +112,11 @@ class AuthRepositoryImpl @Inject constructor(
                     val isNewUser = it.result?.additionalUserInfo?.isNewUser
                     val firebaseUser = firebaseAuth.currentUser
                     firebaseUser?.let {
-                        val user = User(id = firebaseUser.uid, name = firebaseUser.displayName)
+                        val user = User(
+                            id = firebaseUser.uid,
+                            name = firebaseUser.displayName,
+                            email = firebaseUser.email
+                        )
                         user.isNew = isNewUser
                         NetworkResult.Success(user)
                     } ?: run {
@@ -83,7 +141,11 @@ class AuthRepositoryImpl @Inject constructor(
                     val isNewUser = it.result?.additionalUserInfo?.isNewUser
                     val firebaseUser = firebaseAuth.currentUser
                     firebaseUser?.let {
-                        val user = User(id = firebaseUser.uid, name = firebaseUser.displayName)
+                        val user = User(
+                            id = firebaseUser.uid,
+                            name = firebaseUser.displayName,
+                            email = firebaseUser.email
+                        )
                         user.isNew = isNewUser
                         NetworkResult.Success(user)
                     } ?: run {

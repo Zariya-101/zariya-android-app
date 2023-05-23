@@ -36,6 +36,7 @@ class AppSharedPreference private constructor(context: Context) {
         sharedPref.edit()
             .putString("name", user.name)
             .putString("phone", user.phone)
+            .putString("email", user.email)
             .putString("fcmToken", user.fcmToken)
             .putString("dob", user.dob)
             .putString("countryCode", user.countryCode)
@@ -46,6 +47,7 @@ class AppSharedPreference private constructor(context: Context) {
     fun getUserData(): User = User(
         name = sharedPref.getString("name", ""),
         phone = sharedPref.getString("phone", ""),
+        email = sharedPref.getString("email", ""),
         fcmToken = sharedPref.getString("fcmToken", ""),
         dob = sharedPref.getString("dob", ""),
         countryCode = sharedPref.getString("countryCode", ""),

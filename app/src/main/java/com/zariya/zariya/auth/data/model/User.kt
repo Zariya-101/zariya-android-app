@@ -8,6 +8,7 @@ data class User(
     var id: String? = "",
     var name: String? = "",
     var phone: String? = "",
+    var email: String? = "",
     var dob: String? = "",
     var countryCode: String? = "",
     var fcmToken: String? = ""
@@ -16,6 +17,7 @@ data class User(
     var isNew: Boolean? = false
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -30,6 +32,7 @@ data class User(
         parcel.writeString(id)
         parcel.writeString(name)
         parcel.writeString(phone)
+        parcel.writeString(email)
         parcel.writeString(dob)
         parcel.writeString(countryCode)
         parcel.writeString(fcmToken)

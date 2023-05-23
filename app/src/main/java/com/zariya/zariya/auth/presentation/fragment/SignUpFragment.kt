@@ -55,6 +55,10 @@ class SignUpFragment : BaseFragment() {
                 binding.tilPhone.editText?.setText(user.phone)
                 binding.tilPhone.isEnabled = false
             }
+            if (user.email.isNullOrEmpty().not()) {
+                binding.tilEmail.editText?.setText(user.email)
+                binding.tilEmail.isEnabled = false
+            }
         }
     }
 
@@ -109,7 +113,7 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun signUpUser() {
-        val countryCode = if (args.user?.countryCode.isNullOrEmpty()) {
+        val countryCode = if (args.user?.countryCode.isNullOrEmpty().not()) {
             args.user?.countryCode
         } else {
             binding.countryCodePicker.selectedCountryCodeWithPlus
@@ -121,6 +125,7 @@ class SignUpFragment : BaseFragment() {
                         id = args.user?.id,
                         name = binding.tilName.editText?.text.toString(),
                         phone = binding.tilPhone.editText?.text.toString(),
+                        email = binding.tilEmail.editText?.text.toString(),
                         dob = binding.tilDOB.editText?.text.toString(),
                         countryCode = countryCode,
                         fcmToken = token
@@ -170,6 +175,12 @@ class SignUpFragment : BaseFragment() {
             return false
         }
         binding.tilDOB.error = ""
+
+        if (binding.tilEmail.editText?.text?.isEmpty() == true) {
+            binding.tilEmail.error = getString(R.string.validation_empty_email)
+            return false
+        }
+        binding.tilEmail.error = ""
 
         if (binding.countryCodePicker.selectedCountryCode.isNullOrEmpty()) {
             binding.tilPhone.error = getString(R.string.validation_select_country)

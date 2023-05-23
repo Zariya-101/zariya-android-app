@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.PhoneAuthCredential
 import com.zariya.zariya.auth.data.model.User
-import com.zariya.zariya.auth.domain.repository.AuthRepository
+import com.zariya.zariya.auth.domain.usecase.AuthUseCase
 import com.zariya.zariya.auth.presentation.fragment.LoginFragmentDirections
 import com.zariya.zariya.auth.presentation.fragment.SignUpFragmentDirections
 import com.zariya.zariya.core.local.AppSharedPreference
@@ -23,7 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val preference: AppSharedPreference?,
-    private val authRepository: AuthRepository
+    private val authUseCase: AuthUseCase
 ) : ViewModel() {
 
     private val _uiEvents = SingleLiveEvent<UIEvents>()
@@ -31,7 +31,7 @@ class AuthViewModel @Inject constructor(
 
     fun authenticateWithPhone(credential: PhoneAuthCredential) {
         viewModelScope.launch(Dispatchers.IO) {
-            authRepository.authenticateWithPhone(credential).collect {
+            authUseCase.authenticateWithPhone(credential).collect {
                 when (it) {
                     is NetworkResult.Success -> {
                         it.data?.let { user ->
@@ -67,7 +67,7 @@ class AuthViewModel @Inject constructor(
 
     fun authenticateWithGoogle(credential: AuthCredential) {
         viewModelScope.launch(Dispatchers.IO) {
-            authRepository.authenticateWithGoogle(credential).collect {
+            authUseCase.authenticateWithGoogle(credential).collect {
                 when (it) {
                     is NetworkResult.Success -> {
                         it.data?.let { user ->
@@ -101,7 +101,7 @@ class AuthViewModel @Inject constructor(
 
     fun authenticateWithFacebook(credential: AuthCredential) {
         viewModelScope.launch(Dispatchers.IO) {
-            authRepository.authenticateWithFacebook(credential).collect {
+            authUseCase.authenticateWithFacebook(credential).collect {
                 when (it) {
                     is NetworkResult.Success -> {
                         it.data?.let { user ->
@@ -135,7 +135,7 @@ class AuthViewModel @Inject constructor(
 
     fun updateFcmToken(user: User, isLogin: Boolean = false) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (authRepository.updateFcmToken(user)) {
+            when (authUseCase.updateFcmToken(user)) {
                 is NetworkResult.Success -> {
                     fetchUser(user, isLogin)
                 }
@@ -153,7 +153,7 @@ class AuthViewModel @Inject constructor(
 
     fun fetchUser(authenticatedUser: User, isLogin: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            authRepository.getUserFromDB(authenticatedUser).collect {
+            authUseCase.getUserFromDB(authenticatedUser).collect {
                 when (it) {
                     is NetworkResult.Success -> {
                         it.data?.let { user ->
@@ -185,7 +185,7 @@ class AuthViewModel @Inject constructor(
 
     fun signUpUser(authenticatedUser: User) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (authRepository.createUser(authenticatedUser)) {
+            when (authUseCase.createUser(authenticatedUser)) {
                 is NetworkResult.Success -> {
                     preference?.setUserData(authenticatedUser)
                     withContext(Dispatchers.Main.immediate) {
