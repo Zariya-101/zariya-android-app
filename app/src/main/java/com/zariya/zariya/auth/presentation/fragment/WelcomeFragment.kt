@@ -62,9 +62,6 @@ class WelcomeFragment : Fragment() {
         binding.btnLogin.setOnClickListener {
             it.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeToLogin())
         }
-        binding.btnSignUp.setOnClickListener {
-//            it.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeToSignUp())
-        }
     }
 
     inner class MyViewPagerAdapter : PagerAdapter() {
@@ -135,14 +132,12 @@ class WelcomeFragment : Fragment() {
                 binding.btnSkip.visibility = View.GONE
                 binding.btnNext.visibility = View.GONE
                 binding.btnLogin.visibility = View.VISIBLE
-                binding.btnSignUp.visibility = View.VISIBLE
             } else {
                 // still pages are left
                 binding.btnNext.text = getString(R.string.next)
                 binding.btnSkip.visibility = View.VISIBLE
                 binding.btnNext.visibility = View.VISIBLE
                 binding.btnLogin.visibility = View.GONE
-                binding.btnSignUp.visibility = View.GONE
             }
         }
 
