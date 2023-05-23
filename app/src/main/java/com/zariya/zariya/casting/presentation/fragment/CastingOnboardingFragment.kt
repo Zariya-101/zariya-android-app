@@ -47,10 +47,10 @@ class CastingOnboardingFragment : BaseFragment() {
                 Navigation.findNavController(binding.root).popBackStack()
             }
         }
-        binding.viewPager.registerOnPageChangeCallback(object: OnPageChangeCallback() {
+        binding.viewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                binding.sliderProgress.value  = position.toFloat()
+                binding.sliderProgress.value = position.toFloat()
             }
         })
         binding.btnNext.setOnClickListener {
@@ -98,7 +98,8 @@ class CastingOnboardingFragment : BaseFragment() {
                 }
 
                 5 -> {
-
+                    Navigation.findNavController(binding.root)
+                        .navigate(CastingOnboardingFragmentDirections.actionActorProfile())
                 }
 
                 else -> {

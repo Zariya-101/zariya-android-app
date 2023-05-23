@@ -8,7 +8,6 @@
         android:background="@color/dark_blue"
         tools:context=".services.presentation.fragment.MyServicesFragment">
 
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,6 +111,8 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="Casting Volunteers"
                     android:textColor="@color/white" />
             </LinearLayout>
@@ -149,8 +150,8 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginHorizontal="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/bg_et_white"
                 app:tabGravity="fill"
                 app:tabIndicator="@drawable/round_corner8"
