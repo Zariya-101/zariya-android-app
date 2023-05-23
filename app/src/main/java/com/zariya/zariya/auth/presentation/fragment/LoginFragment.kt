@@ -9,6 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -16,6 +21,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthMissingActivityForRecaptchaException
 import com.google.firebase.auth.GoogleAuthProvider
@@ -43,6 +49,8 @@ class LoginFragment : BaseFragment() {
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
 
     private lateinit var googleSignInClient: GoogleSignInClient
+
+    private lateinit var callbackManager: CallbackManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,7 +85,7 @@ class LoginFragment : BaseFragment() {
         }
 
         binding.btnFacebook.setOnClickListener {
-
+            initialiseFacebookLogin()
         }
 
         binding.btnGoogle.setOnClickListener {
@@ -109,17 +117,9 @@ class LoginFragment : BaseFragment() {
         override fun onVerificationFailed(e: FirebaseException) {
             Log.w("LoginFragment", "onVerificationFailed", e)
             when (e) {
-                is FirebaseAuthInvalidCredentialsException -> {
-                    // Invalid request
-                }
-
-                is FirebaseTooManyRequestsException -> {
-                    // The SMS quota for the project has been exceeded
-                }
-
-                is FirebaseAuthMissingActivityForRecaptchaException -> {
-                    // reCAPTCHA verification attempted with null Activity
-                }
+                is FirebaseAuthInvalidCredentialsException -> {}
+                is FirebaseTooManyRequestsException -> {}
+                is FirebaseAuthMissingActivityForRecaptchaException -> {}
             }
             Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
         }
@@ -204,7 +204,6 @@ class LoginFragment : BaseFragment() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-
         activity?.let { googleSignInClient = GoogleSignIn.getClient(it, googleSignInOptions) }
     }
 
@@ -236,6 +235,35 @@ class LoginFragment : BaseFragment() {
             } catch (e: Exception) {
                 Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show()
             }
+        } else {
+            if (::callbackManager.isInitialized) {
+                callbackManager.onActivityResult(requestCode, resultCode, data)
+            }
         }
+    }
+
+    private fun initialiseFacebookLogin() {
+        callbackManager = CallbackManager.Factory.create()
+        activity?.let {
+            LoginManager.getInstance()
+                .logInWithReadPermissions(it, listOf("email", "public_profile"))
+        }
+        LoginManager.getInstance()
+            .registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+                override fun onCancel() {}
+
+                override fun onError(error: FacebookException) {
+                    Log.e("LoginFragment", "facebook login error $error")
+                }
+
+                override fun onSuccess(result: LoginResult) {
+                    val credential = FacebookAuthProvider.getCredential(result.accessToken.token)
+                    signInWithFacebookCredential(credential)
+                }
+            })
+    }
+
+    private fun signInWithFacebookCredential(credential: AuthCredential) {
+        authViewModel.authenticateWithFacebook(credential)
     }
 }

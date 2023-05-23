@@ -99,7 +99,41 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun updateFcmToken(user: User, isLogin: Boolean) {
+    fun authenticateWithFacebook(credential: AuthCredential) {
+        viewModelScope.launch(Dispatchers.IO) {
+            authRepository.authenticateWithFacebook(credential).collect {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        it.data?.let { user ->
+                            if (user.isNew!!) {
+                                withContext(Dispatchers.Main.immediate) {
+                                    val action = LoginFragmentDirections.actionLoginToSignup()
+                                    action.user = user
+                                    _uiEvents.value = UIEvents.Navigate(action)
+                                }
+                            } else {
+                                updateFcmToken(user, true)
+                            }
+                        } ?: run {
+                            withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                            }
+                        }
+                    }
+
+                    is NetworkResult.Error -> {
+                        Log.e("AuthViewModel", "Auth with Facebook Failed: $it")
+                    }
+
+                    is NetworkResult.Loading -> {
+
+                    }
+                }
+            }
+        }
+    }
+
+    fun updateFcmToken(user: User, isLogin: Boolean = false) {
         viewModelScope.launch(Dispatchers.IO) {
             when (authRepository.updateFcmToken(user)) {
                 is NetworkResult.Success -> {

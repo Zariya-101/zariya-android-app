@@ -12,6 +12,7 @@ import com.zariya.zariya.core.network.NetworkResult
 import com.zariya.zariya.utils.COL_USERS
 import com.zariya.zariya.utils.FCM_TOKEN
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -65,6 +66,31 @@ class AuthRepositoryImpl @Inject constructor(
                     }
                 } else {
                     Log.e("AuthRepositoryImpl", "Google Auth Not successful")
+                    NetworkResult.Error(it.exception?.message.toString())
+                }
+                trySend(result)
+            }
+        awaitClose {
+            listener
+        }
+    }
+
+    override suspend fun authenticateWithFacebook(credential: AuthCredential) = callbackFlow {
+        val listener = firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener {
+                val result = if (it.isSuccessful) {
+                    Log.d("AuthRepositoryImpl", it.toString())
+                    val isNewUser = it.result?.additionalUserInfo?.isNewUser
+                    val firebaseUser = firebaseAuth.currentUser
+                    firebaseUser?.let {
+                        val user = User(id = firebaseUser.uid, name = firebaseUser.displayName)
+                        user.isNew = isNewUser
+                        NetworkResult.Success(user)
+                    } ?: run {
+                        NetworkResult.Error("Something went wrong")
+                    }
+                } else {
+                    Log.e("AuthRepositoryImpl", "Facebook Auth Not successful")
                     NetworkResult.Error(it.exception?.message.toString())
                 }
                 trySend(result)

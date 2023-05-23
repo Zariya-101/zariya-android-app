@@ -12,6 +12,8 @@ interface AuthRepository {
 
     suspend fun authenticateWithGoogle(credential: AuthCredential): Flow<NetworkResult<User>>
 
+    suspend fun authenticateWithFacebook(credential: AuthCredential): Flow<NetworkResult<User>>
+
     suspend fun updateFcmToken(user: User): NetworkResult<Boolean>
 
     suspend fun getUserFromDB(authenticatedUser: User): Flow<NetworkResult<User>>
