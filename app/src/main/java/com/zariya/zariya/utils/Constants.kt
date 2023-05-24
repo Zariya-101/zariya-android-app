@@ -2,6 +2,7 @@ package com.zariya.zariya.utils
 
 //Collections
 const val COL_USERS = "users"
+const val COL_ACTORS = "actors"
 
 //Fields
 const val ID = "id"

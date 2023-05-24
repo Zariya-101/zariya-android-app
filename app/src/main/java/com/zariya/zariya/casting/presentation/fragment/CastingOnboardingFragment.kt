@@ -11,8 +11,11 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.zariya.zariya.casting.presentation.adapter.ViewPagerAdapter
 import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewModel
 import com.zariya.zariya.core.ui.BaseFragment
+import com.zariya.zariya.core.ui.UIEvents
 import com.zariya.zariya.databinding.FragmentCastingOnboardingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CastingOnboardingFragment : BaseFragment() {
 
     private lateinit var binding: FragmentCastingOnboardingBinding
@@ -40,6 +43,7 @@ class CastingOnboardingFragment : BaseFragment() {
     }
 
     private fun setUpListeners() {
+        uiEventListener()
         binding.ivBack.setOnClickListener {
             if (binding.viewPager.currentItem > 2) {
                 binding.viewPager.currentItem -= 1
@@ -65,7 +69,7 @@ class CastingOnboardingFragment : BaseFragment() {
                 }
 
                 1 -> {
-                    if (castingOnboardingViewModel.userAge != null) {
+                    if (castingOnboardingViewModel.actorProfileDetails.age.isEmpty().not()) {
                         binding.viewPager.currentItem += 1
                     } else {
                         Toast.makeText(context, "Please Select your Age", Toast.LENGTH_LONG)
@@ -74,7 +78,7 @@ class CastingOnboardingFragment : BaseFragment() {
                 }
 
                 2 -> {
-                    if (castingOnboardingViewModel.userComplexion != null) {
+                    if (castingOnboardingViewModel.actorProfileDetails.complexion.isEmpty().not()) {
                         binding.viewPager.currentItem += 1
                     } else {
                         Toast.makeText(
@@ -84,7 +88,7 @@ class CastingOnboardingFragment : BaseFragment() {
                 }
 
                 3 -> {
-                    if (castingOnboardingViewModel.userHeight != null) {
+                    if (castingOnboardingViewModel.actorProfileDetails.height.isEmpty().not()) {
                         binding.viewPager.currentItem += 1
                     } else {
                         Toast.makeText(
@@ -98,12 +102,37 @@ class CastingOnboardingFragment : BaseFragment() {
                 }
 
                 5 -> {
-                    Navigation.findNavController(binding.root)
-                        .navigate(CastingOnboardingFragmentDirections.actionActorProfile())
+                    castingOnboardingViewModel.createActorProfile()
                 }
 
                 else -> {
 
+                }
+            }
+        }
+    }
+
+    private fun uiEventListener() {
+        castingOnboardingViewModel.uiEvents.observe(viewLifecycleOwner) { uiEvent ->
+            when (uiEvent) {
+                is UIEvents.Loading -> {
+                    // Handle Loading
+                }
+
+                is UIEvents.ShowError -> {
+                    Toast.makeText(
+                        context,
+                        uiEvent.message ?: "Something went wrong",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                is UIEvents.Navigate -> {
+                    uiEvent.navDirections?.let {
+                        Navigation.findNavController(binding.root).navigate(
+                            it
+                        )
+                    }
                 }
             }
         }

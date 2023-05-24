@@ -9,7 +9,9 @@ import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewMod
 import com.zariya.zariya.common.data.model.SelectableListElement
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentSelectComplexionBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SelectComplexionFragment(private val castingOnboardingViewModel: CastingOnboardingViewModel) :
     BaseFragment() {
 
@@ -38,7 +40,9 @@ class SelectComplexionFragment(private val castingOnboardingViewModel: CastingOn
                     SelectableListElement(text = "Dark Brown")
                 ),
                 onCardClicked = {
-                    castingOnboardingViewModel.updateComplexion(it)
+                    castingOnboardingViewModel.updateActorProfileDetails(
+                        castingOnboardingViewModel.actorProfileDetails.copy(complexion = it)
+                    )
                 }
             )
         }

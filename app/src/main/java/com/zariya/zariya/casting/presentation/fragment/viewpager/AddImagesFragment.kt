@@ -10,8 +10,6 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -20,8 +18,10 @@ import com.zariya.zariya.casting.presentation.adapter.AddImageAdapter
 import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewModel
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentAddImagesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class AddImagesFragment(private val castingOnboardingViewModel: CastingOnboardingViewModel) :
     BaseFragment() {
 

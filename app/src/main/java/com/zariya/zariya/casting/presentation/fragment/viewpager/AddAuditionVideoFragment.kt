@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewModel
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentAddAuditionVideoBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddAuditionVideoFragment(private val castingOnboardingViewModel: CastingOnboardingViewModel) :
     BaseFragment() {
 

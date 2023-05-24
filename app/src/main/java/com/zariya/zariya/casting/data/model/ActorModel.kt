@@ -8,3 +8,10 @@ data class SelectUserTypeModel(
     val icon: Drawable,
     val isSelected: Boolean = false
 )
+
+data class ActorProfile(
+    var userId: String = "",
+    val age: String = "",
+    val complexion: String = "",
+    val height: String = ""
+)

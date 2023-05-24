@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewModel
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentSelectAgeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SelectAgeFragment(private val castingOnboardingViewModel: CastingOnboardingViewModel) :
     BaseFragment() {
 
@@ -29,7 +31,14 @@ class SelectAgeFragment(private val castingOnboardingViewModel: CastingOnboardin
             val age = "${value.toInt()} years"
 
             binding.tilAge.editText?.setText(age)
-            castingOnboardingViewModel.updateAge(value.toInt().toString())
+            castingOnboardingViewModel.updateActorProfileDetails(
+                castingOnboardingViewModel.actorProfileDetails.copy(age = value.toInt().toString())
+            )
+//            castingOnboardingViewModel.actorProfileDetails.value?.copy(
+//                age = value.toInt().toString()
+//            )?.let {
+//                castingOnboardingViewModel.updateActorProfileDetails(it)
+//            }
 
             return@setLabelFormatter age
         }

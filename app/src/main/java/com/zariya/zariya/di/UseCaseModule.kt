@@ -2,6 +2,8 @@ package com.zariya.zariya.di
 
 import com.zariya.zariya.auth.domain.repository.AuthRepository
 import com.zariya.zariya.auth.domain.usecase.AuthUseCase
+import com.zariya.zariya.casting.domain.repository.CastingOnboardingRepository
+import com.zariya.zariya.casting.domain.usecase.CastingOnboardingUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,4 +17,8 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideAuthUseCase(authRepository: AuthRepository) = AuthUseCase(authRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideCastingUseCase(castingOnboardingRepository: CastingOnboardingRepository) = CastingOnboardingUseCase(castingOnboardingRepository)
 }
