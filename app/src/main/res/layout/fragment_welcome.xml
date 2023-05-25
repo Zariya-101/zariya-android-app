@@ -55,26 +55,8 @@
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/layoutDots"
-        app:layout_constraintEnd_toStartOf="@id/btnSignUp"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_corner8"
-        android:gravity="center"
-        android:paddingHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_10sdp"
-        android:text="@string/signup"
-        android:textAllCaps="false"
-        android:visibility="gone"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_13ssp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/layoutDots"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnLogin" />
+        app:layout_constraintStart_toStartOf="parent" />
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/layoutDots"
         android:layout_width="match_parent"

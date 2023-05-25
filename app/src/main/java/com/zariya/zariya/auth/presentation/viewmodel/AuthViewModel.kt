@@ -1,111 +1,211 @@
 package com.zariya.zariya.auth.presentation.viewmodel
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zariya.zariya.app
-import com.zariya.zariya.auth.data.model.Customers
-import com.zariya.zariya.auth.data.repository.AuthRepositoryImpl
-import com.zariya.zariya.remote.SyncRepositoryImpl
-import com.zariya.zariya.auth.domain.repository.AuthRepository
-import com.zariya.zariya.remote.SyncRepository
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.PhoneAuthCredential
+import com.zariya.zariya.auth.data.model.User
+import com.zariya.zariya.auth.domain.usecase.AuthUseCase
 import com.zariya.zariya.auth.presentation.fragment.LoginFragmentDirections
 import com.zariya.zariya.auth.presentation.fragment.SignUpFragmentDirections
 import com.zariya.zariya.core.local.AppSharedPreference
+import com.zariya.zariya.core.network.NetworkResult
 import com.zariya.zariya.core.network.SingleLiveEvent
-import com.zariya.zariya.core.ui.BaseViewModel
 import com.zariya.zariya.core.ui.UIEvents
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class AuthViewModel(private val application: Application) : BaseViewModel(application) {
-
-    private val authRepository: AuthRepository = AuthRepositoryImpl()
-    private lateinit var syncRepository: SyncRepository
-
-    val preference = AppSharedPreference.getInstance(application)
+@HiltViewModel
+class AuthViewModel @Inject constructor(
+    private val preference: AppSharedPreference?,
+    private val authUseCase: AuthUseCase
+) : ViewModel() {
 
     private val _uiEvents = SingleLiveEvent<UIEvents>()
     val uiEvents: LiveData<UIEvents> = _uiEvents
 
-    private var isNewUser: Boolean = false
-
-    fun register(customer: Customers) {
-        _uiEvents.value = UIEvents.Loading(true)
+    fun authenticateWithPhone(credential: PhoneAuthCredential) {
         viewModelScope.launch(Dispatchers.IO) {
-            kotlin.runCatching {
-                authRepository.createAccount(
-                    email = customer.phone.plus("@zariya.com"),
-                    password = customer.phone
-                )
-            }.onSuccess {
-                Log.v("AuthViewModel", "Register Success")
-                login(customer.phone, customer = customer)
-            }.onFailure {
-                Log.e("AuthViewModel", "Register Failed: $it")
-                withContext(Dispatchers.Main) {
-                    _uiEvents.value = UIEvents.ShowError(it.message)
-                    _uiEvents.value = UIEvents.Loading(false)
+            authUseCase.authenticateWithPhone(credential).collect {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        it.data?.let { user ->
+                            if (user.isNew!!) {
+                                withContext(Dispatchers.Main.immediate) {
+                                    user.countryCode = user.phone?.substring(0, 3)
+                                    user.phone = user.phone?.substring(3, 13)
+                                    val action = LoginFragmentDirections.actionLoginToSignup()
+                                    action.user = user
+                                    _uiEvents.value = UIEvents.Navigate(action)
+                                }
+                            } else {
+                                updateFcmToken(user, true)
+                            }
+                        } ?: run {
+                            withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                            }
+                        }
+                    }
+
+                    is NetworkResult.Error -> {
+                        Log.e("AuthViewModel", "Auth with Phone Failed: $it")
+                    }
+
+                    is NetworkResult.Loading -> {
+
+                    }
                 }
             }
         }
     }
 
-    fun login(mobile: String, customer: Customers?) {
-        isNewUser = customer != null
-        if (!isNewUser) {
-            _uiEvents.value = UIEvents.Loading(true)
-        }
+    fun authenticateWithGoogle(credential: AuthCredential) {
         viewModelScope.launch(Dispatchers.IO) {
-            kotlin.runCatching {
-                authRepository.login(email = mobile.plus("@zariya.com"), password = mobile)
-            }.onSuccess {
-                Log.v("AuthViewModel", "Login Success")
-                if (isNewUser) {
-                    if (customer != null) {
-                        createCustomer(customer = customer)
+            authUseCase.authenticateWithGoogle(credential).collect {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        it.data?.let { user ->
+                            if (user.isNew!!) {
+                                withContext(Dispatchers.Main.immediate) {
+                                    val action = LoginFragmentDirections.actionLoginToSignup()
+                                    action.user = user
+                                    _uiEvents.value = UIEvents.Navigate(action)
+                                }
+                            } else {
+                                updateFcmToken(user, true)
+                            }
+                        } ?: run {
+                            withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                            }
+                        }
                     }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        _uiEvents.value = UIEvents.Loading(false)
+
+                    is NetworkResult.Error -> {
+                        Log.e("AuthViewModel", "Auth with Google Failed: $it")
+                    }
+
+                    is NetworkResult.Loading -> {
+
+                    }
+                }
+            }
+        }
+    }
+
+    fun authenticateWithFacebook(credential: AuthCredential) {
+        viewModelScope.launch(Dispatchers.IO) {
+            authUseCase.authenticateWithFacebook(credential).collect {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        it.data?.let { user ->
+                            if (user.isNew!!) {
+                                withContext(Dispatchers.Main.immediate) {
+                                    val action = LoginFragmentDirections.actionLoginToSignup()
+                                    action.user = user
+                                    _uiEvents.value = UIEvents.Navigate(action)
+                                }
+                            } else {
+                                updateFcmToken(user, true)
+                            }
+                        } ?: run {
+                            withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                            }
+                        }
+                    }
+
+                    is NetworkResult.Error -> {
+                        Log.e("AuthViewModel", "Auth with Facebook Failed: $it")
+                    }
+
+                    is NetworkResult.Loading -> {
+
+                    }
+                }
+            }
+        }
+    }
+
+    fun updateFcmToken(user: User, isLogin: Boolean = false) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (authUseCase.updateFcmToken(user)) {
+                is NetworkResult.Success -> {
+                    fetchUser(user, isLogin)
+                }
+
+                is NetworkResult.Error -> {
+                    Log.e("AuthViewModel", "Update FCM Token Failed")
+                }
+
+                is NetworkResult.Loading -> {
+
+                }
+            }
+        }
+    }
+
+    fun fetchUser(authenticatedUser: User, isLogin: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            authUseCase.getUserFromDB(authenticatedUser).collect {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        it.data?.let { user ->
+                            preference?.setUserData(user)
+                            if (isLogin) {
+                                withContext(Dispatchers.Main.immediate) {
+                                    _uiEvents.value =
+                                        UIEvents.Navigate(LoginFragmentDirections.actionLoginToHome())
+                                }
+                            }
+                        } ?: run {
+                            withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                            }
+                        }
+                    }
+
+                    is NetworkResult.Error -> {
+                        Log.e("AuthViewModel", "fetch User Failed: $it")
+                    }
+
+                    is NetworkResult.Loading -> {
+
+                    }
+                }
+            }
+        }
+    }
+
+    fun signUpUser(authenticatedUser: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (authUseCase.createUser(authenticatedUser)) {
+                is NetworkResult.Success -> {
+                    preference?.setUserData(authenticatedUser)
+                    withContext(Dispatchers.Main.immediate) {
                         _uiEvents.value =
-                            UIEvents.Navigate(LoginFragmentDirections.actionLoginToHome())
+                            UIEvents.Navigate(SignUpFragmentDirections.actionSignUpToHome())
                     }
                 }
-            }.onFailure {
-                Log.e("AuthViewModel", "Login Failed: $it")
-                withContext(Dispatchers.Main) {
-                    _uiEvents.value = UIEvents.ShowError(it.message)
-                    _uiEvents.value = UIEvents.Loading(false)
+
+                is NetworkResult.Error -> {
+                    Log.e("AuthViewModel", "Signup user Failed")
+                }
+
+                is NetworkResult.Loading -> {
+
                 }
             }
         }
     }
 
-    fun createCustomer(customer: Customers) {
-        customer.fcmToken = preference?.getFcmToken() ?: ""
-        syncRepository = SyncRepositoryImpl()
-        viewModelScope.launch(Dispatchers.IO) {
-            kotlin.runCatching {
-                syncRepository.createCustomer(customer)
-            }.onSuccess {
-                Log.v("AuthViewModel", "Customer Creation Success")
-                customer.owner_id = app.currentUser?.id ?: ""
-                preference?.setCustomerData(customer)
-                withContext(Dispatchers.Main) {
-                    _uiEvents.value = UIEvents.Loading(false)
-                    _uiEvents.value =
-                        UIEvents.Navigate(SignUpFragmentDirections.actionSignUpToHome())
-                }
-            }.onFailure {
-                Log.e("AuthViewModel", "Customer Creation Failed: $it")
-                withContext(Dispatchers.Main) {
-                    _uiEvents.value = UIEvents.ShowError(it.message)
-                    _uiEvents.value = UIEvents.Loading(false)
-                }
-            }
-        }
+    fun isUserLoggedIn(): Boolean {
+        return preference?.getUserData()?.id.isNullOrEmpty().not()
     }
 }

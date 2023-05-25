@@ -2,7 +2,7 @@ package com.zariya.zariya.core.local
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.zariya.zariya.auth.data.model.Customers
+import com.zariya.zariya.auth.data.model.User
 
 class AppSharedPreference private constructor(context: Context) {
     private val sharedPref: SharedPreferences = context.getSharedPreferences(
@@ -32,23 +32,25 @@ class AppSharedPreference private constructor(context: Context) {
         sharedPref.edit().clear().apply()
     }
 
-    fun setCustomerData(customer: Customers) {
+    fun setUserData(user: User) {
         sharedPref.edit()
-            .putString("name", customer.name)
-            .putString("phone", customer.phone)
-            .putString("fcmToken", customer.fcmToken)
-            .putString("dob", customer.dob)
-            .putString("countryCode", customer.countryCode)
-            .putString("customerId", customer._id.toString())
-            .putString("userId", customer.owner_id)
+            .putString("name", user.name)
+            .putString("phone", user.phone)
+            .putString("email", user.email)
+            .putString("fcmToken", user.fcmToken)
+            .putString("dob", user.dob)
+            .putString("countryCode", user.countryCode)
+            .putString("userId", user.id)
             .apply()
     }
 
-    fun getCustomerData(): Customers = Customers().apply {
-        name = sharedPref.getString("name", "") ?: ""
-        phone = sharedPref.getString("phone", "") ?: ""
-        fcmToken = sharedPref.getString("fcmToken", "") ?: ""
-        dob = sharedPref.getString("dob", "") ?: ""
-        countryCode = sharedPref.getString("countryCode", "") ?: ""
-    }
+    fun getUserData(): User = User(
+        name = sharedPref.getString("name", ""),
+        phone = sharedPref.getString("phone", ""),
+        email = sharedPref.getString("email", ""),
+        fcmToken = sharedPref.getString("fcmToken", ""),
+        dob = sharedPref.getString("dob", ""),
+        countryCode = sharedPref.getString("countryCode", ""),
+        id = sharedPref.getString("userId", ""),
+    )
 }

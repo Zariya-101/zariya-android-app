@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">zariya</string>
 
+    <string name="facebook_app_id">2483416021824234</string>
+    <string name="fb_login_protocol_scheme">fb2483416021824234</string>
+    <string name="facebook_client_token">103df86b1787f1f5eb68bc3b75dac095</string>
+
     <string name="next">Next</string>
     <string name="skip">Skip</string>
     <string name="slder1">Your next big break is just a profile away</string>
@@ -19,6 +23,7 @@
     <string name="phone">Phone Number</string>
     <string name="name">Name</string>
     <string name="dob">Date of Birth</string>
+    <string name="email">Email</string>
     <string name="search">Search</string>
     <string name="actor">Actor</string>
     <string name="casting_agency">Casting Agency</string>
@@ -58,6 +63,7 @@
     <string name="validation_empty_name">Please enter name</string>
     <string name="validation_empty_dob">Please select Date of birth</string>
     <string name="validation_invalid_name">Please enter valid name</string>
+    <string name="validation_empty_email">Please enter Email</string>
     <string name="validation_select_country">Please select country code</string>
     <string name="validation_empty_phone">Please enter phone</string>
     <string name="validation_invalid_phone">Please enter valid phone</string>

@@ -66,7 +66,7 @@
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/tilPhone">
+            app:layout_constraintBottom_toTopOf="@+id/tilEmail">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -78,6 +78,29 @@
                 android:drawableTint="@color/blue_500"
                 android:focusable="false"
                 android:hint="@string/dob"
+                android:textColorHint="@color/blue_500" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            style="@style/roundedTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:hintEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/tilPhone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_edit_text"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/blue_500"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 android:textColorHint="@color/blue_500" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -100,7 +123,7 @@
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/cbTerms"
+            app:layout_constraintBottom_toTopOf="@+id/tilOTP"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/countryCodePicker">
 
@@ -112,6 +135,33 @@
                 android:drawablePadding="@dimen/_10sdp"
                 android:drawableTint="@color/blue_500"
                 android:hint="@string/phone"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textColorHint="@color/blue_500" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilOTP"
+            style="@style/roundedTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:visibility="gone"
+            app:hintEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/cbTerms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_edit_text"
+                android:drawableStart="@drawable/ic_call"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/blue_500"
+                android:hint="OTP"
                 android:inputType="number"
                 android:maxLength="10"
                 android:textColorHint="@color/blue_500" />
@@ -144,97 +194,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:enabled="false"
             android:paddingHorizontal="@dimen/_50sdp"
             android:paddingVertical="@dimen/_15sdp"
-            android:text="@string/signup_via_otp"
+            android:text="Signup"
             android:textColor="@color/white"
             app:cornerRadius="@dimen/_30sdp"
-            app:layout_constraintBottom_toTopOf="@id/tvOr"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvOr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:text="@string/or"
-            android:textColor="@color/blue_300"
-            app:layout_constraintBottom_toTopOf="@+id/btnGoogle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/viewOrLeft"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:src="@color/blue_300"
-            app:layout_constraintBottom_toBottomOf="@id/tvOr"
-            app:layout_constraintEnd_toStartOf="@id/tvOr"
-            app:layout_constraintStart_toStartOf="@id/btnSignUp"
-            app:layout_constraintTop_toTopOf="@id/tvOr" />
-
-        <View
-            android:id="@+id/viewOrRight"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:background="@color/blue_300"
-            app:layout_constraintBottom_toBottomOf="@id/tvOr"
-            app:layout_constraintEnd_toEndOf="@id/btnSignUp"
-            app:layout_constraintStart_toEndOf="@id/tvOr"
-            app:layout_constraintTop_toTopOf="@id/tvOr" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnGoogle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:backgroundTint="@color/white"
-            android:paddingVertical="@dimen/_15sdp"
-            android:text="@string/google"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="bold"
-            app:cornerRadius="@dimen/_30sdp"
-            app:icon="@drawable/ic_google"
-            app:iconGravity="textStart"
-            app:iconSize="@dimen/_20sdp"
-            app:iconTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnFacebook"
-            app:layout_constraintStart_toStartOf="parent"
-            app:strokeColor="@color/blue"
-            app:strokeWidth="1dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFacebook"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:backgroundTint="@color/white"
-            android:paddingVertical="@dimen/_15sdp"
-            android:text="@string/facebook"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="bold"
-            app:cornerRadius="@dimen/_30sdp"
-            app:icon="@drawable/ic_facebook"
-            app:iconGravity="textStart"
-            app:iconSize="@dimen/_20sdp"
-            app:iconTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btnGoogle"
-            app:strokeColor="@color/blue"
-            app:strokeWidth="1dp" />
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
