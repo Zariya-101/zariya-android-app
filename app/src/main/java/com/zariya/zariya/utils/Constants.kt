@@ -9,6 +9,7 @@ const val ID = "id"
 const val FCM_TOKEN = "fcmToken"
 const val PHONE = "phone"
 const val EMAIL = "email"
+const val USER_ID = "userId"
 
 const val RC_SIGN_IN = 123
 

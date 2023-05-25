@@ -31,6 +31,9 @@ class CastingOnboardingViewModel @Inject constructor(
 
     var actorProfileDetails: ActorProfile = ActorProfile()
 
+    private val _getActorProfileDetails = SingleLiveEvent<ActorProfile>()
+    val getActorProfileDetails: LiveData<ActorProfile> = _getActorProfileDetails
+
     fun updateActorProfileDetails(actorProfile: ActorProfile) {
         actorProfileDetails = actorProfile
     }
@@ -87,6 +90,31 @@ class CastingOnboardingViewModel @Inject constructor(
 
                 is NetworkResult.Loading -> {
 
+                }
+            }
+        }
+    }
+
+    fun getActorProfile() {
+        viewModelScope.launch(Dispatchers.IO) {
+            castingOnboardingUseCase.getActorProfile().collect {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        Log.v("CastingOnboardingVM", "Get Actor Profile Success")
+                        withContext(Dispatchers.Main.immediate) {
+                            it.data?.let { actor ->
+                                _getActorProfileDetails.value = actor
+                            }
+                        }
+                    }
+
+                    is NetworkResult.Error -> {
+                        Log.e("CastingOnboardingVM", "Get Actor Profile Failed")
+                    }
+
+                    is NetworkResult.Loading -> {
+
+                    }
                 }
             }
         }

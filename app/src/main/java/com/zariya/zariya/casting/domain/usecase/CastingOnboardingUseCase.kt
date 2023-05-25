@@ -10,4 +10,6 @@ class CastingOnboardingUseCase @Inject constructor(
 
     suspend fun createActorProfile(actorProfile: ActorProfile) =
         castingOnboardingRepository.createActorProfile(actorProfile)
+
+    suspend fun getActorProfile() = castingOnboardingRepository.getActorProfile()
 }
