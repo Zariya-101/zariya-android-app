@@ -34,11 +34,6 @@ class SelectAgeFragment(private val castingOnboardingViewModel: CastingOnboardin
             castingOnboardingViewModel.updateActorProfileDetails(
                 castingOnboardingViewModel.actorProfileDetails.copy(age = value.toInt().toString())
             )
-//            castingOnboardingViewModel.actorProfileDetails.value?.copy(
-//                age = value.toInt().toString()
-//            )?.let {
-//                castingOnboardingViewModel.updateActorProfileDetails(it)
-//            }
 
             return@setLabelFormatter age
         }
