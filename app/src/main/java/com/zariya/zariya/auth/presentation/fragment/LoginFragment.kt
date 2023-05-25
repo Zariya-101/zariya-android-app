@@ -173,6 +173,8 @@ class LoginFragment : BaseFragment() {
                         )
                     }
                 }
+
+                is UIEvents.RefreshUi -> {}
             }
         }
     }

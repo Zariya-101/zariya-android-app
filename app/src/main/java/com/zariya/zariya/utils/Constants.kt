@@ -11,3 +11,7 @@ const val PHONE = "phone"
 const val EMAIL = "email"
 
 const val RC_SIGN_IN = 123
+
+//Storage Folders
+const val FOL_IMAGES = "images"
+const val FOL_ACTORS = "actors"

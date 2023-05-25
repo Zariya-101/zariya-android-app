@@ -1,5 +1,6 @@
 package com.zariya.zariya.casting.presentation.viewmodel
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import com.zariya.zariya.casting.presentation.fragment.CastingOnboardingFragment
 import com.zariya.zariya.core.network.NetworkResult
 import com.zariya.zariya.core.network.SingleLiveEvent
 import com.zariya.zariya.core.ui.UIEvents
+import com.zariya.zariya.upload.domain.usecase.UploadUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CastingOnboardingViewModel @Inject constructor(
-    private val castingOnboardingUseCase: CastingOnboardingUseCase
+    private val castingOnboardingUseCase: CastingOnboardingUseCase,
+    private val uploadUseCase: UploadUseCase
 ) : ViewModel() {
 
     var userType: String? = null
@@ -36,7 +39,38 @@ class CastingOnboardingViewModel @Inject constructor(
         this.userType = type
     }
 
+    fun uploadImage(imageUri: Uri, onUploaded: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = uploadUseCase.uploadImage(imageUri)
+            when (result) {
+                is NetworkResult.Success -> {
+                    Log.v("CastingOnboardingVM", "Upload Image Success")
+                    result.data?.let { uri ->
+                        actorProfileDetails.imageList.add(0, uri.toString())
+                        if (actorProfileDetails.imageList.size > 5) {
+                            actorProfileDetails.imageList.remove("")
+                        }
+                    }
+                    withContext(Dispatchers.Main.immediate) {
+                        onUploaded()
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    Log.e("CastingOnboardingVM", "Upload Image Failed")
+                }
+
+                is NetworkResult.Loading -> {
+
+                }
+            }
+        }
+    }
+
     fun createActorProfile(actorProfile: ActorProfile = actorProfileDetails) {
+        if (actorProfile.imageList.contains("")) {
+            actorProfile.imageList.remove("")
+        }
         viewModelScope.launch(Dispatchers.IO) {
             when (castingOnboardingUseCase.createActorProfile(actorProfile)) {
                 is NetworkResult.Success -> {

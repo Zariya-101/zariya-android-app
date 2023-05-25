@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.zariya.zariya.R
 import com.zariya.zariya.databinding.ItemUploadImageBinding
 
@@ -32,7 +33,9 @@ class AddImageAdapter(
         holder.binding.root.setOnClickListener { onItemClick(list[position]) }
         holder.binding.ivClose.setOnClickListener { onCloseClick(list[position]) }
         if (list[position].isNullOrEmpty().not()) {
-            holder.binding.ivImage.setImageURI(list[position]?.toUri())
+            Glide.with(holder.binding.ivImage)
+                .load(list[position])
+                .into(holder.binding.ivImage)
         }
     }
 }

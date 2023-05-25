@@ -159,6 +159,7 @@ class SignUpFragment : BaseFragment() {
                         )
                     }
                 }
+                is UIEvents.RefreshUi -> {}
             }
         }
     }

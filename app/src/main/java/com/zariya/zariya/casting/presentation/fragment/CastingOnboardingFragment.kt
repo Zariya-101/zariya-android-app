@@ -98,7 +98,23 @@ class CastingOnboardingFragment : BaseFragment() {
                 }
 
                 4 -> {
-                    binding.viewPager.currentItem += 1
+                    val size =
+                        if (castingOnboardingViewModel.actorProfileDetails.imageList.contains("")) {
+                            castingOnboardingViewModel.actorProfileDetails.imageList.size - 1
+                        } else {
+                            castingOnboardingViewModel.actorProfileDetails.imageList.size
+                        }
+                    if (size < 2) {
+                        Toast.makeText(
+                            context, "Please Select atleast 2 images", Toast.LENGTH_LONG
+                        ).show()
+                    } else if (size > 5) {
+                        Toast.makeText(
+                            context, "You can select maximum of 5 images", Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        binding.viewPager.currentItem += 1
+                    }
                 }
 
                 5 -> {
@@ -134,6 +150,8 @@ class CastingOnboardingFragment : BaseFragment() {
                         )
                     }
                 }
+
+                is UIEvents.RefreshUi -> {}
             }
         }
     }
