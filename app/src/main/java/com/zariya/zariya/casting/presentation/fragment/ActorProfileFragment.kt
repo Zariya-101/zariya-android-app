@@ -42,5 +42,12 @@ class ActorProfileFragment : BaseFragment() {
     private fun populateActorDetails(actorProfile: ActorProfile) {
         binding.viewPager.adapter = ActorImagesAdapter(actorProfile.imageList)
         binding.actor = actorProfile
+        val actorName = castingOnboardingViewModel.getUserDetails()?.let { user ->
+            user.name.plus(", ")
+        } ?: run {
+            "Actor XXXX, "
+        }
+
+        binding.tvUserName.text = actorName
     }
 }

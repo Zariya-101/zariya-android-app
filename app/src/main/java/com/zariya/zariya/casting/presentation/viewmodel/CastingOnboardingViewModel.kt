@@ -119,4 +119,6 @@ class CastingOnboardingViewModel @Inject constructor(
             }
         }
     }
+
+    fun getUserDetails() = castingOnboardingUseCase.getUserDetails()
 }
