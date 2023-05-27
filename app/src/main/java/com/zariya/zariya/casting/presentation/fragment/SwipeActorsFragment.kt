@@ -5,12 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
+import com.yuyakaido.android.cardstackview.Duration
 import com.yuyakaido.android.cardstackview.StackFrom
+import com.yuyakaido.android.cardstackview.SwipeAnimationSetting
+import com.yuyakaido.android.cardstackview.SwipeableMethod
 import com.zariya.zariya.casting.data.model.ActorProfile
 import com.zariya.zariya.casting.presentation.adapter.SwipeActorsAdapter
 import com.zariya.zariya.casting.presentation.viewmodel.CastingAgencyViewModel
@@ -36,14 +41,46 @@ class SwipeActorsFragment : BaseFragment(), CardStackListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initView()
+        setUpListeners()
+        getActors()
+    }
+
+    private fun initView() {
         cardStackLayoutManager = CardStackLayoutManager(context, this)
         cardStackLayoutManager.setStackFrom(StackFrom.Top)
+        cardStackLayoutManager.setDirections(Direction.FREEDOM)
+        cardStackLayoutManager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
         binding.cardStack.layoutManager = cardStackLayoutManager
+        showData(false)
+    }
 
-        getActors()
-
+    private fun setUpListeners() {
         binding.cvInfo.setOnClickListener {
             viewActorProfile(cardStackLayoutManager.topPosition)
+        }
+
+        binding.cvLike.setOnClickListener {
+            val likeSetting = SwipeAnimationSetting.Builder()
+                .setDirection(Direction.Right)
+                .setDuration(Duration.Normal.duration)
+                .setInterpolator(AccelerateInterpolator())
+                .build()
+
+            cardStackLayoutManager.setSwipeAnimationSetting(likeSetting)
+            binding.cardStack.swipe()
+        }
+
+        binding.cvDisLike.setOnClickListener {
+            val disLikeSetting = SwipeAnimationSetting.Builder()
+                .setDirection(Direction.Left)
+                .setDuration(Duration.Normal.duration)
+                .setInterpolator(AccelerateInterpolator())
+                .build()
+
+            cardStackLayoutManager.setSwipeAnimationSetting(disLikeSetting)
+            binding.cardStack.swipe()
         }
     }
 
@@ -57,6 +94,7 @@ class SwipeActorsFragment : BaseFragment(), CardStackListener {
 
     private fun populateActors(actors: List<ActorProfile?>) {
         binding.cardStack.adapter = SwipeActorsAdapter(actors)
+        showData(true)
     }
 
     override fun onCardDragging(direction: Direction?, ratio: Float) {
@@ -64,7 +102,6 @@ class SwipeActorsFragment : BaseFragment(), CardStackListener {
     }
 
     override fun onCardSwiped(direction: Direction?) {
-        Log.v("SwipeActorsFragment", cardStackLayoutManager.topPosition.toString())
         when (direction) {
             Direction.Right -> {
             }
@@ -110,5 +147,16 @@ class SwipeActorsFragment : BaseFragment(), CardStackListener {
                 Navigation.findNavController(binding.root).navigate(action)
             }
         }
+    }
+
+    private fun showData(show: Boolean) {
+        binding.shimmerLayout.apply {
+            if (show) stopShimmer() else startShimmer()
+            isVisible = !show
+        }
+        binding.cardStack.isVisible = show
+        binding.cvLike.isVisible = show
+        binding.cvDisLike.isVisible = show
+        binding.ivInfo.isVisible = show
     }
 }
