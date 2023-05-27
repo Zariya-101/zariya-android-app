@@ -109,9 +109,6 @@
             android:id="@+id/actionHomeToCasting"
             app:destination="@id/castingOnboardingFragment" />
         <action
-            android:id="@+id/actionActorProfile"
-            app:destination="@id/actorProfileFragment" />
-        <action
             android:id="@+id/actionSwipeActors"
             app:destination="@id/swipeActorsFragment" />
     </fragment>
@@ -168,7 +165,9 @@
             app:destination="@id/castingAgencyProfileFragment" />
         <action
             android:id="@+id/actionActorProfile"
-            app:destination="@id/actorProfileFragment" />
+            app:destination="@id/actorProfileFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/castingAgencyProfileFragment"

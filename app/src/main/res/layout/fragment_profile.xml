@@ -52,24 +52,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profImage" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/clear_search_button_content_description"
-        android:textColor="@color/dark_blue"
-        android:textSize="@dimen/_14sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_500sdp"
         android:layout_marginTop="@dimen/_30sdp"
         android:background="@drawable/bg_profile_page"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintTop_toBottomOf="@+id/tvUserName">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -16,3 +16,8 @@ const val RC_SIGN_IN = 123
 //Storage Folders
 const val FOL_IMAGES = "images"
 const val FOL_ACTORS = "actors"
+
+//User Roles
+const val ACTOR = "actor"
+const val AGENCY = "agency"
+const val VOLUNTEER = "volunteer"

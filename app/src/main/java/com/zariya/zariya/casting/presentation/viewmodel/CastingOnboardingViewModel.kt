@@ -5,9 +5,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zariya.zariya.auth.data.model.User
+import com.zariya.zariya.auth.domain.usecase.AuthUseCase
 import com.zariya.zariya.casting.data.model.ActorProfile
 import com.zariya.zariya.casting.domain.usecase.CastingOnboardingUseCase
 import com.zariya.zariya.casting.presentation.fragment.CastingOnboardingFragmentDirections
+import com.zariya.zariya.core.local.AppSharedPreference
 import com.zariya.zariya.core.network.NetworkResult
 import com.zariya.zariya.core.network.SingleLiveEvent
 import com.zariya.zariya.core.ui.UIEvents
@@ -21,7 +24,9 @@ import javax.inject.Inject
 @HiltViewModel
 class CastingOnboardingViewModel @Inject constructor(
     private val castingOnboardingUseCase: CastingOnboardingUseCase,
-    private val uploadUseCase: UploadUseCase
+    private val uploadUseCase: UploadUseCase,
+    private val authUseCase: AuthUseCase,
+    private val preference: AppSharedPreference?
 ) : ViewModel() {
 
     var userType: String? = null
@@ -33,6 +38,9 @@ class CastingOnboardingViewModel @Inject constructor(
 
     private val _getActorProfileDetails = SingleLiveEvent<ActorProfile>()
     val getActorProfileDetails: LiveData<ActorProfile> = _getActorProfileDetails
+
+    private val _userFetchedFromRemote = SingleLiveEvent<User>()
+    val userFetchedFromRemote: LiveData<User> = _userFetchedFromRemote
 
     fun updateActorProfileDetails(actorProfile: ActorProfile) {
         actorProfileDetails = actorProfile
@@ -114,6 +122,43 @@ class CastingOnboardingViewModel @Inject constructor(
 
                     is NetworkResult.Loading -> {
 
+                    }
+                }
+            }
+        }
+    }
+
+    fun fetchUserDetailsFromRemote() {
+        getUserDetails()?.let { user ->
+            viewModelScope.launch(Dispatchers.IO) {
+                authUseCase.getUserFromDB(user).collect {
+                    when (it) {
+                        is NetworkResult.Success -> {
+                            it.data?.let { user ->
+                                preference?.setUserData(user)
+                                withContext(Dispatchers.Main.immediate) {
+                                    _userFetchedFromRemote.value = user
+                                }
+                            } ?: run {
+                                withContext(Dispatchers.Main.immediate) {
+                                    _uiEvents.value = UIEvents.Loading(false)
+                                    _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                                }
+                            }
+                        }
+
+                        is NetworkResult.Error -> {
+                            withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.Loading(false)
+                                _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                            }
+                        }
+
+                        is NetworkResult.Loading -> {
+                            withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.Loading(true)
+                            }
+                        }
                     }
                 }
             }

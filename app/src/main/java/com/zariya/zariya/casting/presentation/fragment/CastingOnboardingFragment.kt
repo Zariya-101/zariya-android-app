@@ -13,6 +13,9 @@ import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewMod
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.core.ui.UIEvents
 import com.zariya.zariya.databinding.FragmentCastingOnboardingBinding
+import com.zariya.zariya.utils.ACTOR
+import com.zariya.zariya.utils.AGENCY
+import com.zariya.zariya.utils.VOLUNTEER
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,11 +35,42 @@ class CastingOnboardingFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initView()
-        setUpListeners()
+        fetchUserFromRemote()
+    }
+
+    private fun fetchUserFromRemote() {
+        showProgress(binding.root)
+        castingOnboardingViewModel.fetchUserDetailsFromRemote()
+        castingOnboardingViewModel.userFetchedFromRemote.observe(viewLifecycleOwner) {
+            when (it.role) {
+                ACTOR -> {
+                    hideProgress()
+                    Navigation.findNavController(binding.root)
+                        .navigate(CastingOnboardingFragmentDirections.actionActorProfile())
+                }
+
+                AGENCY -> {
+
+                }
+
+                VOLUNTEER -> {
+
+                }
+
+                else -> {
+                    hideProgress()
+                    initView()
+                    setUpListeners()
+                }
+            }
+        }
     }
 
     private fun initView() {
+        setUpViewPager()
+    }
+
+    private fun setUpViewPager() {
         binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter =
             fragmentManager?.let { ViewPagerAdapter(it, lifecycle, castingOnboardingViewModel) }
@@ -44,6 +78,7 @@ class CastingOnboardingFragment : BaseFragment() {
 
     private fun setUpListeners() {
         uiEventListener()
+
         binding.ivBack.setOnClickListener {
             if (binding.viewPager.currentItem > 2) {
                 binding.viewPager.currentItem -= 1
@@ -132,22 +167,18 @@ class CastingOnboardingFragment : BaseFragment() {
         castingOnboardingViewModel.uiEvents.observe(viewLifecycleOwner) { uiEvent ->
             when (uiEvent) {
                 is UIEvents.Loading -> {
-                    // Handle Loading
+                    if (uiEvent.loading) showProgress(binding.root) else hideProgress()
                 }
 
                 is UIEvents.ShowError -> {
                     Toast.makeText(
-                        context,
-                        uiEvent.message ?: "Something went wrong",
-                        Toast.LENGTH_LONG
+                        context, uiEvent.message ?: "Something went wrong", Toast.LENGTH_LONG
                     ).show()
                 }
 
                 is UIEvents.Navigate -> {
                     uiEvent.navDirections?.let {
-                        Navigation.findNavController(binding.root).navigate(
-                            it
-                        )
+                        Navigation.findNavController(binding.root).navigate(it)
                     }
                 }
 
