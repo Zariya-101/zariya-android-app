@@ -3,28 +3,28 @@ package com.zariya.zariya.profile.presentation.fragment
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.zariya.zariya.databinding.FragmentProfileBinding
+import com.zariya.zariya.profile.presentation.ProfileViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+    private val profileViewModel by viewModels<ProfileViewModel>()
 
 
     private val PERMISSION_READ_MEDIA_IMAGES = 1
     private val PERMISSION_WRITE_EXTERNAL = 1
-
-    var profileImageUrl: Uri? = null
-    var imageUri: Uri? = null
 
     private val IMAGE_GALLERY_REQUEST = 1
 
@@ -34,13 +34,23 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater)
         return binding.root
-
-
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.ivUserImage.setOnClickListener{
+        initView()
+        setUpListeners()
+    }
+
+    private fun initView() {
+        profileViewModel.getUser()?.let { user ->
+            binding.tvUserName.text = user.name
+        }
+    }
+
+    private fun setUpListeners() {
+        binding.ivUserImage.setOnClickListener {
             checkGalleryPermission()
         }
     }
@@ -51,7 +61,7 @@ class ProfileFragment : Fragment() {
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(
             Intent.createChooser(intent, "Select Image"),
-           IMAGE_GALLERY_REQUEST
+            IMAGE_GALLERY_REQUEST
         )
     }
 
