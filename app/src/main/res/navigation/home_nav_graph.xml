@@ -108,6 +108,9 @@
         <action
             android:id="@+id/actionHomeToCasting"
             app:destination="@id/castingOnboardingFragment" />
+        <action
+            android:id="@+id/actionActorProfile"
+            app:destination="@id/actorProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/myServicesFragment"

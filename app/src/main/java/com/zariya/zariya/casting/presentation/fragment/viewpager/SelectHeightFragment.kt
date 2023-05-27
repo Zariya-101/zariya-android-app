@@ -9,7 +9,9 @@ import com.zariya.zariya.R
 import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewModel
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentSelectHeightBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SelectHeightFragment(private val castingOnboardingViewModel: CastingOnboardingViewModel) :
     BaseFragment() {
 
@@ -33,7 +35,9 @@ class SelectHeightFragment(private val castingOnboardingViewModel: CastingOnboar
             val height = "$feet' $inch\""
 
             binding.tilHeight.editText?.setText(height)
-            castingOnboardingViewModel.updateHeight(height)
+            castingOnboardingViewModel.updateActorProfileDetails(
+                castingOnboardingViewModel.actorProfileDetails.copy(height = height)
+            )
 
             return@setLabelFormatter height
         }

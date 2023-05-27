@@ -110,7 +110,8 @@ class HomeFragment : BaseFragment() {
         }
 
         binding.layoutCasting.cv.setOnClickListener {
-            it.findNavController().navigate(HomeFragmentDirections.actionHomeToCasting())
+//            it.findNavController().navigate(HomeFragmentDirections.actionHomeToCasting())
+            it.findNavController().navigate(HomeFragmentDirections.actionActorProfile())
         }
     }
 }

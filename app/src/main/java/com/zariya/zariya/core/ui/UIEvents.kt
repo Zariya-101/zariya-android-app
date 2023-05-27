@@ -8,4 +8,6 @@ sealed class UIEvents {
     data class Loading(val loading: Boolean) : UIEvents()
 
     data class Navigate(val navDirections: NavDirections?) : UIEvents()
+
+    data class RefreshUi(val message: String) : UIEvents()
 }
