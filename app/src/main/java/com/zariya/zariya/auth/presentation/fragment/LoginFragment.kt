@@ -2,7 +2,6 @@ package com.zariya.zariya.auth.presentation.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,24 +70,27 @@ class LoginFragment : BaseFragment() {
         uiEventListener()
 
         binding.btnLogin.setOnClickListener {
-            if (binding.btnLogin.text.equals("Verify OTP")) {
+            if (binding.btnLogin.text.equals(getString(R.string.verify_otp))) {
+                showProgress(binding.root)
                 val credential = PhoneAuthProvider.getCredential(
                     storedVerificationId, binding.tilOTP.editText?.text.toString()
                 )
-                Log.d("LoginFragment", "login OTP entered")
                 signInWithPhoneAuthCredential(credential)
             } else {
                 if (validate()) {
+                    showProgress(binding.root)
                     initiateOTPLogin()
                 }
             }
         }
 
         binding.btnFacebook.setOnClickListener {
+            showProgress(binding.root)
             initialiseFacebookLogin()
         }
 
         binding.btnGoogle.setOnClickListener {
+            showProgress(binding.root)
             initiateSignInWithGoogle()
         }
     }
@@ -110,17 +112,16 @@ class LoginFragment : BaseFragment() {
 
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            Log.d("LoginFragment", "onVerificationCompleted:$credential")
             signInWithPhoneAuthCredential(credential)
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
-            Log.w("LoginFragment", "onVerificationFailed", e)
             when (e) {
                 is FirebaseAuthInvalidCredentialsException -> {}
                 is FirebaseTooManyRequestsException -> {}
                 is FirebaseAuthMissingActivityForRecaptchaException -> {}
             }
+            hideProgress()
             Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
         }
 
@@ -128,7 +129,7 @@ class LoginFragment : BaseFragment() {
             verificationId: String,
             token: PhoneAuthProvider.ForceResendingToken
         ) {
-            Log.d("LoginFragment", "onCodeSent:$verificationId")
+            hideProgress()
             storedVerificationId = verificationId
             resendToken = token
             showOTPUi(true)
@@ -140,9 +141,9 @@ class LoginFragment : BaseFragment() {
             AppUtil.setVisibility(show, tilOTP)
             AppUtil.setVisibility(show.not(), btnGoogle, btnFacebook, tvOr, viewOrLeft, viewOrRight)
             if (show) {
-                btnLogin.text = "Verify OTP"
+                btnLogin.text = getString(R.string.verify_otp)
             } else {
-                btnLogin.text = "GET OTP"
+                btnLogin.text = getString(R.string.get_otp)
             }
         }
     }
@@ -155,14 +156,12 @@ class LoginFragment : BaseFragment() {
         authViewModel.uiEvents.observe(viewLifecycleOwner) { uiEvent ->
             when (uiEvent) {
                 is UIEvents.Loading -> {
-                    // Handle Loading
+                    if (uiEvent.loading) showProgress(binding.root) else hideProgress()
                 }
 
                 is UIEvents.ShowError -> {
                     Toast.makeText(
-                        context,
-                        uiEvent.message ?: "Something went wrong",
-                        Toast.LENGTH_LONG
+                        context, uiEvent.message ?: "Something went wrong", Toast.LENGTH_LONG
                     ).show()
                 }
 
@@ -214,6 +213,7 @@ class LoginFragment : BaseFragment() {
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         } else {
+            hideProgress()
             Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show()
         }
     }
@@ -235,6 +235,7 @@ class LoginFragment : BaseFragment() {
                     signInWithGoogleAuthCredential(credential)
                 }
             } catch (e: Exception) {
+                hideProgress()
                 Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show()
             }
         } else {
@@ -252,10 +253,13 @@ class LoginFragment : BaseFragment() {
         }
         LoginManager.getInstance()
             .registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-                override fun onCancel() {}
+                override fun onCancel() {
+                    hideProgress()
+                }
 
                 override fun onError(error: FacebookException) {
-                    Log.e("LoginFragment", "facebook login error $error")
+                    hideProgress()
+                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onSuccess(result: LoginResult) {

@@ -1,6 +1,8 @@
 package com.zariya.zariya.core.ui
 
+import android.app.Activity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +19,14 @@ abstract class BaseFragment : Fragment(), CoroutineScope {
         super.onCreate(savedInstanceState)
 
         job = Job()
+    }
+
+    fun showProgress(view: View) {
+        ProgressView.showProgress(view, activity)
+    }
+
+    fun hideProgress() {
+        ProgressView.hideProgress()
     }
 
     override fun onDestroy() {

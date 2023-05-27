@@ -41,6 +41,7 @@ class AuthViewModel @Inject constructor(
                                     user.phone = user.phone?.substring(3, 13)
                                     val action = LoginFragmentDirections.actionLoginToSignup()
                                     action.user = user
+                                    _uiEvents.value = UIEvents.Loading(false)
                                     _uiEvents.value = UIEvents.Navigate(action)
                                 }
                             } else {
@@ -48,17 +49,23 @@ class AuthViewModel @Inject constructor(
                             }
                         } ?: run {
                             withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.Loading(false)
                                 _uiEvents.value = UIEvents.ShowError("Something went wrong")
                             }
                         }
                     }
 
                     is NetworkResult.Error -> {
-                        Log.e("AuthViewModel", "Auth with Phone Failed: $it")
+                        withContext(Dispatchers.Main.immediate) {
+                            _uiEvents.value = UIEvents.Loading(false)
+                            _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                        }
                     }
 
                     is NetworkResult.Loading -> {
-
+                        withContext(Dispatchers.Main.immediate) {
+                            _uiEvents.value = UIEvents.Loading(true)
+                        }
                     }
                 }
             }
@@ -73,6 +80,7 @@ class AuthViewModel @Inject constructor(
                         it.data?.let { user ->
                             if (user.isNew!!) {
                                 withContext(Dispatchers.Main.immediate) {
+                                    _uiEvents.value = UIEvents.Loading(false)
                                     val action = LoginFragmentDirections.actionLoginToSignup()
                                     action.user = user
                                     _uiEvents.value = UIEvents.Navigate(action)
@@ -82,17 +90,23 @@ class AuthViewModel @Inject constructor(
                             }
                         } ?: run {
                             withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.Loading(false)
                                 _uiEvents.value = UIEvents.ShowError("Something went wrong")
                             }
                         }
                     }
 
                     is NetworkResult.Error -> {
-                        Log.e("AuthViewModel", "Auth with Google Failed: $it")
+                        withContext(Dispatchers.Main.immediate) {
+                            _uiEvents.value = UIEvents.Loading(false)
+                            _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                        }
                     }
 
                     is NetworkResult.Loading -> {
-
+                        withContext(Dispatchers.Main.immediate) {
+                            _uiEvents.value = UIEvents.Loading(true)
+                        }
                     }
                 }
             }
@@ -107,6 +121,7 @@ class AuthViewModel @Inject constructor(
                         it.data?.let { user ->
                             if (user.isNew!!) {
                                 withContext(Dispatchers.Main.immediate) {
+                                    _uiEvents.value = UIEvents.Loading(false)
                                     val action = LoginFragmentDirections.actionLoginToSignup()
                                     action.user = user
                                     _uiEvents.value = UIEvents.Navigate(action)
@@ -116,17 +131,23 @@ class AuthViewModel @Inject constructor(
                             }
                         } ?: run {
                             withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.Loading(false)
                                 _uiEvents.value = UIEvents.ShowError("Something went wrong")
                             }
                         }
                     }
 
                     is NetworkResult.Error -> {
-                        Log.e("AuthViewModel", "Auth with Facebook Failed: $it")
+                        withContext(Dispatchers.Main.immediate) {
+                            _uiEvents.value = UIEvents.Loading(false)
+                            _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                        }
                     }
 
                     is NetworkResult.Loading -> {
-
+                        withContext(Dispatchers.Main.immediate) {
+                            _uiEvents.value = UIEvents.Loading(true)
+                        }
                     }
                 }
             }
@@ -141,11 +162,16 @@ class AuthViewModel @Inject constructor(
                 }
 
                 is NetworkResult.Error -> {
-                    Log.e("AuthViewModel", "Update FCM Token Failed")
+                    withContext(Dispatchers.Main.immediate) {
+                        _uiEvents.value = UIEvents.Loading(false)
+                        _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                    }
                 }
 
                 is NetworkResult.Loading -> {
-
+                    withContext(Dispatchers.Main.immediate) {
+                        _uiEvents.value = UIEvents.Loading(true)
+                    }
                 }
             }
         }
@@ -160,23 +186,30 @@ class AuthViewModel @Inject constructor(
                             preference?.setUserData(user)
                             if (isLogin) {
                                 withContext(Dispatchers.Main.immediate) {
+                                    _uiEvents.value = UIEvents.Loading(false)
                                     _uiEvents.value =
                                         UIEvents.Navigate(LoginFragmentDirections.actionLoginToHome())
                                 }
                             }
                         } ?: run {
                             withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.Loading(false)
                                 _uiEvents.value = UIEvents.ShowError("Something went wrong")
                             }
                         }
                     }
 
                     is NetworkResult.Error -> {
-                        Log.e("AuthViewModel", "fetch User Failed: $it")
+                        withContext(Dispatchers.Main.immediate) {
+                            _uiEvents.value = UIEvents.Loading(false)
+                            _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                        }
                     }
 
                     is NetworkResult.Loading -> {
-
+                        withContext(Dispatchers.Main.immediate) {
+                            _uiEvents.value = UIEvents.Loading(true)
+                        }
                     }
                 }
             }
@@ -189,17 +222,23 @@ class AuthViewModel @Inject constructor(
                 is NetworkResult.Success -> {
                     preference?.setUserData(authenticatedUser)
                     withContext(Dispatchers.Main.immediate) {
+                        _uiEvents.value = UIEvents.Loading(false)
                         _uiEvents.value =
                             UIEvents.Navigate(SignUpFragmentDirections.actionSignUpToHome())
                     }
                 }
 
                 is NetworkResult.Error -> {
-                    Log.e("AuthViewModel", "Signup user Failed")
+                    withContext(Dispatchers.Main.immediate) {
+                        _uiEvents.value = UIEvents.Loading(false)
+                        _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                    }
                 }
 
                 is NetworkResult.Loading -> {
-
+                    withContext(Dispatchers.Main.immediate) {
+                        _uiEvents.value = UIEvents.Loading(true)
+                    }
                 }
             }
         }

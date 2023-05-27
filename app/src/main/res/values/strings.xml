@@ -50,6 +50,8 @@
     <string name="signup_via_otp">Signup via OTP</string>
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="get_otp">GET OTP</string>
 
 
     <string name="pick_a_region">Pick A Region</string>

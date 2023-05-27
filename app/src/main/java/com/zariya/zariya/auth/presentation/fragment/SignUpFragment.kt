@@ -107,6 +107,7 @@ class SignUpFragment : BaseFragment() {
 
         binding.btnSignUp.setOnClickListener {
             if (validate()) {
+                showProgress(binding.root)
                 signUpUser()
             }
         }
@@ -133,6 +134,7 @@ class SignUpFragment : BaseFragment() {
                 )
             }
             .addOnFailureListener {
+                hideProgress()
                 Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show()
             }
     }
@@ -141,24 +143,22 @@ class SignUpFragment : BaseFragment() {
         authViewModel.uiEvents.observe(viewLifecycleOwner) { uiEvent ->
             when (uiEvent) {
                 is UIEvents.Loading -> {
-                    // Handle Loading
+                    if (uiEvent.loading) showProgress(binding.root) else hideProgress()
                 }
 
                 is UIEvents.ShowError -> {
                     Toast.makeText(
                         context,
-                        uiEvent.message ?: "Something went wrong",
-                        Toast.LENGTH_LONG
+                        uiEvent.message ?: "Something went wrong", Toast.LENGTH_LONG
                     ).show()
                 }
 
                 is UIEvents.Navigate -> {
                     uiEvent.navDirections?.let {
-                        Navigation.findNavController(binding.root).navigate(
-                            it
-                        )
+                        Navigation.findNavController(binding.root).navigate(it)
                     }
                 }
+
                 is UIEvents.RefreshUi -> {}
             }
         }
