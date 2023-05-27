@@ -16,4 +16,6 @@ class CastingOnboardingUseCase @Inject constructor(
     suspend fun getActorProfile() = castingOnboardingRepository.getActorProfile()
 
     fun getUserDetails() = preference?.getUserData()
+
+    suspend fun getActors() = castingOnboardingRepository.getActors()
 }

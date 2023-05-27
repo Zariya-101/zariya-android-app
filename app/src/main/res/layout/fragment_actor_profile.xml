@@ -67,6 +67,7 @@
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
+                    android:text="@{actor.name}"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"

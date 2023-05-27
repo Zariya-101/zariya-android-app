@@ -9,4 +9,6 @@ interface CastingOnboardingRepository {
     suspend fun createActorProfile(actorProfile: ActorProfile): NetworkResult<Boolean>
 
     suspend fun getActorProfile(): Flow<NetworkResult<ActorProfile>>
+
+    suspend fun getActors(): Flow<NetworkResult<List<ActorProfile?>>>
 }

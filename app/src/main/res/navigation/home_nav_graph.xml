@@ -111,6 +111,9 @@
         <action
             android:id="@+id/actionActorProfile"
             app:destination="@id/actorProfileFragment" />
+        <action
+            android:id="@+id/actionSwipeActors"
+            app:destination="@id/swipeActorsFragment" />
     </fragment>
     <fragment
         android:id="@+id/myServicesFragment"
@@ -176,5 +179,19 @@
         android:id="@+id/actorProfileFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.ActorProfileFragment"
         android:label="ActorProfileFragment"
-        tools:layout="@layout/fragment_actor_profile" />
+        tools:layout="@layout/fragment_actor_profile">
+        <argument
+            android:name="actor"
+            android:defaultValue="@null"
+            app:argType="com.zariya.zariya.casting.data.model.ActorProfile"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/swipeActorsFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.SwipeActorsFragment"
+        android:label="SwipeActorsFragment">
+        <action
+            android:id="@+id/actionActorProfile"
+            app:destination="@id/actorProfileFragment" />
+    </fragment>
 </navigation>

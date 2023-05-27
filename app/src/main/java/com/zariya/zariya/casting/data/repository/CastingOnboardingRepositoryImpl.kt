@@ -21,11 +21,14 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
 ) : CastingOnboardingRepository {
 
     override suspend fun createActorProfile(actorProfile: ActorProfile) = try {
-        preference?.getUserData()?.id?.let {
-            actorProfile.userId = it
-            firestore.collection(COL_ACTORS)
-                .add(actorProfile).await()
-            NetworkResult.Success(true)
+        preference?.getUserData()?.let { user ->
+            user.id?.let {
+                actorProfile.userId = it
+                actorProfile.name = user.name ?: "Actor XXXX"
+                firestore.collection(COL_ACTORS)
+                    .add(actorProfile).await()
+                NetworkResult.Success(true)
+            }
         } ?: run {
             NetworkResult.Error("Something went wrong")
         }
@@ -55,5 +58,29 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
             }
 
         awaitClose { listener }
+    }
+
+    override suspend fun getActors() = callbackFlow {
+        val listener = firestore.collection(COL_ACTORS)
+            .get()
+            .addOnCompleteListener {
+                val result = if (it.isSuccessful) {
+                    try {
+                        val actors =
+                            it.result.documents.map { it.toObject(ActorProfile::class.java) }
+                        NetworkResult.Success(actors)
+                    } catch (e: Exception) {
+                        Log.e("CastingOnbRepoImpl", "Get Actors Exception")
+                        NetworkResult.Error(e.message.toString())
+                    }
+                } else {
+                    Log.e("CastingOnbRepoImpl", "Get Actors Not successful")
+                    NetworkResult.Error(it.exception?.message.toString())
+                }
+                trySend(result)
+            }
+        awaitClose {
+            listener
+        }
     }
 }

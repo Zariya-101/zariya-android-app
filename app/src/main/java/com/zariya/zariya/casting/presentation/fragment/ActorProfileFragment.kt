@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.zariya.zariya.casting.data.model.ActorProfile
 import com.zariya.zariya.casting.presentation.adapter.ActorImagesAdapter
 import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewModel
@@ -17,6 +18,7 @@ class ActorProfileFragment : BaseFragment() {
 
     private lateinit var binding: FragmentActorProfileBinding
     private val castingOnboardingViewModel by viewModels<CastingOnboardingViewModel>()
+    private val args: ActorProfileFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +31,11 @@ class ActorProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getActorData()
+        args.actor?.let {
+            populateActorDetails(it)
+        } ?: run {
+            getActorData()
+        }
     }
 
     private fun getActorData() {
@@ -42,12 +48,5 @@ class ActorProfileFragment : BaseFragment() {
     private fun populateActorDetails(actorProfile: ActorProfile) {
         binding.viewPager.adapter = ActorImagesAdapter(actorProfile.imageList)
         binding.actor = actorProfile
-        val actorName = castingOnboardingViewModel.getUserDetails()?.let { user ->
-            user.name.plus(", ")
-        } ?: run {
-            "Actor XXXX, "
-        }
-
-        binding.tvUserName.text = actorName
     }
 }
