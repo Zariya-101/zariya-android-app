@@ -32,10 +32,5 @@ class AddImageAdapter(
         holder.binding.image = list[position]
         holder.binding.root.setOnClickListener { onItemClick(list[position]) }
         holder.binding.ivClose.setOnClickListener { onCloseClick(list[position]) }
-        if (list[position].isNullOrEmpty().not()) {
-            Glide.with(holder.binding.ivImage)
-                .load(list[position])
-                .into(holder.binding.ivImage)
-        }
     }
 }

@@ -76,6 +76,10 @@
     <string name="validation_select_country">Please select country code</string>
     <string name="validation_empty_phone">Please enter phone</string>
     <string name="validation_invalid_phone">Please enter valid phone</string>
+    <string name="validation_empty_started_in">Please select Start Date of Agency</string>
+    <string name="validation_empty_description">Please enter Description</string>
+    <string name="validation_empty_known_For">Please enter anything you are known for</string>
+    <string name="validation_empty_speciality">Please select Speciality</string>
 
 
     <string name="workshop_details_temp">Realization of the patterns of their brain and that of the character\'s brain is the first thing which makes an actor aware about the reality of the situation/scene.\n\n

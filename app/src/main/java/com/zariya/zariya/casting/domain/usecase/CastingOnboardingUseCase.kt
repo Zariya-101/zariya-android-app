@@ -1,6 +1,7 @@
 package com.zariya.zariya.casting.domain.usecase
 
 import com.zariya.zariya.casting.data.model.ActorProfile
+import com.zariya.zariya.casting.data.model.Agency
 import com.zariya.zariya.casting.domain.repository.CastingOnboardingRepository
 import com.zariya.zariya.core.local.AppSharedPreference
 import javax.inject.Inject
@@ -18,4 +19,7 @@ class CastingOnboardingUseCase @Inject constructor(
     fun getUserDetails() = preference?.getUserData()
 
     suspend fun getActors() = castingOnboardingRepository.getActors()
+
+    suspend fun createAgency(agency: Agency) =
+        castingOnboardingRepository.createAgencyProfile(agency)
 }

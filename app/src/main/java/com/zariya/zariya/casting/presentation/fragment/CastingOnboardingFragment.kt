@@ -35,37 +35,13 @@ class CastingOnboardingFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        uiEventListener()
         fetchUserFromRemote()
     }
 
     private fun fetchUserFromRemote() {
         showProgress(binding.root)
         castingOnboardingViewModel.fetchUserDetailsFromRemote()
-        castingOnboardingViewModel.userFetchedFromRemote.observe(viewLifecycleOwner) {
-            when (it.role) {
-                ACTOR -> {
-                    hideProgress()
-                    Navigation.findNavController(binding.root)
-                        .navigate(CastingOnboardingFragmentDirections.actionActorProfile())
-                }
-
-                AGENCY -> {
-                    hideProgress()
-                    Navigation.findNavController(binding.root)
-                        .navigate(CastingOnboardingFragmentDirections.actionCastingAgency())
-                }
-
-                VOLUNTEER -> {
-
-                }
-
-                else -> {
-                    hideProgress()
-                    initView()
-                    setUpListeners()
-                }
-            }
-        }
     }
 
     private fun initView() {
@@ -79,7 +55,6 @@ class CastingOnboardingFragment : BaseFragment() {
     }
 
     private fun setUpListeners() {
-        uiEventListener()
 
         binding.ivBack.setOnClickListener {
             if (binding.viewPager.currentItem > 2) {
@@ -203,7 +178,10 @@ class CastingOnboardingFragment : BaseFragment() {
                     }
                 }
 
-                is UIEvents.RefreshUi -> {}
+                is UIEvents.RefreshUi -> {
+                    initView()
+                    setUpListeners()
+                }
             }
         }
     }

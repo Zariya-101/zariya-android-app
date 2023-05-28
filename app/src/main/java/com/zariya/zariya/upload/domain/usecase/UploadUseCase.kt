@@ -8,5 +8,5 @@ class UploadUseCase @Inject constructor(
     private val uploadRepository: UploadRepository
 ) {
 
-    suspend fun uploadImage(imageUri: Uri) = uploadRepository.uploadImage(imageUri)
+    suspend fun uploadImage(imageUri: Uri, imageType: String) = uploadRepository.uploadImage(imageUri, imageType)
 }

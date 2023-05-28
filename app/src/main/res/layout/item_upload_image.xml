@@ -30,6 +30,7 @@
                 android:id="@+id/ivImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                loadImageFromUrl="@{image}"
                 android:visibility='@{image != null &amp;&amp; image != "" ? View.VISIBLE: View.GONE}' />
 
             <ImageButton

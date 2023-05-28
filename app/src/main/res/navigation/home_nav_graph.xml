@@ -154,7 +154,13 @@
         android:id="@+id/agencyDetailsFormFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.AgencyDetailsFormFragment"
         android:label="AgencyDetailsFormFragment"
-        tools:layout="@layout/fragment_agency_details_form" />
+        tools:layout="@layout/fragment_agency_details_form">
+        <action
+            android:id="@+id/actionAgencyProfile"
+            app:destination="@id/castingAgencyProfileFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/castingOnboardingFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.CastingOnboardingFragment"

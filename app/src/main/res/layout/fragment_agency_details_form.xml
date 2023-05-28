@@ -201,9 +201,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_edit_text"
+                        android:clickable="false"
                         android:drawableStart="@drawable/ic_profile"
                         android:drawablePadding="@dimen/_10sdp"
                         android:drawableTint="@color/dark_blue"
+                        android:focusable="false"
                         android:hint="@string/speciality"
                         android:inputType="textPersonName"
                         android:textColorHint="@color/dark_blue" />
@@ -234,17 +236,17 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSignUp"
+                    android:id="@+id/btnRegister"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
+                    android:backgroundTint="@color/dark_blue"
                     android:paddingHorizontal="@dimen/_50sdp"
                     android:paddingVertical="@dimen/_15sdp"
                     android:text="@string/register"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/dark_blue"
                     app:cornerRadius="@dimen/_30sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -167,9 +167,7 @@ class LoginFragment : BaseFragment() {
 
                 is UIEvents.Navigate -> {
                     uiEvent.navDirections?.let {
-                        Navigation.findNavController(binding.root).navigate(
-                            it
-                        )
+                        Navigation.findNavController(binding.root).navigate(it)
                     }
                 }
 
