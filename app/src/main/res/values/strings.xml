@@ -24,6 +24,7 @@
     <string name="name">Name</string>
     <string name="dob">Date of Birth</string>
     <string name="email">Email</string>
+    <string name="official_email">Official Email</string>
     <string name="search">Search</string>
     <string name="actor">Actor</string>
     <string name="casting_agency">Casting Agency</string>
@@ -31,6 +32,11 @@
     <string name="height">Height</string>
     <string name="complexion">Complexion</string>
     <string name="or">OR</string>
+    <string name="started_in">Started in</string>
+    <string name="description">Description</string>
+    <string name="known_for">Known for</string>
+    <string name="speciality">Speciality</string>
+
 
     <string name="user_type_title">Type of Account</string>
     <string name="user_type_subtitle">Choose the type of your account, be careful to change it is impossible</string>
@@ -52,6 +58,7 @@
     <string name="google">Google</string>
     <string name="verify_otp">Verify OTP</string>
     <string name="get_otp">GET OTP</string>
+    <string name="register">Register</string>
 
 
     <string name="pick_a_region">Pick A Region</string>

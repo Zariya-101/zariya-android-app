@@ -162,12 +162,19 @@
         tools:layout="@layout/fragment_casting_onboarding">
         <action
             android:id="@+id/actionCastingAgency"
-            app:destination="@id/castingAgencyProfileFragment" />
+            app:destination="@id/castingAgencyProfileFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/actionActorProfile"
             app:destination="@id/actorProfileFragment"
             app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false"/>
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/actionAgencyForm"
+            app:destination="@id/agencyDetailsFormFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/castingAgencyProfileFragment"

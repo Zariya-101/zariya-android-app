@@ -50,7 +50,9 @@ class CastingOnboardingFragment : BaseFragment() {
                 }
 
                 AGENCY -> {
-
+                    hideProgress()
+                    Navigation.findNavController(binding.root)
+                        .navigate(CastingOnboardingFragmentDirections.actionCastingAgency())
                 }
 
                 VOLUNTEER -> {
@@ -93,72 +95,91 @@ class CastingOnboardingFragment : BaseFragment() {
             }
         })
         binding.btnNext.setOnClickListener {
-            when (binding.viewPager.currentItem) {
-                0 -> {
-                    if (castingOnboardingViewModel.userType != null) {
-                        binding.viewPager.currentItem += 1
-                    } else {
-                        Toast.makeText(context, "Please Select Type of account", Toast.LENGTH_LONG)
-                            .show()
+            if (castingOnboardingViewModel.userType.isNullOrEmpty().not()) {
+                when (castingOnboardingViewModel.userType) {
+                    ACTOR -> nextClickListenerForActor()
+                    AGENCY -> {
+                        Navigation.findNavController(binding.root)
+                            .navigate(CastingOnboardingFragmentDirections.actionAgencyForm())
+                    }
+
+                    VOLUNTEER -> {
+
                     }
                 }
+            } else {
+                Toast.makeText(context, "Please Select Type of account", Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
+    }
 
-                1 -> {
-                    if (castingOnboardingViewModel.actorProfileDetails.age.isEmpty().not()) {
-                        binding.viewPager.currentItem += 1
+    private fun nextClickListenerForActor() {
+        when (binding.viewPager.currentItem) {
+            0 -> {
+                if (castingOnboardingViewModel.userType != null) {
+                    binding.viewPager.currentItem += 1
+                } else {
+                    Toast.makeText(context, "Please Select Type of account", Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+
+            1 -> {
+                if (castingOnboardingViewModel.actorProfileDetails.age.isEmpty().not()) {
+                    binding.viewPager.currentItem += 1
+                } else {
+                    Toast.makeText(context, "Please Select your Age", Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+
+            2 -> {
+                if (castingOnboardingViewModel.actorProfileDetails.complexion.isEmpty().not()) {
+                    binding.viewPager.currentItem += 1
+                } else {
+                    Toast.makeText(
+                        context, "Please Select your Complexion type", Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            3 -> {
+                if (castingOnboardingViewModel.actorProfileDetails.height.isEmpty().not()) {
+                    binding.viewPager.currentItem += 1
+                } else {
+                    Toast.makeText(
+                        context, "Please Select your Height", Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            4 -> {
+                val size =
+                    if (castingOnboardingViewModel.actorProfileDetails.imageList.contains("")) {
+                        castingOnboardingViewModel.actorProfileDetails.imageList.size - 1
                     } else {
-                        Toast.makeText(context, "Please Select your Age", Toast.LENGTH_LONG)
-                            .show()
+                        castingOnboardingViewModel.actorProfileDetails.imageList.size
                     }
+                if (size < 2) {
+                    Toast.makeText(
+                        context, "Please Select atleast 2 images", Toast.LENGTH_LONG
+                    ).show()
+                } else if (size > 5) {
+                    Toast.makeText(
+                        context, "You can select maximum of 5 images", Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    binding.viewPager.currentItem += 1
                 }
+            }
 
-                2 -> {
-                    if (castingOnboardingViewModel.actorProfileDetails.complexion.isEmpty().not()) {
-                        binding.viewPager.currentItem += 1
-                    } else {
-                        Toast.makeText(
-                            context, "Please Select your Complexion type", Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
+            5 -> {
+                castingOnboardingViewModel.createActorProfile()
+            }
 
-                3 -> {
-                    if (castingOnboardingViewModel.actorProfileDetails.height.isEmpty().not()) {
-                        binding.viewPager.currentItem += 1
-                    } else {
-                        Toast.makeText(
-                            context, "Please Select your Height", Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
+            else -> {
 
-                4 -> {
-                    val size =
-                        if (castingOnboardingViewModel.actorProfileDetails.imageList.contains("")) {
-                            castingOnboardingViewModel.actorProfileDetails.imageList.size - 1
-                        } else {
-                            castingOnboardingViewModel.actorProfileDetails.imageList.size
-                        }
-                    if (size < 2) {
-                        Toast.makeText(
-                            context, "Please Select atleast 2 images", Toast.LENGTH_LONG
-                        ).show()
-                    } else if (size > 5) {
-                        Toast.makeText(
-                            context, "You can select maximum of 5 images", Toast.LENGTH_LONG
-                        ).show()
-                    } else {
-                        binding.viewPager.currentItem += 1
-                    }
-                }
-
-                5 -> {
-                    castingOnboardingViewModel.createActorProfile()
-                }
-
-                else -> {
-
-                }
             }
         }
     }
