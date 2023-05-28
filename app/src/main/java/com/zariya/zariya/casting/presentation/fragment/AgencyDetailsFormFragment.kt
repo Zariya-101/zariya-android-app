@@ -161,7 +161,6 @@ class AgencyDetailsFormFragment : BaseFragment() {
             }
             create().show()
         }
-
     }
 
     private fun register() {
@@ -179,9 +178,7 @@ class AgencyDetailsFormFragment : BaseFragment() {
     }
 
     private var galleryActivityResultLauncher: ActivityResultLauncher<Intent> =
-        registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 viewModel.imageUri = result.data?.data
                 binding.layoutUploadImage.image = viewModel.imageUri.toString()

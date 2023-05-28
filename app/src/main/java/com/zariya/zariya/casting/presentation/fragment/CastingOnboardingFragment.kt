@@ -79,7 +79,8 @@ class CastingOnboardingFragment : BaseFragment() {
                     }
 
                     VOLUNTEER -> {
-
+                        Navigation.findNavController(binding.root)
+                            .navigate(CastingOnboardingFragmentDirections.actionVolunteerForm())
                     }
                 }
             } else {

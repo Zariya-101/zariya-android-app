@@ -181,6 +181,11 @@
             app:destination="@id/agencyDetailsFormFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/actionVolunteerForm"
+            app:destination="@id/volunteerOnboardingFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/castingAgencyProfileFragment"
@@ -201,9 +206,15 @@
     <fragment
         android:id="@+id/swipeActorsFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.SwipeActorsFragment"
-        android:label="SwipeActorsFragment">
+        android:label="SwipeActorsFragment"
+        tools:layout="@layout/fragment_swipe_actors">
         <action
             android:id="@+id/actionActorProfile"
             app:destination="@id/actorProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/volunteerOnboardingFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.VolunteerOnboardingFragment"
+        android:label="VolunteerOnboardingFragment"
+        tools:layout="@layout/fragment_volunteer_onboarding" />
 </navigation>

@@ -35,7 +35,9 @@
     <string name="started_in">Started in</string>
     <string name="description">Description</string>
     <string name="known_for">Known for</string>
+    <string name="works_for">Works for</string>
     <string name="speciality">Speciality</string>
+    <string name="experience">Experience</string>
 
 
     <string name="user_type_title">Type of Account</string>
