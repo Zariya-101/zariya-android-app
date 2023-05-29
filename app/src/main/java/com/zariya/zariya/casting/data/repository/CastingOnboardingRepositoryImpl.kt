@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.zariya.zariya.casting.data.model.ActorProfile
 import com.zariya.zariya.casting.data.model.Agency
+import com.zariya.zariya.casting.data.model.Volunteer
 import com.zariya.zariya.casting.domain.repository.CastingOnboardingRepository
 import com.zariya.zariya.core.local.AppSharedPreference
 import com.zariya.zariya.core.network.NetworkResult
@@ -12,8 +13,10 @@ import com.zariya.zariya.utils.AGENCY
 import com.zariya.zariya.utils.COL_ACTORS
 import com.zariya.zariya.utils.COL_AGENCIES
 import com.zariya.zariya.utils.COL_USERS
+import com.zariya.zariya.utils.COL_VOLUNTEERS
 import com.zariya.zariya.utils.ROLE
 import com.zariya.zariya.utils.USER_ID
+import com.zariya.zariya.utils.VOLUNTEER
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
@@ -100,6 +103,22 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
                 .add(agency).await()
 
             firestore.collection(COL_USERS).document(id).update(ROLE, AGENCY).await()
+
+            NetworkResult.Success(true)
+        } ?: run {
+            NetworkResult.Error("Something went wrong")
+        }
+    } catch (e: Exception) {
+        NetworkResult.Error(e.message.toString())
+    }
+
+    override suspend fun createVolunteerProfile(volunteer: Volunteer) = try {
+        preference?.getUserData()?.id?.let { id ->
+            volunteer.userId = id
+            firestore.collection(COL_VOLUNTEERS)
+                .add(volunteer).await()
+
+            firestore.collection(COL_USERS).document(id).update(ROLE, VOLUNTEER).await()
 
             NetworkResult.Success(true)
         } ?: run {

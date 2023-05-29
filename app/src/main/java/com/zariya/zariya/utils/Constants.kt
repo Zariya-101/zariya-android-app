@@ -4,6 +4,7 @@ package com.zariya.zariya.utils
 const val COL_USERS = "users"
 const val COL_ACTORS = "actors"
 const val COL_AGENCIES = "agencies"
+const val COL_VOLUNTEERS = "volunteers"
 
 //Fields
 const val ID = "id"

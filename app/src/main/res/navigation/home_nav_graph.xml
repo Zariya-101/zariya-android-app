@@ -186,6 +186,11 @@
             app:destination="@id/volunteerOnboardingFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/actionVolunteerProfile"
+            app:destination="@id/volunteerProfileFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/castingAgencyProfileFragment"
@@ -216,5 +221,16 @@
         android:id="@+id/volunteerOnboardingFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.VolunteerOnboardingFragment"
         android:label="VolunteerOnboardingFragment"
-        tools:layout="@layout/fragment_volunteer_onboarding" />
+        tools:layout="@layout/fragment_volunteer_onboarding">
+        <action
+            android:id="@+id/actionVolunteerProfile"
+            app:destination="@id/volunteerProfileFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/volunteerProfileFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.VolunteerProfileFragment"
+        android:label="VolunteerProfileFragment"
+        tools:layout="@layout/fragment_volunteer_profile" />
 </navigation>

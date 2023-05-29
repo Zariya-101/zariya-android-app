@@ -195,49 +195,49 @@ class AgencyDetailsFormFragment : BaseFragment() {
             binding.tilName.error = getString(R.string.validation_empty_name)
             return false
         }
-        binding.tilName.error = ""
+        binding.tilName.isErrorEnabled = false
 
         if (binding.tilStarted.editText?.text?.isEmpty() == true) {
             binding.tilStarted.error = getString(R.string.validation_empty_started_in)
             return false
         }
-        binding.tilStarted.error = ""
+        binding.tilStarted.isErrorEnabled = false
 
         if (binding.tilEmail.editText?.text?.isEmpty() == true) {
             binding.tilEmail.error = getString(R.string.validation_empty_email)
             return false
         }
-        binding.tilEmail.error = ""
+        binding.tilEmail.isErrorEnabled = false
 
         if (binding.tilPhone.editText?.text?.isEmpty() == true) {
             binding.tilPhone.error = getString(R.string.validation_empty_phone)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         if (binding.tilPhone.editText?.text?.toString()?.length != 10) {
             binding.tilPhone.error = getString(R.string.validation_invalid_phone)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         if (binding.tilDescription.editText?.text?.isEmpty() == true) {
             binding.tilDescription.error = getString(R.string.validation_empty_description)
             return false
         }
-        binding.tilDescription.error = ""
+        binding.tilDescription.isErrorEnabled = false
 
         if (binding.tilSpeciality.editText?.text?.isEmpty() == true) {
             binding.tilSpeciality.error = getString(R.string.validation_empty_speciality)
             return false
         }
-        binding.tilKnownFor.error = ""
+        binding.tilSpeciality.isErrorEnabled = false
 
         if (binding.tilKnownFor.editText?.text?.isEmpty() == true) {
             binding.tilKnownFor.error = getString(R.string.validation_empty_known_For)
             return false
         }
-        binding.tilKnownFor.error = ""
+        binding.tilKnownFor.isErrorEnabled = false
 
         return true
     }

@@ -193,11 +193,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_edit_text"
-                        android:clickable="false"
                         android:drawableStart="@drawable/ic_profile"
                         android:drawablePadding="@dimen/_10sdp"
                         android:drawableTint="@color/dark_blue"
-                        android:focusable="false"
                         android:hint="@string/works_for"
                         android:inputType="textPersonName"
                         android:textColorHint="@color/dark_blue" />

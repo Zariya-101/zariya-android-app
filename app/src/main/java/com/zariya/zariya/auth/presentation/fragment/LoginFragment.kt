@@ -181,19 +181,19 @@ class LoginFragment : BaseFragment() {
             binding.tilPhone.error = getString(R.string.validation_select_country)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         if (binding.tilPhone.editText?.text?.isEmpty() == true) {
             binding.tilPhone.error = getString(R.string.validation_empty_phone)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         if (binding.tilPhone.editText?.text?.toString()?.length != 10) {
             binding.tilPhone.error = getString(R.string.validation_invalid_phone)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         return true
     }

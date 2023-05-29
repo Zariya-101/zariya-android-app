@@ -169,37 +169,37 @@ class SignUpFragment : BaseFragment() {
             binding.tilName.error = getString(R.string.validation_empty_name)
             return false
         }
-        binding.tilName.error = ""
+        binding.tilName.isErrorEnabled = false
 
         if (binding.tilDOB.editText?.text?.isEmpty() == true) {
             binding.tilDOB.error = getString(R.string.validation_empty_dob)
             return false
         }
-        binding.tilDOB.error = ""
+        binding.tilDOB.isErrorEnabled = false
 
         if (binding.tilEmail.editText?.text?.isEmpty() == true) {
             binding.tilEmail.error = getString(R.string.validation_empty_email)
             return false
         }
-        binding.tilEmail.error = ""
+        binding.tilEmail.isErrorEnabled = false
 
         if (binding.countryCodePicker.selectedCountryCode.isNullOrEmpty()) {
             binding.tilPhone.error = getString(R.string.validation_select_country)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         if (binding.tilPhone.editText?.text?.isEmpty() == true) {
             binding.tilPhone.error = getString(R.string.validation_empty_phone)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         if (binding.tilPhone.editText?.text?.toString()?.length != 10) {
             binding.tilPhone.error = getString(R.string.validation_invalid_phone)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         return true
     }

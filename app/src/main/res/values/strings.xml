@@ -82,6 +82,8 @@
     <string name="validation_empty_description">Please enter Description</string>
     <string name="validation_empty_known_For">Please enter anything you are known for</string>
     <string name="validation_empty_speciality">Please select Speciality</string>
+    <string name="validation_empty_experience">Please select Experience</string>
+    <string name="validation_empty_works_for">Please select who you work for</string>
 
 
     <string name="workshop_details_temp">Realization of the patterns of their brain and that of the character\'s brain is the first thing which makes an actor aware about the reality of the situation/scene.\n\n
