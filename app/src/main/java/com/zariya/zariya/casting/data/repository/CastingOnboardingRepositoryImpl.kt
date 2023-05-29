@@ -18,6 +18,7 @@ import com.zariya.zariya.utils.ROLE
 import com.zariya.zariya.utils.USER_ID
 import com.zariya.zariya.utils.VOLUNTEER
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -110,6 +111,34 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
         }
     } catch (e: Exception) {
         NetworkResult.Error(e.message.toString())
+    }
+
+    override suspend fun getAllAgencies() = callbackFlow {
+        val listener = firestore.collection(COL_AGENCIES)
+            .get()
+            .addOnCompleteListener {
+                val result = if (it.isSuccessful) {
+                    try {
+                        val agencies =
+                            it.result.documents.map {
+                                val agency = it.toObject(Agency::class.java)
+                                agency?.agencyId = it.id
+                                return@map agency
+                            }
+                        NetworkResult.Success(agencies)
+                    } catch (e: Exception) {
+                        Log.e("CastingOnbRepoImpl", "Get Actors Exception")
+                        NetworkResult.Error(e.message.toString())
+                    }
+                } else {
+                    Log.e("CastingOnbRepoImpl", "Get Agencies Not successful")
+                    NetworkResult.Error(it.exception?.message.toString())
+                }
+
+                trySend(result)
+            }
+
+        awaitClose { listener }
     }
 
     override suspend fun createVolunteerProfile(volunteer: Volunteer) = try {

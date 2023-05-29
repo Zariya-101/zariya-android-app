@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.zariya.zariya.R
+import com.zariya.zariya.casting.data.model.Agency
 import com.zariya.zariya.casting.data.model.Volunteer
 import com.zariya.zariya.casting.presentation.viewmodel.VolunteerOnboardingViewModel
 import com.zariya.zariya.core.ui.BaseFragment
@@ -30,7 +31,9 @@ class VolunteerOnboardingFragment : BaseFragment() {
     private val specialityCheckedItems = BooleanArray(specialityListItems.size)
     private val specialitySelectedItems = arrayListOf<String>()
 
-    val experienceSelectedItems = intArrayOf(-1)
+    private val experienceSelectedItems = intArrayOf(-1)
+    private val worksForSelectedItems = intArrayOf(-1)
+    private var worksForAgency: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,12 +78,47 @@ class VolunteerOnboardingFragment : BaseFragment() {
             return@setOnTouchListener false
         }
 
+        binding.tilWorksFor.editText?.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                getAllAgencies()
+            }
 
+            return@setOnTouchListener false
+        }
 
         binding.btnRegister.setOnClickListener {
             if (validate()) {
                 register()
             }
+        }
+    }
+
+    private fun getAllAgencies() {
+        if (viewModel.agenciesLiveData.value.isNullOrEmpty()) {
+            viewModel.getAllAgencies()
+            viewModel.agenciesLiveData.observe(viewLifecycleOwner) {
+                selectAgency(it)
+            }
+        } else {
+            selectAgency(viewModel.agenciesLiveData.value!!)
+        }
+    }
+
+    private fun selectAgency(list: List<Agency?>) {
+        AlertDialog.Builder(context).apply {
+            setTitle("Choose your Agency")
+            setSingleChoiceItems(
+                list.map { it?.name }.toTypedArray(),
+                worksForSelectedItems[0]
+            ) { dialog, which ->
+                worksForSelectedItems[0] = which
+                binding.tilWorksFor.editText?.setText(list[which]?.name)
+                worksForAgency = list[which]?.agencyId
+                dialog.dismiss()
+            }
+            setNegativeButton("Cancel") { _, _ -> }
+
+            create().show()
         }
     }
 
@@ -150,15 +188,17 @@ class VolunteerOnboardingFragment : BaseFragment() {
 
     private fun register() {
         showProgress(binding.root)
-        val volunteer = Volunteer(
-            name = binding.tilName.editText?.text.toString(),
-            email = binding.tilEmail.editText?.text.toString(),
-            phone = binding.tilPhone.editText?.text.toString(),
-            speciality = specialitySelectedItems,
-            experience = binding.tilExperience.editText?.text.toString(),
-            worksFor = binding.tilWorksFor.editText?.text.toString()
-        )
-        viewModel.registerVolunteer(volunteer)
+        worksForAgency?.let {
+            val volunteer = Volunteer(
+                name = binding.tilName.editText?.text.toString(),
+                email = binding.tilEmail.editText?.text.toString(),
+                phone = binding.tilPhone.editText?.text.toString(),
+                speciality = specialitySelectedItems,
+                experience = binding.tilExperience.editText?.text.toString(),
+                worksFor = it
+            )
+            viewModel.registerVolunteer(volunteer)
+        }
     }
 
     private fun validate(): Boolean {
@@ -199,7 +239,7 @@ class VolunteerOnboardingFragment : BaseFragment() {
         }
         binding.tilSpeciality.isErrorEnabled = false
 
-        if (binding.tilWorksFor.editText?.text?.isEmpty() == true) {
+        if (worksForAgency.isNullOrEmpty()) {
             binding.tilWorksFor.error = getString(R.string.validation_empty_works_for)
             return false
         }

@@ -1,8 +1,11 @@
 package com.zariya.zariya.casting.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zariya.zariya.casting.data.model.ActorProfile
+import com.zariya.zariya.casting.data.model.Agency
 import com.zariya.zariya.casting.data.model.Volunteer
 import com.zariya.zariya.casting.domain.usecase.CastingOnboardingUseCase
 import com.zariya.zariya.casting.presentation.fragment.VolunteerOnboardingFragmentDirections
@@ -22,6 +25,9 @@ class VolunteerOnboardingViewModel @Inject constructor(
 
     private val _uiEvents = SingleLiveEvent<UIEvents>()
     val uiEvents: LiveData<UIEvents> = _uiEvents
+
+    private val _agencies = SingleLiveEvent<List<Agency?>>()
+    val agenciesLiveData: LiveData<List<Agency?>> = _agencies
 
     fun getUserDetails() = castingOnboardingUseCase.getUserDetails()
 
@@ -45,6 +51,35 @@ class VolunteerOnboardingViewModel @Inject constructor(
 
                 is NetworkResult.Loading -> {
 
+                }
+            }
+        }
+    }
+
+    fun getAllAgencies() {
+        viewModelScope.launch(Dispatchers.IO) {
+            castingOnboardingUseCase.getAllAgencies().collect {
+                when (it) {
+                    is NetworkResult.Success -> {
+                        withContext(Dispatchers.Main.immediate) {
+                            it.data?.let { agencies ->
+                                _agencies.value = agencies
+                            } ?: run {
+                                _uiEvents.value = UIEvents.Loading(false)
+                                _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                            }
+                        }
+                    }
+
+                    is NetworkResult.Error -> {
+                        withContext(Dispatchers.Main.immediate) {
+                            _uiEvents.value = UIEvents.Loading(false)
+                            _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                        }
+                    }
+
+                    is NetworkResult.Loading -> {
+                    }
                 }
             }
         }

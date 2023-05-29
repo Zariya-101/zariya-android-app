@@ -16,5 +16,7 @@ interface CastingOnboardingRepository {
 
     suspend fun createAgencyProfile(agency: Agency): NetworkResult<Boolean>
 
+    suspend fun getAllAgencies(): Flow<NetworkResult<List<Agency?>>>
+
     suspend fun createVolunteerProfile(volunteer: Volunteer): NetworkResult<Boolean>
 }

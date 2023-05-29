@@ -24,6 +24,8 @@ class CastingOnboardingUseCase @Inject constructor(
     suspend fun createAgency(agency: Agency) =
         castingOnboardingRepository.createAgencyProfile(agency)
 
+    suspend fun getAllAgencies() = castingOnboardingRepository.getAllAgencies()
+
     suspend fun createVolunteer(volunteer: Volunteer) =
         castingOnboardingRepository.createVolunteerProfile(volunteer)
 }
