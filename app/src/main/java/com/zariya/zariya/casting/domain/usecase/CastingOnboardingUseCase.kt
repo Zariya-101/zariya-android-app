@@ -17,8 +17,6 @@ class CastingOnboardingUseCase @Inject constructor(
 
     suspend fun getActorProfile() = castingOnboardingRepository.getActorProfile()
 
-    fun getUserDetails() = preference?.getUserData()
-
     suspend fun getActors() = castingOnboardingRepository.getActors()
 
     suspend fun createAgency(agency: Agency) =
@@ -26,6 +24,10 @@ class CastingOnboardingUseCase @Inject constructor(
 
     suspend fun getAllAgencies() = castingOnboardingRepository.getAllAgencies()
 
+    suspend fun getAgencyProfile() = castingOnboardingRepository.getAgencyProfile()
+
     suspend fun createVolunteer(volunteer: Volunteer) =
         castingOnboardingRepository.createVolunteerProfile(volunteer)
+
+    fun getUserDetails() = preference?.getUserData()
 }

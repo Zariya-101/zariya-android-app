@@ -73,6 +73,7 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
         awaitClose { listener }
     }
 
+
     override suspend fun getActors() = callbackFlow {
         val listener = firestore.collection(COL_ACTORS)
             .get()
@@ -127,11 +128,35 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
                             }
                         NetworkResult.Success(agencies)
                     } catch (e: Exception) {
-                        Log.e("CastingOnbRepoImpl", "Get Actors Exception")
+                        Log.e("CastingOnbRepoImpl", "Get Agencies Exception")
                         NetworkResult.Error(e.message.toString())
                     }
                 } else {
                     Log.e("CastingOnbRepoImpl", "Get Agencies Not successful")
+                    NetworkResult.Error(it.exception?.message.toString())
+                }
+
+                trySend(result)
+            }
+
+        awaitClose { listener }
+    }
+
+    override suspend fun getAgencyProfile() = callbackFlow {
+        val listener = firestore.collection(COL_AGENCIES)
+            .whereEqualTo(USER_ID, preference?.getUserData()?.id)
+            .get()
+            .addOnCompleteListener {
+                val result = if (it.isSuccessful) {
+                    try {
+                        val agency = it.result.documents[0].toObject(Agency::class.java)
+                        NetworkResult.Success(agency)
+                    } catch (e: Exception) {
+                        Log.e("CastingOnbRepoImpl", "Get Agency Exception")
+                        NetworkResult.Error(e.message.toString())
+                    }
+                } else {
+                    Log.e("CastingOnbRepoImpl", "Get Agency Not successful")
                     NetworkResult.Error(it.exception?.message.toString())
                 }
 

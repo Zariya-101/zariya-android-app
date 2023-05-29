@@ -2,6 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="agency"
+            type="com.zariya.zariya.casting.data.model.Agency" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,11 +45,12 @@
 
                 <ImageView
                     android:id="@+id/ivProfilePic"
+                    loadImageFromUrl="@{agency.profilePic}"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:layout_gravity="center"
                     android:padding="2dp"
-                    android:src="@drawable/zariya_logo" />
+                    tools:src="@drawable/zariya_logo" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -51,12 +59,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="Zariya Theatre Group"
+                android:text="@{agency.name}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cvProfilePic" />
+                app:layout_constraintTop_toBottomOf="@id/cvProfilePic"
+                tools:text="Zariya Theatre Group" />
 
             <include
                 android:id="@+id/layoutVolunteer"

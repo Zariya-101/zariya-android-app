@@ -1,7 +1,6 @@
 package com.zariya.zariya.casting.presentation.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import com.yuyakaido.android.cardstackview.SwipeAnimationSetting
 import com.yuyakaido.android.cardstackview.SwipeableMethod
 import com.zariya.zariya.casting.data.model.ActorProfile
 import com.zariya.zariya.casting.presentation.adapter.SwipeActorsAdapter
-import com.zariya.zariya.casting.presentation.viewmodel.CastingAgencyViewModel
+import com.zariya.zariya.casting.presentation.viewmodel.SwipeActorsViewModel
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentSwipeActorsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SwipeActorsFragment : BaseFragment(), CardStackListener {
 
     private lateinit var binding: FragmentSwipeActorsBinding
-    private val castingAgencyViewModel by viewModels<CastingAgencyViewModel>()
+    private val swipeActorsViewModel by viewModels<SwipeActorsViewModel>()
     private lateinit var cardStackLayoutManager: CardStackLayoutManager
     private var actors: List<ActorProfile?>? = null
 
@@ -85,8 +84,8 @@ class SwipeActorsFragment : BaseFragment(), CardStackListener {
     }
 
     private fun getActors() {
-        castingAgencyViewModel.getActors()
-        castingAgencyViewModel.actorsLiveData.observe(viewLifecycleOwner) {
+        swipeActorsViewModel.getActors()
+        swipeActorsViewModel.actorsLiveData.observe(viewLifecycleOwner) {
             actors = it
             populateActors(it)
         }

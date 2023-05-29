@@ -194,9 +194,9 @@
     </fragment>
     <fragment
         android:id="@+id/castingAgencyProfileFragment"
-        android:name="com.zariya.zariya.casting.presentation.fragment.CastingAgencyProfileFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.AgencyProfileFragment"
         android:label="CastingAgencyProfileFragment"
-        tools:layout="@layout/fragment_casting_agency_profile" />
+        tools:layout="@layout/fragment_agency_profile" />
     <fragment
         android:id="@+id/actorProfileFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.ActorProfileFragment"
