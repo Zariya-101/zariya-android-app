@@ -165,5 +165,10 @@ That is the major difference between an actor which fits into reality and an act
         <item>Dark Brown</item>
     </string-array>
 
+    <string-array name="agency_profile_tab">
+        <item>ABOUT</item>
+        <item>CASTING CALLS</item>
+    </string-array>
+
 
 </resources>
