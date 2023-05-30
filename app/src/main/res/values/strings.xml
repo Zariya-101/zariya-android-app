@@ -33,8 +33,10 @@
     <string name="complexion">Complexion</string>
     <string name="or">OR</string>
     <string name="started_in">Started in</string>
+    <string name="started_in_value"><![CDATA[<b>Started in</b>: %1$s]]></string>
     <string name="description">Description</string>
     <string name="known_for">Known for</string>
+    <string name="known_for_value"><![CDATA[<b>Known for</b>: %1$s]]></string>
     <string name="works_for">Works for</string>
     <string name="speciality">Speciality</string>
     <string name="experience">Experience</string>

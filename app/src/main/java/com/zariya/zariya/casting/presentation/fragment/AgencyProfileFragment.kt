@@ -34,6 +34,7 @@ class AgencyProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        uiEventListener()
         getAgencyDetails()
     }
 
@@ -50,7 +51,7 @@ class AgencyProfileFragment : BaseFragment() {
     }
 
     private fun setUpViewPager(agency: Agency) {
-        val adapter = fragmentManager?.let { AgencyProfileTabAdapter(it, lifecycle) }
+        val adapter = fragmentManager?.let { AgencyProfileTabAdapter(it, lifecycle, agency) }
         binding.viewPager.adapter = adapter
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
