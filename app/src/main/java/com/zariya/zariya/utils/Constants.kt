@@ -13,6 +13,7 @@ const val PHONE = "phone"
 const val EMAIL = "email"
 const val USER_ID = "userId"
 const val ROLE = "role"
+const val WORKS_FOR = "worksFor"
 
 const val RC_SIGN_IN = 123
 

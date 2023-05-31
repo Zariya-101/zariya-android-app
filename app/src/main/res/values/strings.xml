@@ -40,6 +40,12 @@
     <string name="works_for">Works for</string>
     <string name="speciality">Speciality</string>
     <string name="experience">Experience</string>
+    <string name="agency_details">Agency Details</string>
+    <string name="create_casting_call">Create Casting Call</string>
+    <string name="looking_for">Looking for</string>
+    <string name="role">Role</string>
+    <string name="payment">Payment</string>
+    <string name="assign_to">Assign to</string>
 
 
     <string name="user_type_title">Type of Account</string>
@@ -157,7 +163,6 @@ That is the major difference between an actor which fits into reality and an act
     </string-array>
 
     <string-array name="actor_complexion">
-        <item>Select your Complexion</item>
         <item>Extremely Fair</item>
         <item>Fair</item>
         <item>Pale</item>
@@ -170,6 +175,21 @@ That is the major difference between an actor which fits into reality and an act
     <string-array name="agency_profile_tab">
         <item>ABOUT</item>
         <item>CASTING CALLS</item>
+    </string-array>
+
+    <string-array name="gender_array">
+        <item>Female</item>
+        <item>Male</item>
+        <item>Anyone</item>
+    </string-array>
+
+    <string-array name="age_range_array">
+        <item>16–20 Years</item>
+        <item>20–25 Years</item>
+        <item>25–30 Years</item>
+        <item>30–35 Years</item>
+        <item>35–40 Years</item>
+        <item>40+ Years</item>
     </string-array>
 
 

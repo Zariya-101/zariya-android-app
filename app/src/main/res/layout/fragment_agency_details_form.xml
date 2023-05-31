@@ -33,7 +33,7 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Agency Details"
+                    android:text="@string/agency_details"
                     android:textColor="@color/yellow_background"
                     android:textSize="@dimen/_16ssp"
                     android:textStyle="bold"

@@ -5,6 +5,9 @@ import com.zariya.zariya.casting.data.model.Agency
 import com.zariya.zariya.casting.data.model.Volunteer
 import com.zariya.zariya.casting.domain.repository.CastingOnboardingRepository
 import com.zariya.zariya.core.local.AppSharedPreference
+import com.zariya.zariya.core.network.NetworkResult
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class CastingOnboardingUseCase @Inject constructor(
@@ -25,6 +28,28 @@ class CastingOnboardingUseCase @Inject constructor(
     suspend fun getAllAgencies() = castingOnboardingRepository.getAllAgencies()
 
     suspend fun getAgencyProfile() = castingOnboardingRepository.getAgencyProfile()
+
+    suspend fun getVolunteersForMyAgency() = flow {
+        getAgencyProfile().collect { agencyResult ->
+            when (agencyResult) {
+                is NetworkResult.Success -> {
+                    val agencyId = agencyResult.data?.agencyId
+                    castingOnboardingRepository.getVolunteersForMyAgency(agencyId)
+                        .collect { volunteers ->
+                            when (volunteers) {
+                                is NetworkResult.Success -> {
+                                    emit(NetworkResult.Success(volunteers))
+                                }
+
+                                else -> emit(NetworkResult.Error("Something went wrong"))
+                            }
+                        }
+                }
+
+                else -> emit(NetworkResult.Error("Something went wrong"))
+            }
+        }
+    }
 
     suspend fun createVolunteer(volunteer: Volunteer) =
         castingOnboardingRepository.createVolunteerProfile(volunteer)

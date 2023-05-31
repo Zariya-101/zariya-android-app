@@ -17,6 +17,7 @@ import com.zariya.zariya.utils.COL_VOLUNTEERS
 import com.zariya.zariya.utils.ROLE
 import com.zariya.zariya.utils.USER_ID
 import com.zariya.zariya.utils.VOLUNTEER
+import com.zariya.zariya.utils.WORKS_FOR
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -150,6 +151,7 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
                 val result = if (it.isSuccessful) {
                     try {
                         val agency = it.result.documents[0].toObject(Agency::class.java)
+                        agency?.agencyId = it.result.documents[0].id
                         NetworkResult.Success(agency)
                     } catch (e: Exception) {
                         Log.e("CastingOnbRepoImpl", "Get Agency Exception")
@@ -163,6 +165,30 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
                 trySend(result)
             }
 
+        awaitClose { listener }
+    }
+
+    override suspend fun getVolunteersForMyAgency(agencyId: String?) = callbackFlow {
+        val listener = firestore.collection(COL_VOLUNTEERS)
+            .whereEqualTo(WORKS_FOR, agencyId)
+            .get()
+            .addOnCompleteListener {
+                val result = if (it.isSuccessful) {
+                    try {
+                        val volunteers =
+                            it.result.documents.map { it.toObject(Volunteer::class.java) }
+                        NetworkResult.Success(volunteers)
+                    } catch (e: Exception) {
+                        Log.e("CastingOnbRepoImpl", "getVolunteersForMyAgency Exception")
+                        NetworkResult.Error(e.message.toString())
+                    }
+                } else {
+                    Log.e("CastingOnbRepoImpl", "getVolunteersForMyAgency Not successful")
+                    NetworkResult.Error(it.exception?.message.toString())
+                }
+
+                trySend(result)
+            }
         awaitClose { listener }
     }
 
