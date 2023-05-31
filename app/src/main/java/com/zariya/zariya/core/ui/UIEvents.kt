@@ -4,6 +4,7 @@ import androidx.navigation.NavDirections
 
 sealed class UIEvents {
     data class ShowError(val message: String?) : UIEvents()
+    data class ShowSuccess(val message: String?) : UIEvents()
 
     data class Loading(val loading: Boolean) : UIEvents()
 

@@ -5,6 +5,7 @@ const val COL_USERS = "users"
 const val COL_ACTORS = "actors"
 const val COL_AGENCIES = "agencies"
 const val COL_VOLUNTEERS = "volunteers"
+const val COL_CASTING_CALLS = "castingCalls"
 
 //Fields
 const val ID = "id"
@@ -30,3 +31,6 @@ const val VOLUNTEER = "volunteer"
 //Image Upload Type
 const val ACTOR_PROFILE_IMAGE = "actor_profile_image"
 const val AGENCY_PROFILE_IMAGE = "agency_profile_image"
+
+const val PAID = "PAID"
+const val UNPAID = "UNPAID"

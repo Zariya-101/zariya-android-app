@@ -2,6 +2,7 @@ package com.zariya.zariya.casting.domain.usecase
 
 import com.zariya.zariya.casting.data.model.ActorProfile
 import com.zariya.zariya.casting.data.model.Agency
+import com.zariya.zariya.casting.data.model.CastingCall
 import com.zariya.zariya.casting.data.model.Volunteer
 import com.zariya.zariya.casting.domain.repository.CastingOnboardingRepository
 import com.zariya.zariya.core.local.AppSharedPreference
@@ -53,6 +54,9 @@ class CastingOnboardingUseCase @Inject constructor(
 
     suspend fun createVolunteer(volunteer: Volunteer) =
         castingOnboardingRepository.createVolunteerProfile(volunteer)
+
+    suspend fun createCastingCall(castingCall: CastingCall) =
+        castingOnboardingRepository.createCastingCall(castingCall)
 
     fun getUserDetails() = preference?.getUserData()
 }

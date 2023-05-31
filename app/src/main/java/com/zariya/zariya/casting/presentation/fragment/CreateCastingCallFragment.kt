@@ -10,10 +10,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.zariya.zariya.R
+import com.zariya.zariya.casting.data.model.CastingCall
 import com.zariya.zariya.casting.presentation.viewmodel.CreateCastingCallViewModel
 import com.zariya.zariya.core.ui.BaseFragment
+import com.zariya.zariya.core.ui.ProgressView
 import com.zariya.zariya.core.ui.UIEvents
 import com.zariya.zariya.databinding.FragmentCreateCastingCallBinding
+import com.zariya.zariya.utils.PAID
+import com.zariya.zariya.utils.UNPAID
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -68,9 +72,29 @@ class CreateCastingCallFragment : BaseFragment() {
             }
         }
 
-        binding.btnRegister.setOnClickListener {
+        binding.btnCreate.setOnClickListener {
             if (validate()) {
+                create()
+            }
+        }
+    }
 
+    private fun create() {
+        viewModel.selectedVolunteer?.let { volunteerId ->
+            viewModel.agencyId?.let { agencyId ->
+                showProgress(binding.root)
+                val castingCall = CastingCall(
+                    agencyId = agencyId,
+                    gender = binding.tvGender.text.toString(),
+                    role = binding.tilRole.editText?.text.toString(),
+                    ageRange = binding.tvAge.text.toString(),
+                    complexion = binding.tvComplexion.text.toString(),
+                    paymentType = if (binding.rbPaid.isChecked) PAID else UNPAID,
+                    payment = if (binding.rbPaid.isChecked) binding.tilPaid.editText?.text.toString() else null,
+                    description = binding.tilDescription.editText?.text.toString(),
+                    assignedTo = volunteerId
+                )
+                viewModel.createCastingCall(castingCall)
             }
         }
     }
@@ -160,9 +184,17 @@ class CreateCastingCallFragment : BaseFragment() {
                     ).show()
                 }
 
+                is UIEvents.ShowSuccess -> {
+                    Toast.makeText(
+                        context, uiEvent.message ?: "Something went wrong", Toast.LENGTH_LONG
+                    ).show()
+                }
+
                 is UIEvents.Navigate -> {
                     uiEvent.navDirections?.let {
                         Navigation.findNavController(binding.root).navigate(it)
+                    } ?: run {
+                        Navigation.findNavController(binding.root).popBackStack()
                     }
                 }
 

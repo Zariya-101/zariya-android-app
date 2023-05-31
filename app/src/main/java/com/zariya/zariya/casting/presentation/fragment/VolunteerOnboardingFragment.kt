@@ -261,6 +261,12 @@ class VolunteerOnboardingFragment : BaseFragment() {
                     ).show()
                 }
 
+                is UIEvents.ShowSuccess -> {
+                    Toast.makeText(
+                        context, uiEvent.message ?: "Something went wrong", Toast.LENGTH_LONG
+                    ).show()
+                }
+
                 is UIEvents.Navigate -> {
                     uiEvent.navDirections?.let {
                         Navigation.findNavController(binding.root).navigate(it)

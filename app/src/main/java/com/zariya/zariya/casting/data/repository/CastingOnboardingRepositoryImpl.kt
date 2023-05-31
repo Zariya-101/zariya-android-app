@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.zariya.zariya.casting.data.model.ActorProfile
 import com.zariya.zariya.casting.data.model.Agency
+import com.zariya.zariya.casting.data.model.CastingCall
 import com.zariya.zariya.casting.data.model.Volunteer
 import com.zariya.zariya.casting.domain.repository.CastingOnboardingRepository
 import com.zariya.zariya.core.local.AppSharedPreference
@@ -12,6 +13,7 @@ import com.zariya.zariya.utils.ACTOR
 import com.zariya.zariya.utils.AGENCY
 import com.zariya.zariya.utils.COL_ACTORS
 import com.zariya.zariya.utils.COL_AGENCIES
+import com.zariya.zariya.utils.COL_CASTING_CALLS
 import com.zariya.zariya.utils.COL_USERS
 import com.zariya.zariya.utils.COL_VOLUNTEERS
 import com.zariya.zariya.utils.ROLE
@@ -73,7 +75,6 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
 
         awaitClose { listener }
     }
-
 
     override suspend fun getActors() = callbackFlow {
         val listener = firestore.collection(COL_ACTORS)
@@ -208,6 +209,15 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
         } ?: run {
             NetworkResult.Error("Something went wrong")
         }
+    } catch (e: Exception) {
+        NetworkResult.Error(e.message.toString())
+    }
+
+    override suspend fun createCastingCall(castingCall: CastingCall) = try {
+        firestore.collection(COL_CASTING_CALLS)
+            .add(castingCall).await()
+
+        NetworkResult.Success(true)
     } catch (e: Exception) {
         NetworkResult.Error(e.message.toString())
     }
