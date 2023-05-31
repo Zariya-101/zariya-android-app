@@ -22,6 +22,7 @@ const val RC_SIGN_IN = 123
 const val FOL_IMAGES = "images"
 const val FOL_ACTORS = "actors"
 const val FOL_AGENCIES = "agencies"
+const val FOL_CASTING_CALL = "castingCalls"
 
 //User Roles
 const val ACTOR = "actor"
@@ -31,6 +32,7 @@ const val VOLUNTEER = "volunteer"
 //Image Upload Type
 const val ACTOR_PROFILE_IMAGE = "actor_profile_image"
 const val AGENCY_PROFILE_IMAGE = "agency_profile_image"
+const val CASTING_CALL_IMAGE = "casting_call_image"
 
 const val PAID = "PAID"
 const val UNPAID = "UNPAID"

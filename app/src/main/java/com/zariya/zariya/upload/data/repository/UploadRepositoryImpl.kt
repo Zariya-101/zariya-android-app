@@ -7,8 +7,10 @@ import com.zariya.zariya.core.network.NetworkResult
 import com.zariya.zariya.upload.domain.repository.UploadRepository
 import com.zariya.zariya.utils.ACTOR_PROFILE_IMAGE
 import com.zariya.zariya.utils.AGENCY_PROFILE_IMAGE
+import com.zariya.zariya.utils.CASTING_CALL_IMAGE
 import com.zariya.zariya.utils.FOL_ACTORS
 import com.zariya.zariya.utils.FOL_AGENCIES
+import com.zariya.zariya.utils.FOL_CASTING_CALL
 import com.zariya.zariya.utils.FOL_IMAGES
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
@@ -46,6 +48,10 @@ class UploadRepositoryImpl @Inject constructor(
 
         AGENCY_PROFILE_IMAGE -> {
             storageRef.child(FOL_IMAGES).child(FOL_AGENCIES)
+        }
+
+        CASTING_CALL_IMAGE -> {
+            storageRef.child(FOL_IMAGES).child(FOL_CASTING_CALL)
         }
 
         else -> {

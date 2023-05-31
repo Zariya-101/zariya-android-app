@@ -1,11 +1,16 @@
 package com.zariya.zariya.casting.presentation.fragment
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -72,12 +77,33 @@ class CreateCastingCallFragment : BaseFragment() {
             }
         }
 
+        binding.layoutUploadImage.root.setOnClickListener {
+            checkGalleryPermission {
+                val galleryIntent =
+                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                galleryActivityResultLauncher.launch(galleryIntent)
+            }
+        }
+
+        binding.layoutUploadImage.ivClose.setOnClickListener {
+            viewModel.imageUri = null
+            binding.layoutUploadImage.image = null
+        }
+
         binding.btnCreate.setOnClickListener {
             if (validate()) {
                 create()
             }
         }
     }
+
+    private var galleryActivityResultLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                viewModel.imageUri = result.data?.data
+                binding.layoutUploadImage.image = viewModel.imageUri.toString()
+            }
+        }
 
     private fun create() {
         viewModel.selectedVolunteer?.let { volunteerId ->

@@ -9,5 +9,6 @@ data class CastingCall(
     val paymentType: String = "",
     val payment: String? = "",
     val description: String = "",
-    val assignedTo: String = ""
+    val assignedTo: String = "",
+    var image: String? = null
 )
