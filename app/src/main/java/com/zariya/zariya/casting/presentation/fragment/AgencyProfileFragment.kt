@@ -36,6 +36,10 @@ class AgencyProfileFragment : BaseFragment() {
 
         uiEventListener()
         getAgencyDetails()
+        binding.fabPost.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(AgencyProfileFragmentDirections.actionCreateCastingCall())
+        }
     }
 
     private fun getAgencyDetails() {

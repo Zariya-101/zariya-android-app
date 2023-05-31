@@ -157,7 +157,7 @@
         tools:layout="@layout/fragment_agency_details_form">
         <action
             android:id="@+id/actionAgencyProfile"
-            app:destination="@id/castingAgencyProfileFragment"
+            app:destination="@id/agencyProfileFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -168,7 +168,7 @@
         tools:layout="@layout/fragment_casting_onboarding">
         <action
             android:id="@+id/actionCastingAgency"
-            app:destination="@id/castingAgencyProfileFragment"
+            app:destination="@id/agencyProfileFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
@@ -193,10 +193,14 @@
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
-        android:id="@+id/castingAgencyProfileFragment"
+        android:id="@+id/agencyProfileFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.AgencyProfileFragment"
-        android:label="CastingAgencyProfileFragment"
-        tools:layout="@layout/fragment_agency_profile" />
+        android:label="agencyProfileFragment"
+        tools:layout="@layout/fragment_agency_profile">
+        <action
+            android:id="@+id/actionCreateCastingCall"
+            app:destination="@id/createCastingCallFragment" />
+    </fragment>
     <fragment
         android:id="@+id/actorProfileFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.ActorProfileFragment"
@@ -233,4 +237,9 @@
         android:name="com.zariya.zariya.casting.presentation.fragment.VolunteerProfileFragment"
         android:label="VolunteerProfileFragment"
         tools:layout="@layout/fragment_volunteer_profile" />
+    <fragment
+        android:id="@+id/createCastingCallFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.CreateCastingCallFragment"
+        android:label="CreateCastingCallFragment"
+        tools:layout="@layout/fragment_create_casting_call" />
 </navigation>
