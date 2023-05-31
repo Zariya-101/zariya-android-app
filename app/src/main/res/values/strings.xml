@@ -46,6 +46,8 @@
     <string name="role">Role</string>
     <string name="payment">Payment</string>
     <string name="assign_to">Assign to</string>
+    <string name="paid">Paid</string>
+    <string name="unpaid">Unpaid</string>
 
 
     <string name="user_type_title">Type of Account</string>
@@ -92,6 +94,12 @@
     <string name="validation_empty_speciality">Please select Speciality</string>
     <string name="validation_empty_experience">Please select Experience</string>
     <string name="validation_empty_works_for">Please select who you work for</string>
+    <string name="validation_empty_gender">Please select Gender</string>
+    <string name="validation_empty_role">Please enter Role</string>
+    <string name="validation_empty_payment">Please enter Payment</string>
+    <string name="validation_empty_age">Please select Age</string>
+    <string name="validation_empty_complexion">Please select Complexion</string>
+    <string name="validation_empty_volunteer">Please select Volunteer</string>
 
 
     <string name="workshop_details_temp">Realization of the patterns of their brain and that of the character\'s brain is the first thing which makes an actor aware about the reality of the situation/scene.\n\n
@@ -170,6 +178,7 @@ That is the major difference between an actor which fits into reality and an act
         <item>Olive</item>
         <item>Naturally Brown</item>
         <item>Dark Brown</item>
+        <item>Any</item>
     </string-array>
 
     <string-array name="agency_profile_tab">
@@ -190,6 +199,7 @@ That is the major difference between an actor which fits into reality and an act
         <item>30–35 Years</item>
         <item>35–40 Years</item>
         <item>40+ Years</item>
+        <item>Any</item>
     </string-array>
 
 

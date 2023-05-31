@@ -176,7 +176,11 @@ class CastingOnboardingRepositoryImpl @Inject constructor(
                 val result = if (it.isSuccessful) {
                     try {
                         val volunteers =
-                            it.result.documents.map { it.toObject(Volunteer::class.java) }
+                            it.result.documents.map {
+                                val volunteer = it.toObject(Volunteer::class.java)
+                                volunteer?.volunteerId = it.id
+                                return@map volunteer
+                            }
                         NetworkResult.Success(volunteers)
                     } catch (e: Exception) {
                         Log.e("CastingOnbRepoImpl", "getVolunteersForMyAgency Exception")

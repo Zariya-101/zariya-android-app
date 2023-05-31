@@ -1,5 +1,7 @@
 package com.zariya.zariya.casting.data.model
 
+import com.google.firebase.firestore.Exclude
+
 data class Volunteer(
     var userId: String = "",
     val name: String = "",
@@ -8,4 +10,7 @@ data class Volunteer(
     val speciality: ArrayList<String> = arrayListOf(),
     val experience: String = "",
     val worksFor: String = ""
-)
+) {
+    @get:Exclude
+    var volunteerId: String? = ""
+}

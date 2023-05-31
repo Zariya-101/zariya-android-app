@@ -25,6 +25,8 @@ class CreateCastingCallViewModel @Inject constructor(
     private val _volunteers = SingleLiveEvent<List<Volunteer?>>()
     val volunteersLiveData: LiveData<List<Volunteer?>> = _volunteers
 
+    var selectedVolunteer: String? = null
+
     fun getVolunteersForMyAgency() {
         viewModelScope.launch(Dispatchers.IO) {
             castingOnboardingUseCase.getVolunteersForMyAgency().collect {
