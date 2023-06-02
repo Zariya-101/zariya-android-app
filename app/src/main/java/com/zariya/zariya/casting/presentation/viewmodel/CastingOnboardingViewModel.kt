@@ -156,7 +156,7 @@ class CastingOnboardingViewModel @Inject constructor(
                                         VOLUNTEER -> {
                                             _uiEvents.value = UIEvents.Loading(false)
                                             _uiEvents.value = UIEvents.Navigate(
-                                                CastingOnboardingFragmentDirections.actionVolunteerProfile()
+                                                CastingOnboardingFragmentDirections.actionVolunteerCastingFeeds()
                                             )
                                         }
 

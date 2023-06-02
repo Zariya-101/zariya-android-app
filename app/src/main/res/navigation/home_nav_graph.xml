@@ -187,8 +187,8 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/actionVolunteerProfile"
-            app:destination="@id/volunteerProfileFragment"
+            android:id="@+id/actionVolunteerCastingFeeds"
+            app:destination="@id/volunteerCastingFeedsFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -227,16 +227,20 @@
         android:label="VolunteerOnboardingFragment"
         tools:layout="@layout/fragment_volunteer_onboarding">
         <action
-            android:id="@+id/actionVolunteerProfile"
-            app:destination="@id/volunteerProfileFragment"
+            android:id="@+id/actionVolunteerCastingFeeds"
+            app:destination="@id/volunteerCastingFeedsFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
-        android:id="@+id/volunteerProfileFragment"
-        android:name="com.zariya.zariya.casting.presentation.fragment.VolunteerProfileFragment"
-        android:label="VolunteerProfileFragment"
-        tools:layout="@layout/fragment_volunteer_profile" />
+        android:id="@+id/volunteerCastingFeedsFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.VolunteerCastingFeedsFragment"
+        android:label="VolunteerCastingFeedsFragment"
+        tools:layout="@layout/fragment_volunteer_casting_feeds">
+        <action
+            android:id="@+id/actionSwipeActors"
+            app:destination="@id/swipeActorsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/createCastingCallFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.CreateCastingCallFragment"

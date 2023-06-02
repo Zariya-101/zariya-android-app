@@ -38,7 +38,7 @@ class VolunteerOnboardingViewModel @Inject constructor(
                     withContext(Dispatchers.Main.immediate) {
                         _uiEvents.value = UIEvents.Loading(false)
                         _uiEvents.value =
-                            UIEvents.Navigate(VolunteerOnboardingFragmentDirections.actionVolunteerProfile())
+                            UIEvents.Navigate(VolunteerOnboardingFragmentDirections.actionVolunteerCastingFeeds())
                     }
                 }
 

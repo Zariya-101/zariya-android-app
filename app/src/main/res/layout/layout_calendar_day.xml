@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    tools:background="@color/dark_blue">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:id="@+id/tvDayOfWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/yellow_background"
+            android:textSize="@dimen/_12ssp"
+            tools:text="Mon" />
+
+        <TextView
+            android:id="@+id/tvDayOfMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            tools:text="24" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewSelected"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_gravity="bottom"
+        android:background="@color/blue_400" />
+
+</FrameLayout>
