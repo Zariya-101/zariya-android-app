@@ -20,6 +20,8 @@ interface AuthRepository {
 
     suspend fun updateFcmToken(user: User): NetworkResult<Boolean>
 
+    suspend fun updateUserLocation(location: String): NetworkResult<Boolean>
+
     suspend fun getUserFromDB(authenticatedUser: User): Flow<NetworkResult<User>>
 
     suspend fun createUser(authenticatedUser: User): NetworkResult<Boolean>

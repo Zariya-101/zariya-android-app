@@ -13,10 +13,13 @@ import com.zariya.zariya.core.network.NetworkResult
 import com.zariya.zariya.utils.COL_USERS
 import com.zariya.zariya.utils.EMAIL
 import com.zariya.zariya.utils.FCM_TOKEN
+import com.zariya.zariya.utils.LOCATION
 import com.zariya.zariya.utils.PHONE
+import com.zariya.zariya.utils.timestampFormatter
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
+import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -24,7 +27,8 @@ import javax.inject.Singleton
 class AuthRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val firestore: FirebaseFirestore,
-    private val preference: AppSharedPreference?
+    private val preference: AppSharedPreference?,
+    private val calendar: Calendar
 ) : AuthRepository {
 
     override suspend fun authenticateWithPhone(credential: PhoneAuthCredential) = callbackFlow {
@@ -178,6 +182,22 @@ class AuthRepositoryImpl @Inject constructor(
         NetworkResult.Error(e.message.toString())
     }
 
+    override suspend fun updateUserLocation(location: String) = try {
+        preference?.getUserData()?.id?.let {
+            firestore.collection(COL_USERS)
+                .document(it)
+                .update(LOCATION, location)
+                .await()
+
+            NetworkResult.Success(true)
+        } ?: run {
+            NetworkResult.Error("Something went wrong")
+        }
+    } catch (e: Exception) {
+        Log.e("AuthRepositoryImpl", "Update User Location Exception")
+        NetworkResult.Error(e.message.toString())
+    }
+
     override suspend fun getUserFromDB(authenticatedUser: User) = callbackFlow {
         val listener = firestore.collection(COL_USERS)
             .document(authenticatedUser.id!!)
@@ -203,6 +223,8 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun createUser(authenticatedUser: User): NetworkResult<Boolean> = try {
+        val timestamp = timestampFormatter.format(calendar.time)
+        authenticatedUser.createdAt = timestamp
         authenticatedUser.id?.let { id ->
             firestore.collection(COL_USERS)
                 .document(id)

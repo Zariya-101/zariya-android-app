@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.zariya.zariya.R
 import com.zariya.zariya.core.ui.BaseFragment
@@ -111,7 +112,10 @@ class HomeFragment : BaseFragment() {
 
         binding.layoutCasting.cv.setOnClickListener {
             it.findNavController().navigate(HomeFragmentDirections.actionHomeToCasting())
-//            it.findNavController().navigate(HomeFragmentDirections.actionSwipeActors())
+        }
+        binding.ivNotification.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(HomeFragmentDirections.actionLocation())
         }
     }
 }

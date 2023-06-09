@@ -14,6 +14,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.Calendar
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -23,8 +24,9 @@ object RepoModule {
     fun provideAuthRepository(
         firebaseAuth: FirebaseAuth,
         firestore: FirebaseFirestore,
-        appSharedPreference: AppSharedPreference?
-    ): AuthRepository = AuthRepositoryImpl(firebaseAuth, firestore, appSharedPreference)
+        appSharedPreference: AppSharedPreference?,
+        calendar: Calendar
+    ): AuthRepository = AuthRepositoryImpl(firebaseAuth, firestore, appSharedPreference, calendar)
 
     @Provides
     fun provideCastingRepository(

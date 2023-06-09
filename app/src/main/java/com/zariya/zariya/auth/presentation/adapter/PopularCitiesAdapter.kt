@@ -2,37 +2,35 @@ package com.zariya.zariya.auth.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.zariya.zariya.auth.presentation.adapter.PopularCitiesAdapter.MyViewHolder
-import com.zariya.zariya.databinding.PopularCityItemBinding
+import com.zariya.zariya.R
+import com.zariya.zariya.databinding.ItemPopularCityBinding
 
 class PopularCitiesAdapter(
     private val cityNames: Array<String>,
-    private val cityImages: IntArray
+    private val cityImages: IntArray,
+    private val onItemClick: (String?) -> Unit
+) : RecyclerView.Adapter<PopularCitiesAdapter.PopularCityViewHolder>() {
 
-) : RecyclerView.Adapter<MyViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val mBinding = PopularCityItemBinding.inflate(
-            LayoutInflater.from(
-                parent.context
-            ), parent, false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PopularCityViewHolder(
+        DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_popular_city,
+            parent, false
         )
-        return MyViewHolder(mBinding)
+    )
+
+    override fun onBindViewHolder(holder: PopularCityViewHolder, position: Int) {
+        holder.mBinding.cityImageView.setImageResource(cityImages[position])
+        holder.mBinding.cityNameTextView.text = cityNames[position]
+        holder.mBinding.root.setOnClickListener {
+            onItemClick(cityNames[position])
+        }
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun getItemCount() = cityImages.size
 
-        holder.mBinding.cityImageView.setImageResource(cityImages.get(position))
-        holder.mBinding.cityNameTextView.setText(cityNames.get(position))
-    }
-
-    override fun getItemCount(): Int {
-        return cityImages.size
-    }
-
-    inner class MyViewHolder(var mBinding: PopularCityItemBinding) :
-        RecyclerView.ViewHolder(
-            mBinding.root
-        )
+    inner class PopularCityViewHolder(val mBinding: ItemPopularCityBinding) :
+        RecyclerView.ViewHolder(mBinding.root)
 }

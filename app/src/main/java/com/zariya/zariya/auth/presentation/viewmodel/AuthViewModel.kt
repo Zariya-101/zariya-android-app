@@ -8,6 +8,7 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.PhoneAuthCredential
 import com.zariya.zariya.auth.data.model.User
 import com.zariya.zariya.auth.domain.usecase.AuthUseCase
+import com.zariya.zariya.auth.presentation.fragment.LocationFragmentDirections
 import com.zariya.zariya.auth.presentation.fragment.LoginFragmentDirections
 import com.zariya.zariya.auth.presentation.fragment.SignUpFragmentDirections
 import com.zariya.zariya.core.local.AppSharedPreference
@@ -28,6 +29,8 @@ class AuthViewModel @Inject constructor(
 
     private val _uiEvents = SingleLiveEvent<UIEvents>()
     val uiEvents: LiveData<UIEvents> = _uiEvents
+
+    var currentCity: String? = null
 
     fun authenticateWithPhone(credential: PhoneAuthCredential) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -177,6 +180,34 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    fun updateUserLocation(location: String) {
+        _uiEvents.value = UIEvents.Loading(true)
+        viewModelScope.launch {
+            when (authUseCase.updateUserLocation(location)) {
+                is NetworkResult.Success -> {
+                    withContext(Dispatchers.Main.immediate) {
+                        _uiEvents.value = UIEvents.Loading(false)
+                        _uiEvents.value =
+                            UIEvents.Navigate(LocationFragmentDirections.actionLocationToHome())
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    withContext(Dispatchers.Main.immediate) {
+                        _uiEvents.value = UIEvents.Loading(false)
+                        _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                    }
+                }
+
+                is NetworkResult.Loading -> {
+                    withContext(Dispatchers.Main.immediate) {
+                        _uiEvents.value = UIEvents.Loading(true)
+                    }
+                }
+            }
+        }
+    }
+
     fun fetchUser(authenticatedUser: User, isLogin: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             authUseCase.getUserFromDB(authenticatedUser).collect {
@@ -224,7 +255,7 @@ class AuthViewModel @Inject constructor(
                     withContext(Dispatchers.Main.immediate) {
                         _uiEvents.value = UIEvents.Loading(false)
                         _uiEvents.value =
-                            UIEvents.Navigate(SignUpFragmentDirections.actionSignUpToHome())
+                            UIEvents.Navigate(SignUpFragmentDirections.actionSignUpToLocation())
                     }
                 }
 

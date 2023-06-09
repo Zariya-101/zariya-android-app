@@ -12,12 +12,14 @@ data class User(
     var dob: String? = "",
     var countryCode: String? = "",
     var fcmToken: String? = "",
-    var role: String? = ""
+    var role: String? = "",
+    var createdAt: String? = ""
 ) : Parcelable {
     @get:Exclude
     var isNew: Boolean? = false
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -40,6 +42,7 @@ data class User(
         parcel.writeString(fcmToken)
         parcel.writeValue(isNew)
         parcel.writeValue(role)
+        parcel.writeValue(createdAt)
     }
 
     override fun describeContents(): Int {

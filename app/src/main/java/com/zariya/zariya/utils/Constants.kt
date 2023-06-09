@@ -1,5 +1,7 @@
 package com.zariya.zariya.utils
 
+import java.text.SimpleDateFormat
+
 //Collections
 const val COL_USERS = "users"
 const val COL_ACTORS = "actors"
@@ -14,6 +16,7 @@ const val PHONE = "phone"
 const val EMAIL = "email"
 const val USER_ID = "userId"
 const val ROLE = "role"
+const val LOCATION = "location"
 const val WORKS_FOR = "worksFor"
 
 const val RC_SIGN_IN = 123
@@ -36,3 +39,5 @@ const val CASTING_CALL_IMAGE = "casting_call_image"
 
 const val PAID = "PAID"
 const val UNPAID = "UNPAID"
+
+val timestampFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
