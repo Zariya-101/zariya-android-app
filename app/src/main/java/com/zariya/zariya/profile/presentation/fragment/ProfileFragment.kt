@@ -1,32 +1,29 @@
 package com.zariya.zariya.profile.presentation.fragment
 
-import android.Manifest
+import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import com.zariya.zariya.core.ui.BaseFragment
+import com.zariya.zariya.core.ui.UIEvents
 import com.zariya.zariya.databinding.FragmentProfileBinding
 import com.zariya.zariya.profile.presentation.ProfileViewModel
+import com.zariya.zariya.utils.USER_PROFILE_PIC
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private val profileViewModel by viewModels<ProfileViewModel>()
-
-
-    private val PERMISSION_READ_MEDIA_IMAGES = 1
-    private val PERMISSION_WRITE_EXTERNAL = 1
-
-    private val IMAGE_GALLERY_REQUEST = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,63 +41,63 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initView() {
-        profileViewModel.getUser()?.let { user ->
-            binding.tvUserName.text = user.name
-        }
+        profileViewModel.user.observe(viewLifecycleOwner) { binding.user = it }
     }
 
     private fun setUpListeners() {
-        binding.ivUserImage.setOnClickListener {
-            checkGalleryPermission()
+        uiEventListener()
+        binding.cvProfilePic.setOnClickListener {
+            checkGalleryPermission {
+                val galleryIntent =
+                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                profilePicGalleryLauncher.launch(galleryIntent)
+            }
         }
     }
 
-    private fun openGallery() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(
-            Intent.createChooser(intent, "Select Image"),
-            IMAGE_GALLERY_REQUEST
-        )
-    }
-
-    private fun checkGalleryPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (context?.let {
-                    ContextCompat.checkSelfPermission(
-                        it,
-                        Manifest.permission.READ_MEDIA_IMAGES
-                    )
-                } != PackageManager.PERMISSION_GRANTED
-            ) {
-                activity?.let {
-                    ActivityCompat.requestPermissions(
-                        it,
-                        arrayOf<String>(Manifest.permission.READ_MEDIA_IMAGES),
-                        PERMISSION_READ_MEDIA_IMAGES
-                    )
+    private var profilePicGalleryLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val uri = result.data?.data
+                uri?.let {
+                    showProgress(binding.root)
+                    profileViewModel.uploadImage(it, USER_PROFILE_PIC, onUploaded = { uploadedUri ->
+                        profileViewModel.user.value?.let { user ->
+                            profileViewModel.updateUser(user.copy(profilePic = uploadedUri.toString()))
+                        }
+                    })
                 }
-            } else {
-                openGallery()
             }
-        } else {
-            if (context?.let {
-                    ContextCompat.checkSelfPermission(
-                        it,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
-                } != PackageManager.PERMISSION_GRANTED
-            ) {
-                activity?.let {
-                    ActivityCompat.requestPermissions(
-                        it,
-                        arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                        PERMISSION_WRITE_EXTERNAL
-                    )
+        }
+
+    private fun uiEventListener() {
+        profileViewModel.uiEvents.observe(viewLifecycleOwner) { uiEvent ->
+            when (uiEvent) {
+                is UIEvents.Loading -> {
+                    if (uiEvent.loading) showProgress(binding.root) else hideProgress()
                 }
-            } else {
-                openGallery()
+
+                is UIEvents.ShowError -> {
+                    Toast.makeText(
+                        context, uiEvent.message ?: "Something went wrong", Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                is UIEvents.ShowSuccess -> {
+                    Toast.makeText(
+                        context, uiEvent.message ?: "Something went wrong", Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                is UIEvents.Navigate -> {
+                    uiEvent.navDirections?.let {
+                        Navigation.findNavController(binding.root).navigate(it)
+                    }
+                }
+
+                is UIEvents.RefreshUi -> {}
             }
         }
     }

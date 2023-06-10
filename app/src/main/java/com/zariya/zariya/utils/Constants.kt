@@ -26,6 +26,8 @@ const val FOL_IMAGES = "images"
 const val FOL_ACTORS = "actors"
 const val FOL_AGENCIES = "agencies"
 const val FOL_CASTING_CALL = "castingCalls"
+const val FOL_PROFILE_PIC = "profilePic"
+const val FOL_COVER_PIC = "coverPic"
 
 //User Roles
 const val ACTOR = "actor"
@@ -36,6 +38,8 @@ const val VOLUNTEER = "volunteer"
 const val ACTOR_PROFILE_IMAGE = "actor_profile_image"
 const val AGENCY_PROFILE_IMAGE = "agency_profile_image"
 const val CASTING_CALL_IMAGE = "casting_call_image"
+const val USER_PROFILE_PIC = "user_profile_pic"
+const val USER_COVER_PIC = "user_cover_pic"
 
 const val PAID = "PAID"
 const val UNPAID = "UNPAID"

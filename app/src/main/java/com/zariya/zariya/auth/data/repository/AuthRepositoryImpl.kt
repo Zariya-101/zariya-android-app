@@ -194,8 +194,8 @@ class AuthRepositoryImpl @Inject constructor(
             NetworkResult.Error("Something went wrong")
         }
     } catch (e: Exception) {
-        Log.e("AuthRepositoryImpl", "Update User Location Exception")
-        NetworkResult.Error(e.message.toString())
+            Log.e("AuthRepositoryImpl", "Update User Location Exception")
+            NetworkResult.Error(e.message.toString())
     }
 
     override suspend fun getUserFromDB(authenticatedUser: User) = callbackFlow {

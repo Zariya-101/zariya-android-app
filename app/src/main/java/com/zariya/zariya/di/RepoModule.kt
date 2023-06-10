@@ -8,6 +8,8 @@ import com.zariya.zariya.auth.domain.repository.AuthRepository
 import com.zariya.zariya.casting.data.repository.CastingOnboardingRepositoryImpl
 import com.zariya.zariya.casting.domain.repository.CastingOnboardingRepository
 import com.zariya.zariya.core.local.AppSharedPreference
+import com.zariya.zariya.profile.data.repository.ProfileRepositoryImpl
+import com.zariya.zariya.profile.domain.repository.ProfileRepository
 import com.zariya.zariya.upload.data.repository.UploadRepositoryImpl
 import com.zariya.zariya.upload.domain.repository.UploadRepository
 import dagger.Module
@@ -39,4 +41,10 @@ object RepoModule {
         preference: AppSharedPreference?,
         storageRef: StorageReference
     ): UploadRepository = UploadRepositoryImpl(preference, storageRef)
+
+    @Provides
+    fun provideProfileRepository(
+        firestore: FirebaseFirestore,
+        preference: AppSharedPreference?
+    ): ProfileRepository = ProfileRepositoryImpl(firestore, preference)
 }

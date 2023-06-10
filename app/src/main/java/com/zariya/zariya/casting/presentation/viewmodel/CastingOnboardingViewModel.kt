@@ -53,8 +53,7 @@ class CastingOnboardingViewModel @Inject constructor(
 
     fun uploadImage(imageUri: Uri, imageType: String, onUploaded: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = uploadUseCase.uploadImage(imageUri, imageType)
-            when (result) {
+            when (val result = uploadUseCase.uploadImage(imageUri, imageType)) {
                 is NetworkResult.Success -> {
                     Log.v("CastingOnboardingVM", "Upload Image Success")
                     result.data?.let { uri ->

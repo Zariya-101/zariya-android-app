@@ -41,6 +41,10 @@ class AppSharedPreference private constructor(context: Context) {
             .putString("dob", user.dob)
             .putString("countryCode", user.countryCode)
             .putString("userId", user.id)
+            .putString("profilePic", user.profilePic)
+            .putString("coverPic", user.coverPic)
+            .putString("role", user.role)
+            .putString("createdAt", user.createdAt)
             .apply()
     }
 
@@ -52,5 +56,9 @@ class AppSharedPreference private constructor(context: Context) {
         dob = sharedPref.getString("dob", ""),
         countryCode = sharedPref.getString("countryCode", ""),
         id = sharedPref.getString("userId", ""),
+        profilePic = sharedPref.getString("profilePic", ""),
+        coverPic = sharedPref.getString("coverPic", ""),
+        role = sharedPref.getString("role", ""),
+        createdAt = sharedPref.getString("createdAt", ""),
     )
 }

@@ -11,7 +11,11 @@ import com.zariya.zariya.utils.CASTING_CALL_IMAGE
 import com.zariya.zariya.utils.FOL_ACTORS
 import com.zariya.zariya.utils.FOL_AGENCIES
 import com.zariya.zariya.utils.FOL_CASTING_CALL
+import com.zariya.zariya.utils.FOL_COVER_PIC
 import com.zariya.zariya.utils.FOL_IMAGES
+import com.zariya.zariya.utils.FOL_PROFILE_PIC
+import com.zariya.zariya.utils.USER_COVER_PIC
+import com.zariya.zariya.utils.USER_PROFILE_PIC
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 import java.util.UUID
@@ -52,6 +56,14 @@ class UploadRepositoryImpl @Inject constructor(
 
         CASTING_CALL_IMAGE -> {
             storageRef.child(FOL_IMAGES).child(FOL_CASTING_CALL)
+        }
+
+        USER_PROFILE_PIC -> {
+            storageRef.child(FOL_IMAGES).child(FOL_PROFILE_PIC)
+        }
+
+        USER_COVER_PIC -> {
+            storageRef.child(FOL_IMAGES).child(FOL_COVER_PIC)
         }
 
         else -> {
