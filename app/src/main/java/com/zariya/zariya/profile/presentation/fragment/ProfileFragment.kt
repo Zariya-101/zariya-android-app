@@ -16,6 +16,7 @@ import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.core.ui.UIEvents
 import com.zariya.zariya.databinding.FragmentProfileBinding
 import com.zariya.zariya.profile.presentation.ProfileViewModel
+import com.zariya.zariya.utils.USER_COVER_PIC
 import com.zariya.zariya.utils.USER_PROFILE_PIC
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -53,6 +54,14 @@ class ProfileFragment : BaseFragment() {
                 profilePicGalleryLauncher.launch(galleryIntent)
             }
         }
+
+        binding.cvEditCoverPic.setOnClickListener {
+            checkGalleryPermission {
+                val galleryIntent =
+                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                coverPicGalleryLauncher.launch(galleryIntent)
+            }
+        }
     }
 
     private var profilePicGalleryLauncher: ActivityResultLauncher<Intent> =
@@ -66,6 +75,23 @@ class ProfileFragment : BaseFragment() {
                     profileViewModel.uploadImage(it, USER_PROFILE_PIC, onUploaded = { uploadedUri ->
                         profileViewModel.user.value?.let { user ->
                             profileViewModel.updateUser(user.copy(profilePic = uploadedUri.toString()))
+                        }
+                    })
+                }
+            }
+        }
+
+    private var coverPicGalleryLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val uri = result.data?.data
+                uri?.let {
+                    showProgress(binding.root)
+                    profileViewModel.uploadImage(it, USER_COVER_PIC, onUploaded = { uploadedUri ->
+                        profileViewModel.user.value?.let { user ->
+                            profileViewModel.updateUser(user.copy(coverPic = uploadedUri.toString()))
                         }
                     })
                 }
