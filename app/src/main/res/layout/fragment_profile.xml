@@ -9,225 +9,272 @@
             type="com.zariya.zariya.auth.data.model.User" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/yellow_background">
-
-        <ImageView
-            android:id="@+id/ivCoverPic"
-            loadImageFromUrl="@{user.coverPic}"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp"
-            android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvEditCoverPic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_20sdp"
-            android:backgroundTint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/ivEditCoverPic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:src="@drawable/ic_edit"
-                app:tint="@color/dark_blue" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <FrameLayout
-            android:id="@+id/layoutProfilePic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="@dimen/_20sdp"
-            app:layout_constraintBottom_toBottomOf="@id/ivCoverPic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvProfilePic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="@dimen/_15sdp">
-
-                <ImageView
-                    android:id="@+id/ivProfilePic"
-                    loadImageFromUrl="@{user.profilePic}"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:layout_gravity="center"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:backgroundTint="@color/dark_blue">
-
-                <ImageView
-                    android:id="@+id/ivEditProfilePic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:elevation="@dimen/_20sdp"
-                    android:src="@drawable/ic_edit"
-                    app:tint="@color/yellow_background" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </FrameLayout>
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_50sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:background="@drawable/bg_profile_page"
-            android:paddingHorizontal="@dimen/_20sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/layoutProfilePic">
+            android:layout_height="match_parent"
+            android:background="@color/yellow_background">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvUserName"
+            <ImageView
+                android:id="@+id/ivCoverPic"
+                loadImageFromUrl="@{user.coverPic}"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_250sdp"
+                android:scaleType="fitXY"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvEditCoverPic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_50sdp"
-                android:text="@{user.name}"
-                android:textColor="@color/dark_blue"
-                android:textSize="@dimen/_18sdp"
+                android:layout_margin="@dimen/_20sdp"
+                android:backgroundTint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/app_name" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvEditProfile"
-                android:layout_width="0dp"
+                <ImageView
+                    android:id="@+id/ivEditCoverPic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:src="@drawable/ic_edit"
+                    app:tint="@color/dark_blue" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <FrameLayout
+                android:id="@+id/layoutProfilePic"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:drawableStart="@drawable/ic_edit_profile"
-                android:drawablePadding="@dimen/_20sdp"
-                android:text="@string/edit_my_profile"
-                android:textColor="@color/dark_blue"
+                android:elevation="@dimen/_20sdp"
+                app:layout_constraintBottom_toBottomOf="@id/ivCoverPic"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvUserName" />
+                app:layout_constraintStart_toStartOf="parent">
 
-            <View
-                android:id="@+id/separator1"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/light_yellow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvEditProfile" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvProfilePic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="@dimen/_15sdp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvPaymentMethod"
-                android:layout_width="0dp"
+                    <ImageView
+                        android:id="@+id/ivProfilePic"
+                        loadImageFromUrl="@{user.profilePic}"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:layout_gravity="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:backgroundTint="@color/dark_blue">
+
+                    <ImageView
+                        android:id="@+id/ivEditProfilePic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/_20sdp"
+                        android:src="@drawable/ic_edit"
+                        app:tint="@color/yellow_background" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:drawableStart="@drawable/ic_credit_card"
-                android:drawablePadding="@dimen/_20sdp"
-                android:text="@string/payment_method"
-                android:textColor="@color/dark_blue"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/separator1" />
+                android:layout_marginTop="@dimen/_40sdp"
+                android:background="@drawable/bg_profile_page"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_20sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/layoutProfilePic">
 
-            <View
-                android:id="@+id/separator2"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/light_yellow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPaymentMethod" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    android:text="@{user.name}"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="@dimen/_18sdp"
+                    tools:text="@string/app_name" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvPrivacyAndSettings"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:drawableStart="@drawable/ic_settings"
-                android:drawablePadding="@dimen/_20sdp"
-                android:text="@string/privacy_and_settings"
-                android:textColor="@color/dark_blue"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/separator2" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:drawableStart="@drawable/ic_edit_profile"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/edit_my_profile"
+                    android:textColor="@color/dark_blue" />
 
-            <View
-                android:id="@+id/separator3"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/light_yellow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPrivacyAndSettings" />
+                <View
+                    android:id="@+id/separator1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_yellow" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvHelp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:drawableStart="@drawable/ic_support"
-                android:drawablePadding="@dimen/_20sdp"
-                android:text="@string/help_and_support"
-                android:textColor="@color/dark_blue"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/separator3" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvAchievements"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_achievement"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/achievements"
+                    android:textColor="@color/dark_blue"
+                    app:drawableTint="@color/dark_blue" />
 
-            <View
-                android:id="@+id/separator4"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/light_yellow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvHelp" />
+                <View
+                    android:id="@+id/separator2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_yellow" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvLogout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:drawableStart="@drawable/ic_logout"
-                android:drawablePadding="@dimen/_20sdp"
-                android:text="@string/sign_out"
-                android:textColor="@color/dark_blue"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/separator4" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvProgressReport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_chart_upwards"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/progress_report"
+                    android:textColor="@color/dark_blue"
+                    app:drawableTint="@color/dark_blue" />
 
-            <View
-                android:id="@+id/separator5"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/light_yellow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLogout" />
+                <View
+                    android:id="@+id/separator3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_yellow" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvPastActivities"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_history"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/past_activities"
+                    android:textColor="@color/dark_blue"
+                    app:drawableTint="@color/dark_blue" />
+
+                <View
+                    android:id="@+id/separator4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_yellow" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvCastingSelections"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_casting"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/casting_selections"
+                    android:textColor="@color/dark_blue"
+                    app:drawableTint="@color/dark_blue" />
+
+                <View
+                    android:id="@+id/separator5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_yellow" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvPaymentMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_credit_card"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/payment_method"
+                    android:textColor="@color/dark_blue" />
+
+                <View
+                    android:id="@+id/separator6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_yellow" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvPrivacyAndSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_settings"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/privacy_and_settings"
+                    android:textColor="@color/dark_blue" />
+
+                <View
+                    android:id="@+id/separator7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_yellow" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvHelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_support"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/help_and_support"
+                    android:textColor="@color/dark_blue" />
+
+                <View
+                    android:id="@+id/separator8"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_yellow" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:drawableStart="@drawable/ic_logout"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/sign_out"
+                    android:textColor="@color/dark_blue" />
+
+                <View
+                    android:id="@+id/separator9"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_yellow" />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

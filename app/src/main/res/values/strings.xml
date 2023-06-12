@@ -119,6 +119,10 @@ That is the major difference between an actor which fits into reality and an act
 
     <!-- Profile  -->
     <string name="edit_my_profile">Edit My Profile</string>
+    <string name="achievements">Achievements</string>
+    <string name="progress_report">Progress Report</string>
+    <string name="past_activities">Past Activities</string>
+    <string name="casting_selections">Casting Selections</string>
     <string name="payment_method">Payment Method</string>
     <string name="privacy_and_settings">Privacy and Settings</string>
     <string name="help_and_support">Help And Support</string>
