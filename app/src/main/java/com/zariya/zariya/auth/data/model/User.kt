@@ -16,11 +16,13 @@ data class User(
     var createdAt: String? = "",
     var profilePic: String? = "",
     var coverPic: String? = "",
+    var gender: String? = ""
 ) : Parcelable {
     @get:Exclude
     var isNew: Boolean? = false
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -49,6 +51,7 @@ data class User(
         parcel.writeValue(createdAt)
         parcel.writeValue(profilePic)
         parcel.writeValue(coverPic)
+        parcel.writeValue(gender)
     }
 
     override fun describeContents(): Int {

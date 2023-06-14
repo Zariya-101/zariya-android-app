@@ -70,6 +70,18 @@ class SignUpFragment : BaseFragment() {
     private fun setUpListeners() {
         uiEventListener()
 
+        binding.rbMale.setOnCheckedChangeListener { _, b ->
+            if (b) authViewModel.selectedGender = getString(R.string.male)
+        }
+
+        binding.rbFemale.setOnCheckedChangeListener { _, b ->
+            if (b) authViewModel.selectedGender = getString(R.string.female)
+        }
+
+        binding.rbOthers.setOnCheckedChangeListener { _, b ->
+            if (b) authViewModel.selectedGender = getString(R.string.others)
+        }
+
         binding.tilDOB.editText?.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 val cal = Calendar.getInstance()
@@ -129,7 +141,8 @@ class SignUpFragment : BaseFragment() {
                         email = binding.tilEmail.editText?.text.toString(),
                         dob = binding.tilDOB.editText?.text.toString(),
                         countryCode = countryCode,
-                        fcmToken = token
+                        fcmToken = token,
+                        gender = authViewModel.selectedGender
                     )
                 )
             }
@@ -182,6 +195,12 @@ class SignUpFragment : BaseFragment() {
             return false
         }
         binding.tilDOB.isErrorEnabled = false
+
+        if (binding.rbMale.isChecked.not() && binding.rbFemale.isChecked.not() && binding.rbOthers.isChecked.not()) {
+            binding.tilGender.error = getString(R.string.validation_empty_gender)
+            return false
+        }
+        binding.tilGender.isErrorEnabled = false
 
         if (binding.tilEmail.editText?.text?.isEmpty() == true) {
             binding.tilEmail.error = getString(R.string.validation_empty_email)

@@ -45,6 +45,7 @@ class AppSharedPreference private constructor(context: Context) {
             .putString("coverPic", user.coverPic)
             .putString("role", user.role)
             .putString("createdAt", user.createdAt)
+            .putString("gender", user.gender)
             .apply()
     }
 
@@ -60,5 +61,6 @@ class AppSharedPreference private constructor(context: Context) {
         coverPic = sharedPref.getString("coverPic", ""),
         role = sharedPref.getString("role", ""),
         createdAt = sharedPref.getString("createdAt", ""),
+        gender = sharedPref.getString("gender", ""),
     )
 }

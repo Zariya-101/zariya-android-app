@@ -2,6 +2,7 @@ package com.zariya.zariya.profile.presentation.fragment
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -10,12 +11,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import com.zariya.zariya.R
+import com.zariya.zariya.auth.data.model.User
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.core.ui.UIEvents
 import com.zariya.zariya.databinding.FragmentProfileBinding
 import com.zariya.zariya.profile.presentation.ProfileViewModel
+import com.zariya.zariya.utils.AppUtil
 import com.zariya.zariya.utils.USER_COVER_PIC
 import com.zariya.zariya.utils.USER_PROFILE_PIC
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +39,7 @@ class ProfileFragment : BaseFragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,8 +47,39 @@ class ProfileFragment : BaseFragment() {
         setUpListeners()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initView() {
-        profileViewModel.user.observe(viewLifecycleOwner) { binding.user = it }
+        profileViewModel.user.observe(viewLifecycleOwner) {
+            binding.user = it
+            setUserNameAgeAndGender(it)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setUserNameAgeAndGender(user: User) {
+        var displayName = ""
+        if (user.name.isNullOrEmpty().not()) {
+            displayName = user.name!!
+            if (user.gender.isNullOrEmpty().not()) {
+                displayName += if (user.gender.equals(getString(R.string.male))) {
+                    ", M"
+                } else if (user.gender.equals(getString(R.string.female))) {
+                    ", F"
+                } else if (user.gender.equals(getString(R.string.others))) {
+                    ", O"
+                } else ""
+            }
+            if (user.dob.isNullOrEmpty().not()) {
+                val dob = user.dob!!.split("/")
+                val dayOfMonth = dob[0]
+                val month = dob[1]
+                val year = dob[2]
+
+                val age = AppUtil.getAge(year.toInt(), month.toInt(), dayOfMonth.toInt())
+                displayName += ", $age"
+            }
+        }
+        binding.tvUserName.text = displayName
     }
 
     private fun setUpListeners() {

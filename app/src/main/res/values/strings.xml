@@ -48,6 +48,10 @@
     <string name="assign_to">Assign to</string>
     <string name="paid">Paid</string>
     <string name="unpaid">Unpaid</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="others">Others</string>
+    <string name="hi_user">Hi!, %1$s</string>
 
 
     <string name="user_type_title">Type of Account</string>
@@ -143,6 +147,7 @@ That is the major difference between an actor which fits into reality and an act
     <string name="my_cart">My Cart</string>
     <string name="about">About</string>
     <string name="casting_calls">Casting Calls</string>
+    <string name="add_to_cart">Add to Cart</string>
 
 
     <string-array name="actor_height">

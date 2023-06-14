@@ -110,7 +110,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_50sdp"
-                    android:text="@{user.name}"
                     android:textColor="@color/dark_blue"
                     android:textSize="@dimen/_18sdp"
                     tools:text="@string/app_name" />

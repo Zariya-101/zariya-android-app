@@ -31,6 +31,7 @@ class AuthViewModel @Inject constructor(
     val uiEvents: LiveData<UIEvents> = _uiEvents
 
     var currentCity: String? = null
+    var selectedGender: String? = null
 
     fun authenticateWithPhone(credential: PhoneAuthCredential) {
         viewModelScope.launch(Dispatchers.IO) {

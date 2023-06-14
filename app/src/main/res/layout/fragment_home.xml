@@ -30,12 +30,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Hi!, Ayushmann"
                         android:textColor="@color/yellow_background"
                         android:textSize="@dimen/_16ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Hi!, Ayushmann" />
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etSearch"
@@ -112,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/dark_blue"
+                android:background="@color/blue_300"
                 app:layout_constraintTop_toBottomOf="@id/layoutCasting" />
 
             <androidx.recyclerview.widget.RecyclerView
