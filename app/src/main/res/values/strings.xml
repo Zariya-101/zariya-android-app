@@ -6,6 +6,7 @@
     <string name="facebook_client_token">103df86b1787f1f5eb68bc3b75dac095</string>
 
     <string name="next">Next</string>
+    <string name="previous">Previous</string>
     <string name="skip">Skip</string>
     <string name="slder1">Your next big break is just a profile away</string>
     <string name="start">Start</string>
@@ -52,6 +53,7 @@
     <string name="female">Female</string>
     <string name="others">Others</string>
     <string name="hi_user">Hi!, %1$s</string>
+    <string name="reviewed_workshop_name"><![CDATA[Reviewed: <b>%1$s</b>]]></string>
 
 
     <string name="user_type_title">Type of Account</string>

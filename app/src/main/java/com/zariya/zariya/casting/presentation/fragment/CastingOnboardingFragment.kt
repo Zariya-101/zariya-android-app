@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -67,8 +68,22 @@ class CastingOnboardingFragment : BaseFragment() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 binding.sliderProgress.value = position.toFloat()
+                when (position) {
+                    0 -> {
+                        binding.btnNext.isVisible = true
+                        binding.btnPrevious.isVisible = false
+                    }
+
+                    else -> {
+                        binding.btnNext.isVisible = true
+                        binding.btnPrevious.isVisible = true
+                    }
+                }
             }
         })
+        binding.btnPrevious.setOnClickListener {
+            binding.viewPager.currentItem -= 1
+        }
         binding.btnNext.setOnClickListener {
             if (castingOnboardingViewModel.userType.isNullOrEmpty().not()) {
                 when (castingOnboardingViewModel.userType) {

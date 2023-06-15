@@ -51,35 +51,33 @@ class ProfileFragment : BaseFragment() {
     private fun initView() {
         profileViewModel.user.observe(viewLifecycleOwner) {
             binding.user = it
-            setUserNameAgeAndGender(it)
+            setUserAgeAndGender(it)
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun setUserNameAgeAndGender(user: User) {
-        var displayName = ""
-        if (user.name.isNullOrEmpty().not()) {
-            displayName = user.name!!
-            if (user.gender.isNullOrEmpty().not()) {
-                displayName += if (user.gender.equals(getString(R.string.male))) {
-                    ", M"
-                } else if (user.gender.equals(getString(R.string.female))) {
-                    ", F"
-                } else if (user.gender.equals(getString(R.string.others))) {
-                    ", O"
-                } else ""
-            }
-            if (user.dob.isNullOrEmpty().not()) {
-                val dob = user.dob!!.split("/")
-                val dayOfMonth = dob[0]
-                val month = dob[1]
-                val year = dob[2]
-
-                val age = AppUtil.getAge(year.toInt(), month.toInt(), dayOfMonth.toInt())
-                displayName += ", $age"
-            }
+    private fun setUserAgeAndGender(user: User) {
+        var userDetails = ""
+        if (user.gender.isNullOrEmpty().not()) {
+            userDetails = user.gender!!
+//            userDetails = if (user.gender.equals(getString(R.string.male))) {
+//                "M"
+//            } else if (user.gender.equals(getString(R.string.female))) {
+//                "F"
+//            } else if (user.gender.equals(getString(R.string.others))) {
+//                "O"
+//            } else ""
         }
-        binding.tvUserName.text = displayName
+        if (user.dob.isNullOrEmpty().not()) {
+            val dob = user.dob!!.split("/")
+            val dayOfMonth = dob[0]
+            val month = dob[1]
+            val year = dob[2]
+
+            val age = AppUtil.getAge(year.toInt(), month.toInt(), dayOfMonth.toInt())
+            userDetails += if (userDetails == "") "$age" else ", $age"
+        }
+        binding.tvUserDetails.text = userDetails
     }
 
     private fun setUpListeners() {

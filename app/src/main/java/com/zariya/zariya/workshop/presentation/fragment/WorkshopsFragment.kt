@@ -1,19 +1,21 @@
 package com.zariya.zariya.workshop.presentation.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
+import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentWorkshopsBinding
 import com.zariya.zariya.workshop.data.model.FilterWorkshops
 import com.zariya.zariya.workshop.data.model.Workshop
+import com.zariya.zariya.workshop.data.model.WorkshopReview
 import com.zariya.zariya.workshop.presentation.adapter.FilterWorkshopsAdapter
+import com.zariya.zariya.workshop.presentation.adapter.RecentReviewsAdapter
 import com.zariya.zariya.workshop.presentation.adapter.WorkshopsAdapter
 
-class WorkshopsFragment : Fragment() {
+class WorkshopsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentWorkshopsBinding
 
@@ -56,6 +58,48 @@ class WorkshopsFragment : Fragment() {
                     Navigation.findNavController(binding.root)
                         .navigate(WorkshopsFragmentDirections.actionWorkshopDetail())
                 }
+            )
+        }
+
+        binding.rvRecentReviews.apply {
+            adapter = RecentReviewsAdapter(
+                listOf(
+                    WorkshopReview(
+                        reviewerName = "Vivek Sharma",
+                        reviewerImage = "",
+                        workshopName = "An Actor's Mosaic",
+                        rating = 4.0f,
+                        review = "Workshop was super awesome. I liked the workshop a lot"
+                    ),
+                    WorkshopReview(
+                        reviewerName = "Vivek Sharma",
+                        reviewerImage = "",
+                        workshopName = "An Actor's Mosaic",
+                        rating = 4.0f,
+                        review = "Workshop was super awesome. I liked the workshop a lot"
+                    ),
+                    WorkshopReview(
+                        reviewerName = "Vivek Sharma",
+                        reviewerImage = "",
+                        workshopName = "An Actor's Mosaic",
+                        rating = 4.0f,
+                        review = "Workshop was super awesome. I liked the workshop a lot"
+                    ),
+                    WorkshopReview(
+                        reviewerName = "Vivek Sharma",
+                        reviewerImage = "",
+                        workshopName = "An Actor's Mosaic",
+                        rating = 4.0f,
+                        review = "Workshop was super awesome. I liked the workshop a lot"
+                    ),
+                    WorkshopReview(
+                        reviewerName = "Vivek Sharma",
+                        reviewerImage = "",
+                        workshopName = "An Actor's Mosaic",
+                        rating = 4.0f,
+                        review = "Workshop was super awesome. I liked the workshop a lot"
+                    )
+                )
             )
         }
     }
