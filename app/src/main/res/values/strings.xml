@@ -8,11 +8,14 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="skip">Skip</string>
-    <string name="slder1">Your next big break is just a profile away</string>
     <string name="start">Start</string>
     <string name="login">Login</string>
     <string name="signup">Sign up</string>
 
+    <string name="intro_acting"><![CDATA[We prepare you for the game called life and believe that, <b>Drama holds many lives within</b>]]></string>
+    <string name="intro_casting"><![CDATA[<b>Casting you into your dreams - be the lead role of your journey.</b>]]></string>
+    <string name="intro_meditation"><![CDATA[<b>A Journey Within</b>- Your First Step in Cultivating Consciousness for Humanity.]]></string>
+    <string name="intro_merchandise"><![CDATA[<b>Shop what you believe.</b> Unlock a universe of products that suit your lifestyle]]></string>
 
     <string name="login_heading">Let\'s get started</string>
     <string name="login_sub_heading">Please enter your phone number and password to login</string>
