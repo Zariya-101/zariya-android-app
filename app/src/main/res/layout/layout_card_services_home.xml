@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tint="@color/dark_blue"
-            tools:src="@drawable/ic_headphones" />
+            tools:src="@drawable/ic_acting" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/glCenter"

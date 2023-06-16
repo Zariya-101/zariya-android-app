@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class SelectUserTypeModel(
     val title: String,
     val subTitle: String,
-    val icon: Drawable,
+    val icon: Drawable?,
     val isSelected: Boolean = false
 )
 

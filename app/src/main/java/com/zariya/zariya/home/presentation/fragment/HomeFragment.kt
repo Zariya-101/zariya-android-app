@@ -59,7 +59,7 @@ class HomeFragment : BaseFragment() {
                 }
 
             binding.layoutWellness.service =
-                ContextCompat.getDrawable(ctx, R.drawable.ic_headphones)?.let {
+                ContextCompat.getDrawable(ctx, R.drawable.ic_wellness)?.let {
                     Service(
                         name = "Wellness \nWorkshops",
                         icon = it

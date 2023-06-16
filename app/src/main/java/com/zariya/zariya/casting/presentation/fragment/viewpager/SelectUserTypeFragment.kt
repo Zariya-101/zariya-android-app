@@ -33,32 +33,26 @@ class SelectUserTypeFragment(private val castingOnboardingViewModel: CastingOnbo
         super.onViewCreated(view, savedInstanceState)
 
         context?.let { ctx ->
-            ContextCompat.getDrawable(ctx, R.drawable.lights)?.let {
-                binding.layoutActor.userTypeModel = SelectUserTypeModel(
-                    title = "I am an Actor",
-                    subTitle = "Find acting gigs posted by Casting Agencies",
-                    isSelected = false,
-                    icon = it
-                )
-            }
+            binding.layoutActor.userTypeModel = SelectUserTypeModel(
+                title = "I am an Actor",
+                subTitle = "Find acting gigs posted by Casting Agencies",
+                isSelected = false,
+                icon = ContextCompat.getDrawable(ctx, R.drawable.ic_actor)
+            )
 
-            ContextCompat.getDrawable(ctx, R.drawable.lights)?.let {
-                binding.layoutAgency.userTypeModel = SelectUserTypeModel(
-                    title = "I am Casting Agency",
-                    subTitle = "Find actors you are looking for",
-                    isSelected = false,
-                    icon = it
-                )
-            }
+            binding.layoutAgency.userTypeModel = SelectUserTypeModel(
+                title = "I am Casting Agency",
+                subTitle = "Find actors you are looking for",
+                isSelected = false,
+                icon = ContextCompat.getDrawable(ctx, R.drawable.ic_agency)
+            )
 
-            ContextCompat.getDrawable(ctx, R.drawable.lights)?.let {
-                binding.layoutVolunteer.userTypeModel = SelectUserTypeModel(
-                    title = "I am Agency Volunteer",
-                    subTitle = "Find actors for your agency",
-                    isSelected = false,
-                    icon = it
-                )
-            }
+            binding.layoutVolunteer.userTypeModel = SelectUserTypeModel(
+                title = "I am Agency Volunteer",
+                subTitle = "Find actors for your agency",
+                isSelected = false,
+                icon = ContextCompat.getDrawable(ctx, R.drawable.ic_volunteer)
+            )
         }
 
         binding.layoutActor.cv.setOnClickListener {

@@ -202,7 +202,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:drawableStart="@drawable/ic_casting"
+                    android:drawableStart="@drawable/ic_casting_icon"
                     android:drawablePadding="@dimen/_20sdp"
                     android:paddingBottom="@dimen/_10sdp"
                     android:text="@string/casting_selections"
