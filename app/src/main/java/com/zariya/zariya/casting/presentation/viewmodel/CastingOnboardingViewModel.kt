@@ -5,13 +5,20 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.Navigation
+import com.zariya.zariya.auth.data.model.User
+import com.zariya.zariya.auth.domain.usecase.AuthUseCase
 import com.zariya.zariya.casting.data.model.ActorProfile
 import com.zariya.zariya.casting.domain.usecase.CastingOnboardingUseCase
 import com.zariya.zariya.casting.presentation.fragment.CastingOnboardingFragmentDirections
+import com.zariya.zariya.core.local.AppSharedPreference
 import com.zariya.zariya.core.network.NetworkResult
 import com.zariya.zariya.core.network.SingleLiveEvent
 import com.zariya.zariya.core.ui.UIEvents
 import com.zariya.zariya.upload.domain.usecase.UploadUseCase
+import com.zariya.zariya.utils.ACTOR
+import com.zariya.zariya.utils.AGENCY
+import com.zariya.zariya.utils.VOLUNTEER
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +28,9 @@ import javax.inject.Inject
 @HiltViewModel
 class CastingOnboardingViewModel @Inject constructor(
     private val castingOnboardingUseCase: CastingOnboardingUseCase,
-    private val uploadUseCase: UploadUseCase
+    private val uploadUseCase: UploadUseCase,
+    private val authUseCase: AuthUseCase,
+    private val preference: AppSharedPreference?
 ) : ViewModel() {
 
     var userType: String? = null
@@ -42,10 +51,9 @@ class CastingOnboardingViewModel @Inject constructor(
         this.userType = type
     }
 
-    fun uploadImage(imageUri: Uri, onUploaded: () -> Unit) {
+    fun uploadImage(imageUri: Uri, imageType: String, onUploaded: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = uploadUseCase.uploadImage(imageUri)
-            when (result) {
+            when (val result = uploadUseCase.uploadImage(imageUri, imageType)) {
                 is NetworkResult.Success -> {
                     Log.v("CastingOnboardingVM", "Upload Image Success")
                     result.data?.let { uri ->
@@ -114,6 +122,69 @@ class CastingOnboardingViewModel @Inject constructor(
 
                     is NetworkResult.Loading -> {
 
+                    }
+                }
+            }
+        }
+    }
+
+    fun fetchUserDetailsFromRemote() {
+        getUserDetails()?.let { user ->
+            viewModelScope.launch(Dispatchers.IO) {
+                authUseCase.getUserFromDB(user).collect {
+                    when (it) {
+                        is NetworkResult.Success -> {
+                            it.data?.let { user ->
+                                preference?.setUserData(user)
+                                withContext(Dispatchers.Main.immediate) {
+                                    when (user.role) {
+                                        ACTOR -> {
+                                            _uiEvents.value = UIEvents.Loading(false)
+                                            _uiEvents.value = UIEvents.Navigate(
+                                                CastingOnboardingFragmentDirections.actionActorProfile()
+                                            )
+                                        }
+
+                                        AGENCY -> {
+                                            _uiEvents.value = UIEvents.Loading(false)
+                                            _uiEvents.value = UIEvents.Navigate(
+                                                CastingOnboardingFragmentDirections.actionCastingAgency()
+                                            )
+                                        }
+
+                                        VOLUNTEER -> {
+                                            _uiEvents.value = UIEvents.Loading(false)
+                                            _uiEvents.value = UIEvents.Navigate(
+                                                CastingOnboardingFragmentDirections.actionVolunteerCastingFeeds()
+                                            )
+                                        }
+
+                                        else -> {
+                                            _uiEvents.value = UIEvents.Loading(false)
+                                            _uiEvents.value = UIEvents.RefreshUi("")
+                                        }
+                                    }
+                                }
+                            } ?: run {
+                                withContext(Dispatchers.Main.immediate) {
+                                    _uiEvents.value = UIEvents.Loading(false)
+                                    _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                                }
+                            }
+                        }
+
+                        is NetworkResult.Error -> {
+                            withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.Loading(false)
+                                _uiEvents.value = UIEvents.ShowError("Something went wrong")
+                            }
+                        }
+
+                        is NetworkResult.Loading -> {
+                            withContext(Dispatchers.Main.immediate) {
+                                _uiEvents.value = UIEvents.Loading(true)
+                            }
+                        }
                     }
                 }
             }

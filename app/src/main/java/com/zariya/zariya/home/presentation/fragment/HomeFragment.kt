@@ -6,17 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.zariya.zariya.R
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentHomeBinding
 import com.zariya.zariya.home.data.model.Feed
+import com.zariya.zariya.home.presentation.HomeViewModel
 import com.zariya.zariya.home.presentation.adapter.FeedAdapter
 import com.zariya.zariya.services.data.model.Service
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private val homeViewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +40,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initView() {
+        setUserName()
         context?.let { ctx ->
             binding.layoutActing.service =
                 ContextCompat.getDrawable(ctx, R.drawable.ic_acting)?.let {
@@ -52,7 +59,7 @@ class HomeFragment : BaseFragment() {
                 }
 
             binding.layoutWellness.service =
-                ContextCompat.getDrawable(ctx, R.drawable.ic_headphones)?.let {
+                ContextCompat.getDrawable(ctx, R.drawable.ic_wellness)?.let {
                     Service(
                         name = "Wellness \nWorkshops",
                         icon = it
@@ -99,6 +106,14 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    private fun setUserName() {
+        homeViewModel.getUser()?.let { user ->
+            if (user.name.isNullOrEmpty().not()) {
+                binding.tvTitle.text = getString(R.string.hi_user, user.name)
+            }
+        }
+    }
+
     private fun setUpListeners() {
         binding.ivSearch.setOnClickListener {
             it.isVisible = false
@@ -110,8 +125,11 @@ class HomeFragment : BaseFragment() {
         }
 
         binding.layoutCasting.cv.setOnClickListener {
-//            it.findNavController().navigate(HomeFragmentDirections.actionHomeToCasting())
-            it.findNavController().navigate(HomeFragmentDirections.actionActorProfile())
+            it.findNavController().navigate(HomeFragmentDirections.actionHomeToCasting())
+        }
+        binding.ivNotification.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(HomeFragmentDirections.actionLocation())
         }
     }
 }

@@ -10,6 +10,9 @@ import com.zariya.zariya.casting.data.model.SelectUserTypeModel
 import com.zariya.zariya.casting.presentation.viewmodel.CastingOnboardingViewModel
 import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentSelectUserTypeBinding
+import com.zariya.zariya.utils.ACTOR
+import com.zariya.zariya.utils.AGENCY
+import com.zariya.zariya.utils.VOLUNTEER
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,23 +33,26 @@ class SelectUserTypeFragment(private val castingOnboardingViewModel: CastingOnbo
         super.onViewCreated(view, savedInstanceState)
 
         context?.let { ctx ->
-            ContextCompat.getDrawable(ctx, R.drawable.lights)?.let {
-                binding.layoutActor.userTypeModel = SelectUserTypeModel(
-                    title = "I am an Actor",
-                    subTitle = "Find acting gigs posted by Casting Agencies",
-                    isSelected = false,
-                    icon = it
-                )
-            }
+            binding.layoutActor.userTypeModel = SelectUserTypeModel(
+                title = "I am an Actor",
+                subTitle = "Find acting gigs posted by Casting Agencies",
+                isSelected = false,
+                icon = ContextCompat.getDrawable(ctx, R.drawable.ic_actor)
+            )
 
-            ContextCompat.getDrawable(ctx, R.drawable.lights)?.let {
-                binding.layoutAgency.userTypeModel = SelectUserTypeModel(
-                    title = "I am Casting Agency",
-                    subTitle = "Find actors you are looking for",
-                    isSelected = false,
-                    icon = it
-                )
-            }
+            binding.layoutAgency.userTypeModel = SelectUserTypeModel(
+                title = "I am Casting Agency",
+                subTitle = "Find actors you are looking for",
+                isSelected = false,
+                icon = ContextCompat.getDrawable(ctx, R.drawable.ic_agency)
+            )
+
+            binding.layoutVolunteer.userTypeModel = SelectUserTypeModel(
+                title = "I am Agency Volunteer",
+                subTitle = "Find actors for your agency",
+                isSelected = false,
+                icon = ContextCompat.getDrawable(ctx, R.drawable.ic_volunteer)
+            )
         }
 
         binding.layoutActor.cv.setOnClickListener {
@@ -54,7 +60,9 @@ class SelectUserTypeFragment(private val castingOnboardingViewModel: CastingOnbo
                 binding.layoutActor.userTypeModel?.copy(isSelected = true)
             binding.layoutAgency.userTypeModel =
                 binding.layoutAgency.userTypeModel?.copy(isSelected = false)
-            castingOnboardingViewModel.updateUserType("Actor")
+            binding.layoutVolunteer.userTypeModel =
+                binding.layoutVolunteer.userTypeModel?.copy(isSelected = false)
+            castingOnboardingViewModel.updateUserType(ACTOR)
         }
 
         binding.layoutAgency.cv.setOnClickListener {
@@ -62,7 +70,19 @@ class SelectUserTypeFragment(private val castingOnboardingViewModel: CastingOnbo
                 binding.layoutActor.userTypeModel?.copy(isSelected = false)
             binding.layoutAgency.userTypeModel =
                 binding.layoutAgency.userTypeModel?.copy(isSelected = true)
-            castingOnboardingViewModel.updateUserType("Agency")
+            binding.layoutVolunteer.userTypeModel =
+                binding.layoutVolunteer.userTypeModel?.copy(isSelected = false)
+            castingOnboardingViewModel.updateUserType(AGENCY)
+        }
+
+        binding.layoutVolunteer.cv.setOnClickListener {
+            binding.layoutActor.userTypeModel =
+                binding.layoutActor.userTypeModel?.copy(isSelected = false)
+            binding.layoutAgency.userTypeModel =
+                binding.layoutAgency.userTypeModel?.copy(isSelected = false)
+            binding.layoutVolunteer.userTypeModel =
+                binding.layoutVolunteer.userTypeModel?.copy(isSelected = true)
+            castingOnboardingViewModel.updateUserType(VOLUNTEER)
         }
     }
 }

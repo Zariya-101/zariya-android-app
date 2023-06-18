@@ -69,6 +69,8 @@ class AuthUseCase @Inject constructor(
 
     suspend fun updateFcmToken(user: User) = authRepository.updateFcmToken(user)
 
+    suspend fun updateUserLocation(location: String) = authRepository.updateUserLocation(location)
+
     suspend fun getUserFromDB(authenticatedUser: User) =
         authRepository.getUserFromDB(authenticatedUser)
 

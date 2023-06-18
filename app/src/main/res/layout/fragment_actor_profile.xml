@@ -42,7 +42,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageButton
+                            android:id="@+id/ivBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/transparent"
+                            android:src="@drawable/ic_back_arrow"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/ivNotification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/transparent"
+                            android:src="@drawable/ic_notification"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/yellow_background" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </Toolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -67,6 +96,7 @@
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
+                    android:text="@{actor.name}"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +130,16 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabFeeds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/_10sdp"
+            android:backgroundTint="@color/dark_blue"
+            android:src="@drawable/ic_feed"
+            app:tint="@color/yellow_background" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

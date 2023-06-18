@@ -6,12 +6,16 @@
     <string name="facebook_client_token">103df86b1787f1f5eb68bc3b75dac095</string>
 
     <string name="next">Next</string>
+    <string name="previous">Previous</string>
     <string name="skip">Skip</string>
-    <string name="slder1">Your next big break is just a profile away</string>
     <string name="start">Start</string>
     <string name="login">Login</string>
     <string name="signup">Sign up</string>
 
+    <string name="intro_acting"><![CDATA[We prepare you for the game called life and believe that, <b>Drama holds many lives within</b>]]></string>
+    <string name="intro_casting"><![CDATA[<b>Casting you into your dreams - be the lead role of your journey.</b>]]></string>
+    <string name="intro_meditation"><![CDATA[<b>A Journey Within</b>- Your First Step in Cultivating Consciousness for Humanity.]]></string>
+    <string name="intro_merchandise"><![CDATA[<b>Shop what you believe.</b> Unlock a universe of products that suit your lifestyle]]></string>
 
     <string name="login_heading">Let\'s get started</string>
     <string name="login_sub_heading">Please enter your phone number and password to login</string>
@@ -24,6 +28,7 @@
     <string name="name">Name</string>
     <string name="dob">Date of Birth</string>
     <string name="email">Email</string>
+    <string name="official_email">Official Email</string>
     <string name="search">Search</string>
     <string name="actor">Actor</string>
     <string name="casting_agency">Casting Agency</string>
@@ -31,6 +36,28 @@
     <string name="height">Height</string>
     <string name="complexion">Complexion</string>
     <string name="or">OR</string>
+    <string name="started_in">Started in</string>
+    <string name="started_in_value"><![CDATA[<b>Started in</b>: %1$s]]></string>
+    <string name="description">Description</string>
+    <string name="known_for">Known for</string>
+    <string name="known_for_value"><![CDATA[<b>Known for</b>: %1$s]]></string>
+    <string name="works_for">Works for</string>
+    <string name="speciality">Speciality</string>
+    <string name="experience">Experience</string>
+    <string name="agency_details">Agency Details</string>
+    <string name="create_casting_call">Create Casting Call</string>
+    <string name="looking_for">Looking for</string>
+    <string name="role">Role</string>
+    <string name="payment">Payment</string>
+    <string name="assign_to">Assign to</string>
+    <string name="paid">Paid</string>
+    <string name="unpaid">Unpaid</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="others">Others</string>
+    <string name="hi_user">Hi!, %1$s</string>
+    <string name="reviewed_workshop_name"><![CDATA[Reviewed: <b>%1$s</b>]]></string>
+
 
     <string name="user_type_title">Type of Account</string>
     <string name="user_type_subtitle">Choose the type of your account, be careful to change it is impossible</string>
@@ -50,6 +77,9 @@
     <string name="signup_via_otp">Signup via OTP</string>
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="get_otp">GET OTP</string>
+    <string name="register">Register</string>
 
 
     <string name="pick_a_region">Pick A Region</string>
@@ -67,6 +97,18 @@
     <string name="validation_select_country">Please select country code</string>
     <string name="validation_empty_phone">Please enter phone</string>
     <string name="validation_invalid_phone">Please enter valid phone</string>
+    <string name="validation_empty_started_in">Please select Start Date of Agency</string>
+    <string name="validation_empty_description">Please enter Description</string>
+    <string name="validation_empty_known_For">Please enter anything you are known for</string>
+    <string name="validation_empty_speciality">Please select Speciality</string>
+    <string name="validation_empty_experience">Please select Experience</string>
+    <string name="validation_empty_works_for">Please select who you work for</string>
+    <string name="validation_empty_gender">Please select Gender</string>
+    <string name="validation_empty_role">Please enter Role</string>
+    <string name="validation_empty_payment">Please enter Payment</string>
+    <string name="validation_empty_age">Please select Age</string>
+    <string name="validation_empty_complexion">Please select Complexion</string>
+    <string name="validation_empty_volunteer">Please select Volunteer</string>
 
 
     <string name="workshop_details_temp">Realization of the patterns of their brain and that of the character\'s brain is the first thing which makes an actor aware about the reality of the situation/scene.\n\n
@@ -86,6 +128,10 @@ That is the major difference between an actor which fits into reality and an act
 
     <!-- Profile  -->
     <string name="edit_my_profile">Edit My Profile</string>
+    <string name="achievements">Achievements</string>
+    <string name="progress_report">Progress Report</string>
+    <string name="past_activities">Past Activities</string>
+    <string name="casting_selections">Casting Selections</string>
     <string name="payment_method">Payment Method</string>
     <string name="privacy_and_settings">Privacy and Settings</string>
     <string name="help_and_support">Help And Support</string>
@@ -106,6 +152,7 @@ That is the major difference between an actor which fits into reality and an act
     <string name="my_cart">My Cart</string>
     <string name="about">About</string>
     <string name="casting_calls">Casting Calls</string>
+    <string name="add_to_cart">Add to Cart</string>
 
 
     <string-array name="actor_height">
@@ -138,7 +185,6 @@ That is the major difference between an actor which fits into reality and an act
     </string-array>
 
     <string-array name="actor_complexion">
-        <item>Select your Complexion</item>
         <item>Extremely Fair</item>
         <item>Fair</item>
         <item>Pale</item>
@@ -146,6 +192,28 @@ That is the major difference between an actor which fits into reality and an act
         <item>Olive</item>
         <item>Naturally Brown</item>
         <item>Dark Brown</item>
+        <item>Any</item>
+    </string-array>
+
+    <string-array name="agency_profile_tab">
+        <item>ABOUT</item>
+        <item>CASTING CALLS</item>
+    </string-array>
+
+    <string-array name="gender_array">
+        <item>Female</item>
+        <item>Male</item>
+        <item>Anyone</item>
+    </string-array>
+
+    <string-array name="age_range_array">
+        <item>16–20 Years</item>
+        <item>20–25 Years</item>
+        <item>25–30 Years</item>
+        <item>30–35 Years</item>
+        <item>35–40 Years</item>
+        <item>40+ Years</item>
+        <item>Any</item>
     </string-array>
 
 

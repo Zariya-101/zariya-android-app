@@ -105,7 +105,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:paddingHorizontal="@dimen/_50sdp"
             android:paddingVertical="@dimen/_15sdp"
-            android:text="GET OTP"
+            android:text="@string/get_otp"
             android:textColor="@color/white"
             app:cornerRadius="@dimen/_30sdp"
             app:layout_constraintBottom_toTopOf="@id/tvOr"

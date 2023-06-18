@@ -25,6 +25,18 @@
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/_10sdp">
 
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textColor="@color/yellow_background"
+                        android:textSize="@dimen/_16ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Hi!, Ayushmann" />
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etSearch"
                         android:layout_width="0dp"
@@ -47,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/transparent"
-                        android:src="@drawable/ic_search"
+                        android:src="@drawable/ic_filter"
                         app:layout_constraintEnd_toStartOf="@id/ivNotification"
                         app:layout_constraintTop_toTopOf="parent"
                         app:tint="@color/white" />
@@ -73,6 +85,7 @@
                 layout="@layout/layout_card_services_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@id/layoutCasting"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cvToolBarHome" />
 
@@ -81,7 +94,8 @@
                 layout="@layout/layout_card_services_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/layoutActing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cvToolBarHome" />
 
             <include
@@ -89,8 +103,17 @@
                 layout="@layout/layout_card_services_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/layoutCasting"
                 app:layout_constraintTop_toBottomOf="@id/cvToolBarHome" />
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/blue_300"
+                app:layout_constraintTop_toBottomOf="@id/layoutCasting" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFeed"
@@ -99,7 +122,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/layoutCasting"
+                app:layout_constraintTop_toBottomOf="@id/separator"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_feed" />
 

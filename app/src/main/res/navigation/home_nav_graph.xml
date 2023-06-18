@@ -59,7 +59,10 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/actionSignUpToLocation"
-            app:destination="@id/locationFragment" />
+            app:destination="@id/locationFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/home_nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
@@ -109,8 +112,11 @@
             android:id="@+id/actionHomeToCasting"
             app:destination="@id/castingOnboardingFragment" />
         <action
-            android:id="@+id/actionActorProfile"
-            app:destination="@id/actorProfileFragment" />
+            android:id="@+id/actionSwipeActors"
+            app:destination="@id/swipeActorsFragment" />
+        <action
+            android:id="@+id/actionLocation"
+            app:destination="@id/locationFragment" />
     </fragment>
     <fragment
         android:id="@+id/myServicesFragment"
@@ -154,7 +160,13 @@
         android:id="@+id/agencyDetailsFormFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.AgencyDetailsFormFragment"
         android:label="AgencyDetailsFormFragment"
-        tools:layout="@layout/fragment_agency_details_form" />
+        tools:layout="@layout/fragment_agency_details_form">
+        <action
+            android:id="@+id/actionAgencyProfile"
+            app:destination="@id/agencyProfileFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/castingOnboardingFragment"
         android:name="com.zariya.zariya.casting.presentation.fragment.CastingOnboardingFragment"
@@ -162,19 +174,82 @@
         tools:layout="@layout/fragment_casting_onboarding">
         <action
             android:id="@+id/actionCastingAgency"
-            app:destination="@id/castingAgencyProfileFragment" />
+            app:destination="@id/agencyProfileFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/actionActorProfile"
+            app:destination="@id/actorProfileFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/actionAgencyForm"
+            app:destination="@id/agencyDetailsFormFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/actionVolunteerForm"
+            app:destination="@id/volunteerOnboardingFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/actionVolunteerCastingFeeds"
+            app:destination="@id/volunteerCastingFeedsFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/agencyProfileFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.AgencyProfileFragment"
+        android:label="agencyProfileFragment"
+        tools:layout="@layout/fragment_agency_profile">
+        <action
+            android:id="@+id/actionCreateCastingCall"
+            app:destination="@id/createCastingCallFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/actorProfileFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.ActorProfileFragment"
+        android:label="ActorProfileFragment"
+        tools:layout="@layout/fragment_actor_profile">
+        <argument
+            android:name="actor"
+            android:defaultValue="@null"
+            app:argType="com.zariya.zariya.casting.data.model.ActorProfile"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/swipeActorsFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.SwipeActorsFragment"
+        android:label="SwipeActorsFragment"
+        tools:layout="@layout/fragment_swipe_actors">
         <action
             android:id="@+id/actionActorProfile"
             app:destination="@id/actorProfileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/castingAgencyProfileFragment"
-        android:name="com.zariya.zariya.casting.presentation.fragment.CastingAgencyProfileFragment"
-        android:label="CastingAgencyProfileFragment"
-        tools:layout="@layout/fragment_casting_agency_profile" />
+        android:id="@+id/volunteerOnboardingFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.VolunteerOnboardingFragment"
+        android:label="VolunteerOnboardingFragment"
+        tools:layout="@layout/fragment_volunteer_onboarding">
+        <action
+            android:id="@+id/actionVolunteerCastingFeeds"
+            app:destination="@id/volunteerCastingFeedsFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
-        android:id="@+id/actorProfileFragment"
-        android:name="com.zariya.zariya.casting.presentation.fragment.ActorProfileFragment"
-        android:label="ActorProfileFragment"
-        tools:layout="@layout/fragment_actor_profile" />
+        android:id="@+id/volunteerCastingFeedsFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.VolunteerCastingFeedsFragment"
+        android:label="VolunteerCastingFeedsFragment"
+        tools:layout="@layout/fragment_volunteer_casting_feeds">
+        <action
+            android:id="@+id/actionSwipeActors"
+            app:destination="@id/swipeActorsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCastingCallFragment"
+        android:name="com.zariya.zariya.casting.presentation.fragment.CreateCastingCallFragment"
+        android:label="CreateCastingCallFragment"
+        tools:layout="@layout/fragment_create_casting_call" />
 </navigation>

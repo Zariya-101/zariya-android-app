@@ -1,37 +1,34 @@
 package com.zariya.zariya.auth.presentation.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.zariya.zariya.databinding.OtherCityItemBinding
+import com.zariya.zariya.R
+import com.zariya.zariya.databinding.ItemOtherCityBinding
 
+class OtherCitiesAdapter(
+    private val cities: ArrayList<String>,
+    private val onItemClick: (String?) -> Unit
+) : RecyclerView.Adapter<OtherCitiesAdapter.OtherCitiesViewHolder>() {
 
-class OtherCitiesAdapter (
-    private val cityNames: Array<String>,
-
-) : RecyclerView.Adapter<OtherCitiesAdapter.MyViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val mBinding = OtherCityItemBinding.inflate(
-            LayoutInflater.from(
-                parent.context
-            ), parent, false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = OtherCitiesViewHolder(
+        DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_other_city,
+            parent, false
         )
-        return MyViewHolder(mBinding)
+    )
+
+    override fun onBindViewHolder(holder: OtherCitiesViewHolder, position: Int) {
+        holder.binding.tvCity.text = cities[position]
+        holder.binding.root.setOnClickListener {
+            onItemClick(cities[position])
+        }
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun getItemCount() = cities.size
 
-        holder.mBinding.cityNameTextView.setText(cityNames.get(position))
-    }
-
-    override fun getItemCount(): Int {
-        return cityNames.size
-    }
-
-    inner class MyViewHolder(var mBinding: OtherCityItemBinding) :
-        RecyclerView.ViewHolder(
-            mBinding.root
-        )
+    inner class OtherCitiesViewHolder(var binding: ItemOtherCityBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

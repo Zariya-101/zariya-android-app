@@ -18,14 +18,14 @@
 
         <ImageView
             android:id="@+id/ivService"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             android:src="@{service.icon}"
             app:layout_constraintBottom_toTopOf="@id/tvService"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tint="@color/dark_blue"
-            tools:src="@drawable/ic_headphones" />
+            tools:src="@drawable/ic_acting" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/glCenter"

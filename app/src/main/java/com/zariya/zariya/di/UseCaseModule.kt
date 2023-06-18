@@ -5,6 +5,8 @@ import com.zariya.zariya.auth.domain.usecase.AuthUseCase
 import com.zariya.zariya.casting.domain.repository.CastingOnboardingRepository
 import com.zariya.zariya.casting.domain.usecase.CastingOnboardingUseCase
 import com.zariya.zariya.core.local.AppSharedPreference
+import com.zariya.zariya.profile.domain.repository.ProfileRepository
+import com.zariya.zariya.profile.domain.usecase.ProfileUseCase
 import com.zariya.zariya.upload.domain.repository.UploadRepository
 import com.zariya.zariya.upload.domain.usecase.UploadUseCase
 import dagger.Module
@@ -31,4 +33,11 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideUploadUseCase(uploadRepository: UploadRepository) = UploadUseCase(uploadRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideProfileUseCase(
+        profileRepository: ProfileRepository,
+        preference: AppSharedPreference?
+    ) = ProfileUseCase(profileRepository, preference)
 }

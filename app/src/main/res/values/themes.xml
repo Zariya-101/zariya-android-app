@@ -15,6 +15,12 @@
         </item>
     </style>
 
+    <style name="roundedDropdown" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded
+        </item>
+    </style>
+
     <style name="ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>

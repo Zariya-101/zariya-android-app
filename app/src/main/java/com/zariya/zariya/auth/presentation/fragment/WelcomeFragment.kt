@@ -1,26 +1,39 @@
 package com.zariya.zariya.auth.presentation.fragment
 
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Html
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.navigation.findNavController
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
+import androidx.navigation.Navigation
+import androidx.viewpager2.widget.ViewPager2
 import com.zariya.zariya.R
+import com.zariya.zariya.auth.data.model.IntroSlide
+import com.zariya.zariya.auth.presentation.adapter.IntroSlideAdapter
+import com.zariya.zariya.core.ui.BaseFragment
 import com.zariya.zariya.databinding.FragmentWelcomeBinding
 
+class WelcomeFragment : BaseFragment() {
 
-class WelcomeFragment : Fragment() {
-    private lateinit var layouts: IntArray
-    private lateinit var dots: Array<TextView?>
-    private var myViewPagerAdapter: MyViewPagerAdapter? = null
     private lateinit var binding: FragmentWelcomeBinding
+    private val introSlideAdapter = IntroSlideAdapter(
+        listOf(
+            IntroSlide(description = R.string.intro_acting, drawable = R.drawable.anim_acting),
+            IntroSlide(description = R.string.intro_casting, drawable = R.drawable.anim_casting),
+            IntroSlide(
+                description = R.string.intro_meditation,
+                drawable = R.drawable.anim_meditation
+            ),
+            IntroSlide(
+                description = R.string.intro_merchandise,
+                drawable = R.drawable.anim_merchandise
+            ),
+        )
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,114 +46,80 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        layouts = intArrayOf(
-            R.layout.welcome_slide1,
-            R.layout.welcome_slide2,
-            R.layout.welcome_slide3,
-            R.layout.welcome_slide4
-        )
+        initView()
+        setUpListeners()
+    }
 
-        // adding bottom dots
-        addBottomDots(0)
+    private fun initView() {
+        binding.viewPager.adapter = introSlideAdapter
+        setupIndicator()
+        setCurrentIndicator(0)
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                setCurrentIndicator(position)
+            }
+        })
+    }
 
-        //setup viewpager
-        myViewPagerAdapter = MyViewPagerAdapter()
-        binding.viewPager.adapter = myViewPagerAdapter
-        binding.viewPager.addOnPageChangeListener(viewPagerPageChangeListener)
-
-        //click events
+    private fun setUpListeners() {
         binding.btnNext.setOnClickListener {
-            val current = getItem(+1)
-            if (current < layouts.size) {
-                // move to next screen
-                binding.viewPager.currentItem = current
+            if (binding.viewPager.currentItem + 1 < introSlideAdapter.itemCount) {
+                binding.viewPager.currentItem += 1
+            } else {
+                Navigation.findNavController(binding.root)
+                    .navigate(WelcomeFragmentDirections.actionWelcomeToLogin())
             }
         }
+
         binding.btnSkip.setOnClickListener {
-           binding.viewPager.currentItem = 3
-        }
-        binding.btnLogin.setOnClickListener {
-            it.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeToLogin())
+            binding.viewPager.currentItem = introSlideAdapter.itemCount - 1
         }
     }
 
-    inner class MyViewPagerAdapter : PagerAdapter() {
-        private var layoutInflater: LayoutInflater? = null
-        override fun instantiateItem(container: ViewGroup, position: Int): Any {
-            layoutInflater =
-                activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val view = layoutInflater!!.inflate(layouts[position], container, false)
-            container.addView(view)
-            return view
-        }
-
-        override fun getCount(): Int {
-            return layouts.size
-        }
-
-        override fun isViewFromObject(view: View, obj: Any): Boolean {
-            return view === obj
-        }
-
-        override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-            val view = `object` as View
-            container.removeView(view)
-        }
-    }
-
-    private fun getItem(i: Int): Int {
-        return binding.viewPager.currentItem + i
-    }
-
-    private fun addBottomDots(currentPage: Int) {
-        dots = arrayOfNulls(layouts.size)
-        val colorsActive = resources.getIntArray(R.array.array_dot_active)
-        val colorsInactive = resources.getIntArray(R.array.array_dot_inactive)
-        binding.layoutDots.removeAllViews()
-        for (i in dots.indices) {
-            dots[i] = TextView(context)
-            dots[i]!!.text = Html.fromHtml("&#8226;")
-            dots[i]!!.textSize = 35f
-            dots[i]!!.setTextColor(colorsInactive[currentPage])
-            binding.layoutDots.addView(dots[i])
-        }
-        if (dots.isNotEmpty()) dots[currentPage]!!.setTextColor(colorsActive[currentPage])
-    }
-
-    private var viewPagerPageChangeListener: ViewPager.OnPageChangeListener = object :
-        ViewPager.OnPageChangeListener {
-        override fun onPageScrolled(
-            position: Int,
-            positionOffset: Float,
-            positionOffsetPixels: Int
-        ) {
-        }
-
-        override fun onPageSelected(position: Int) {
-            addBottomDots(position)
-            if (position == 0) {
-                binding.btnSkip.setTextColor(resources.getColor(R.color.dark_blue))
-                binding.btnNext.setTextColor(resources.getColor(R.color.white))
-            } else {
-                binding.btnNext.setTextColor(Color.WHITE)
+    private fun setupIndicator() {
+        val indicators = arrayOfNulls<ImageView>(introSlideAdapter.itemCount)
+        val layoutParams: LinearLayout.LayoutParams =
+            LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+        layoutParams.setMargins(8, 0, 8, 0)
+        for (i in indicators.indices) {
+            indicators[i] = ImageView(context?.applicationContext)
+            indicators[i].apply {
+                this?.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context.applicationContext, R.drawable.intro_indicator_inactive
+                    )
+                )
+                this?.layoutParams = layoutParams
             }
-            // changing the next button text 'NEXT' / 'GOT IT'
-            if (position == layouts.size - 1) {
-                // last page. make button text to GOT IT
-                binding.btnNext.setTextColor(resources.getColor(R.color.white))
-                binding.btnNext.text = resources.getString(R.string.start)
-                binding.btnSkip.visibility = View.GONE
-                binding.btnNext.visibility = View.GONE
-                binding.btnLogin.visibility = View.VISIBLE
+            binding.llIndicatorContainer.addView(indicators[i])
+        }
+    }
+
+    private fun setCurrentIndicator(index: Int) {
+        if (index + 1 == introSlideAdapter.itemCount) {
+            binding.btnSkip.visibility = View.GONE
+            binding.btnNext.text = getString(R.string.login)
+        } else {
+            binding.btnSkip.visibility = View.VISIBLE
+            binding.btnNext.text = getString(R.string.next)
+        }
+        val childCount = binding.llIndicatorContainer.childCount
+        for (i in 0 until childCount) {
+            val imageView = binding.llIndicatorContainer[i] as ImageView
+            if (i == index) {
+                imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext().applicationContext, R.drawable.intro_indicator_active
+                    )
+                )
             } else {
-                // still pages are left
-                binding.btnNext.text = getString(R.string.next)
-                binding.btnSkip.visibility = View.VISIBLE
-                binding.btnNext.visibility = View.VISIBLE
-                binding.btnLogin.visibility = View.GONE
+                imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext().applicationContext, R.drawable.intro_indicator_inactive
+                    )
+                )
             }
         }
-
-        override fun onPageScrollStateChanged(state: Int) {}
     }
 }

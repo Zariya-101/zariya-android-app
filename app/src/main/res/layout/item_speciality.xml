@@ -1,0 +1,30 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="speciality"
+            type="String" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:strokeColor="@color/dark_blue"
+        app:strokeWidth="1dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSpeciality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:text="@{speciality}"
+            android:textColor="@color/dark_blue"
+            tools:text="Tv Series" />
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

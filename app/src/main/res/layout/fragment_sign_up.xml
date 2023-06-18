@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".auth.presentation.fragment.LoginFragment">
+        tools:context=".auth.presentation.fragment.SignUpFragment">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvHeading"
@@ -51,10 +51,10 @@
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:drawableStart="@drawable/ic_profile"
                 android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/blue_500"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
-                android:textColorHint="@color/blue_500" />
+                android:textColorHint="@color/blue_500"
+                app:drawableTint="@color/blue_500" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,9 +64,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/tilEmail">
+            app:layout_constraintBottom_toTopOf="@+id/tilGender">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -75,10 +75,49 @@
                 android:clickable="false"
                 android:drawableStart="@drawable/ic_calendar"
                 android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/blue_500"
                 android:focusable="false"
                 android:hint="@string/dob"
-                android:textColorHint="@color/blue_500" />
+                android:textColorHint="@color/blue_500"
+                app:drawableTint="@color/blue_500" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintBottom_toTopOf="@id/tilEmail">
+
+            <RadioGroup
+                android:id="@+id/rgGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/male" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/female" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbOthers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/others" />
+
+            </RadioGroup>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,10 +137,10 @@
                 android:background="@drawable/bg_edit_text"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/blue_500"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:textColorHint="@color/blue_500" />
+                android:textColorHint="@color/blue_500"
+                app:drawableTint="@color/blue_500" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,7 +162,7 @@
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/tilOTP"
+            app:layout_constraintBottom_toTopOf="@+id/cbTerms"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/countryCodePicker">
 
@@ -133,38 +172,11 @@
                 android:background="@drawable/bg_edit_text"
                 android:drawableStart="@drawable/ic_call"
                 android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/blue_500"
                 android:hint="@string/phone"
                 android:inputType="number"
                 android:maxLength="10"
-                android:textColorHint="@color/blue_500" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilOTP"
-            style="@style/roundedTextInputLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:visibility="gone"
-            app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/cbTerms"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_edit_text"
-                android:drawableStart="@drawable/ic_call"
-                android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/blue_500"
-                android:hint="OTP"
-                android:inputType="number"
-                android:maxLength="10"
-                android:textColorHint="@color/blue_500" />
+                android:textColorHint="@color/blue_500"
+                app:drawableTint="@color/blue_500" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -198,7 +210,7 @@
             android:enabled="false"
             android:paddingHorizontal="@dimen/_50sdp"
             android:paddingVertical="@dimen/_15sdp"
-            android:text="Signup"
+            android:text="@string/signup"
             android:textColor="@color/white"
             app:cornerRadius="@dimen/_30sdp"
             app:layout_constraintBottom_toBottomOf="parent"

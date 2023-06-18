@@ -70,6 +70,18 @@ class SignUpFragment : BaseFragment() {
     private fun setUpListeners() {
         uiEventListener()
 
+        binding.rbMale.setOnCheckedChangeListener { _, b ->
+            if (b) authViewModel.selectedGender = getString(R.string.male)
+        }
+
+        binding.rbFemale.setOnCheckedChangeListener { _, b ->
+            if (b) authViewModel.selectedGender = getString(R.string.female)
+        }
+
+        binding.rbOthers.setOnCheckedChangeListener { _, b ->
+            if (b) authViewModel.selectedGender = getString(R.string.others)
+        }
+
         binding.tilDOB.editText?.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 val cal = Calendar.getInstance()
@@ -107,6 +119,7 @@ class SignUpFragment : BaseFragment() {
 
         binding.btnSignUp.setOnClickListener {
             if (validate()) {
+                showProgress(binding.root)
                 signUpUser()
             }
         }
@@ -128,11 +141,13 @@ class SignUpFragment : BaseFragment() {
                         email = binding.tilEmail.editText?.text.toString(),
                         dob = binding.tilDOB.editText?.text.toString(),
                         countryCode = countryCode,
-                        fcmToken = token
+                        fcmToken = token,
+                        gender = authViewModel.selectedGender
                     )
                 )
             }
             .addOnFailureListener {
+                hideProgress()
                 Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show()
             }
     }
@@ -141,24 +156,28 @@ class SignUpFragment : BaseFragment() {
         authViewModel.uiEvents.observe(viewLifecycleOwner) { uiEvent ->
             when (uiEvent) {
                 is UIEvents.Loading -> {
-                    // Handle Loading
+                    if (uiEvent.loading) showProgress(binding.root) else hideProgress()
                 }
 
                 is UIEvents.ShowError -> {
                     Toast.makeText(
                         context,
-                        uiEvent.message ?: "Something went wrong",
-                        Toast.LENGTH_LONG
+                        uiEvent.message ?: "Something went wrong", Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                is UIEvents.ShowSuccess -> {
+                    Toast.makeText(
+                        context, uiEvent.message ?: "Something went wrong", Toast.LENGTH_LONG
                     ).show()
                 }
 
                 is UIEvents.Navigate -> {
                     uiEvent.navDirections?.let {
-                        Navigation.findNavController(binding.root).navigate(
-                            it
-                        )
+                        Navigation.findNavController(binding.root).navigate(it)
                     }
                 }
+
                 is UIEvents.RefreshUi -> {}
             }
         }
@@ -169,37 +188,43 @@ class SignUpFragment : BaseFragment() {
             binding.tilName.error = getString(R.string.validation_empty_name)
             return false
         }
-        binding.tilName.error = ""
+        binding.tilName.isErrorEnabled = false
 
         if (binding.tilDOB.editText?.text?.isEmpty() == true) {
             binding.tilDOB.error = getString(R.string.validation_empty_dob)
             return false
         }
-        binding.tilDOB.error = ""
+        binding.tilDOB.isErrorEnabled = false
+
+        if (binding.rbMale.isChecked.not() && binding.rbFemale.isChecked.not() && binding.rbOthers.isChecked.not()) {
+            binding.tilGender.error = getString(R.string.validation_empty_gender)
+            return false
+        }
+        binding.tilGender.isErrorEnabled = false
 
         if (binding.tilEmail.editText?.text?.isEmpty() == true) {
             binding.tilEmail.error = getString(R.string.validation_empty_email)
             return false
         }
-        binding.tilEmail.error = ""
+        binding.tilEmail.isErrorEnabled = false
 
         if (binding.countryCodePicker.selectedCountryCode.isNullOrEmpty()) {
             binding.tilPhone.error = getString(R.string.validation_select_country)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         if (binding.tilPhone.editText?.text?.isEmpty() == true) {
             binding.tilPhone.error = getString(R.string.validation_empty_phone)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         if (binding.tilPhone.editText?.text?.toString()?.length != 10) {
             binding.tilPhone.error = getString(R.string.validation_invalid_phone)
             return false
         }
-        binding.tilPhone.error = ""
+        binding.tilPhone.isErrorEnabled = false
 
         return true
     }
