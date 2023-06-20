@@ -12,6 +12,8 @@ import com.zariya.zariya.profile.data.repository.ProfileRepositoryImpl
 import com.zariya.zariya.profile.domain.repository.ProfileRepository
 import com.zariya.zariya.upload.data.repository.UploadRepositoryImpl
 import com.zariya.zariya.upload.domain.repository.UploadRepository
+import com.zariya.zariya.workshop.data.repository.WorkshopRepositoryImpl
+import com.zariya.zariya.workshop.domain.repository.WorkshopRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,4 +49,10 @@ object RepoModule {
         firestore: FirebaseFirestore,
         preference: AppSharedPreference?
     ): ProfileRepository = ProfileRepositoryImpl(firestore, preference)
+
+    @Provides
+    fun provideWorkshopRepository(
+        firestore: FirebaseFirestore,
+        preference: AppSharedPreference?
+    ): WorkshopRepository = WorkshopRepositoryImpl(firestore, preference)
 }

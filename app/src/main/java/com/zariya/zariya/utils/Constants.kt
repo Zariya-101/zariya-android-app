@@ -8,6 +8,7 @@ const val COL_ACTORS = "actors"
 const val COL_AGENCIES = "agencies"
 const val COL_VOLUNTEERS = "volunteers"
 const val COL_CASTING_CALLS = "castingCalls"
+const val COL_WORKSHOPS = "workshops"
 
 //Fields
 const val ID = "id"
