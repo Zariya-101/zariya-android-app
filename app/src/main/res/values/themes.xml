@@ -7,6 +7,11 @@
         <item name="android:colorAccent">@color/light_yellow</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
     <style name="Theme.Zariya" parent="Base.Theme.Zariya" />
 
     <style name="roundedTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
