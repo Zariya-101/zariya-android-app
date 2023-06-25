@@ -26,9 +26,9 @@ class WorkshopListViewModel @Inject constructor(
     private val _workshops = SingleLiveEvent<List<Workshop?>>()
     val workshopsLiveData: LiveData<List<Workshop?>> = _workshops
 
-    fun getWorkshopsList() {
+    fun getWorkshopsList(type: String?) {
         viewModelScope.launch(Dispatchers.IO) {
-            useCase.getWorkshopsList().collect {
+            useCase.getWorkshopsList(type).collect {
                 when (it) {
                     is NetworkResult.Success -> {
                         withContext(Dispatchers.Main.immediate) {

@@ -19,6 +19,7 @@ const val USER_ID = "userId"
 const val ROLE = "role"
 const val LOCATION = "location"
 const val WORKS_FOR = "worksFor"
+const val TYPE = "type"
 
 const val RC_SIGN_IN = 123
 
@@ -44,5 +45,10 @@ const val USER_COVER_PIC = "user_cover_pic"
 
 const val PAID = "PAID"
 const val UNPAID = "UNPAID"
+
+//Workshop Types
+const val ONLINE = "Online"
+const val OFFLINE = "Offline"
+const val PRODUCTIONS = "Productions"
 
 val timestampFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm")

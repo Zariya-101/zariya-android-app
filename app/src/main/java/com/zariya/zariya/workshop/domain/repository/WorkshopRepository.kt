@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface WorkshopRepository {
 
-    suspend fun getWorkshopsList(): Flow<NetworkResult<List<Workshop?>>>
+    suspend fun getWorkshopsList(type: String?): Flow<NetworkResult<List<Workshop?>>>
 }

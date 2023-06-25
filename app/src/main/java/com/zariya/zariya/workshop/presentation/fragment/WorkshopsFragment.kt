@@ -41,10 +41,14 @@ class WorkshopsFragment : BaseFragment() {
         uiEventListener()
         setUpListeners()
         getWorkshops()
+        workshopListObserver()
     }
 
-    private fun getWorkshops() {
-        viewModel.getWorkshopsList()
+    private fun getWorkshops(type: String? = null) {
+        viewModel.getWorkshopsList(type)
+    }
+
+    private fun workshopListObserver() {
         viewModel.workshopsLiveData.observe(viewLifecycleOwner) {
             binding.rvWorkshops.apply {
                 adapter = WorkshopsAdapter(it.mapNotNull { it }, onCardClicked = {
@@ -65,7 +69,11 @@ class WorkshopsFragment : BaseFragment() {
                     FilterWorkshops(filter = "Online"),
                     FilterWorkshops(filter = "Offline"),
                     FilterWorkshops(filter = "Productions")
-                )
+                ),
+                onItemClicked = {
+                    if (it.filter == "All") getWorkshops()
+                    else getWorkshops(it.filter)
+                }
             )
         }
 
@@ -144,8 +152,13 @@ class WorkshopsFragment : BaseFragment() {
 
     private fun setUpListeners() {
         binding.ivSearch.setOnClickListener {
-            it.isVisible = false
-            binding.etSearch.isVisible = true
+            if (binding.cvFilter.isVisible) {
+                binding.cvFilter.isVisible = false
+                binding.tvTitle.text = "Available Workshops"
+            } else {
+                binding.cvFilter.isVisible = true
+                binding.tvTitle.text = "Filter Workshops"
+            }
         }
 
         binding.ivBack.setOnClickListener {

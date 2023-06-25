@@ -7,5 +7,5 @@ class WorkshopUseCase @Inject constructor(
     private val workshopRepository: WorkshopRepository
 ) {
 
-    suspend fun getWorkshopsList() = workshopRepository.getWorkshopsList()
+    suspend fun getWorkshopsList(type: String?) = workshopRepository.getWorkshopsList(type)
 }

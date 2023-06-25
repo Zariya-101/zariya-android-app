@@ -34,6 +34,19 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Available Workshops"
+                        android:textColor="@color/yellow_background"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/ivBack"
+                        app:layout_constraintEnd_toStartOf="@id/ivSearch"
+                        app:layout_constraintStart_toEndOf="@id/ivBack"
+                        app:layout_constraintTop_toTopOf="@id/ivBack" />
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etSearch"
                         android:layout_width="0dp"
@@ -43,10 +56,10 @@
                         android:drawableStart="@drawable/ic_search"
                         android:drawableEnd="@drawable/ic_filter"
                         android:drawablePadding="@dimen/_10sdp"
-                        android:drawableTint="@color/dark_blue"
                         android:hint="@string/search"
                         android:padding="@dimen/_10sdp"
                         android:visibility="gone"
+                        app:drawableTint="@color/dark_blue"
                         app:layout_constraintEnd_toStartOf="@id/ivCart"
                         app:layout_constraintStart_toEndOf="@id/ivBack"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/transparent"
-                        android:src="@drawable/ic_search"
+                        android:src="@drawable/ic_filter"
                         app:layout_constraintEnd_toStartOf="@id/ivCart"
                         app:layout_constraintTop_toTopOf="parent"
                         app:tint="@color/white" />
@@ -72,22 +85,32 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:tint="@color/white" />
 
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cvFilter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_5sdp"
+                        android:backgroundTint="@color/yellow_background"
+                        android:visibility="gone"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ivSearch">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvFilter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:itemCount="4"
+                            tools:listitem="@layout/item_filter_workshop" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </com.google.android.material.card.MaterialCardView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvFilter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/cvToolBarWorkshop"
-                tools:itemCount="4"
-                tools:listitem="@layout/item_filter_workshop" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvWorkshops"
@@ -97,7 +120,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/rvFilter"
+                app:layout_constraintTop_toBottomOf="@id/cvToolBarWorkshop"
                 tools:itemCount="4"
                 tools:listitem="@layout/item_workshop" />
 

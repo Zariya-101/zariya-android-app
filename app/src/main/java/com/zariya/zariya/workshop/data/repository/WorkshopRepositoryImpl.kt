@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.zariya.zariya.core.local.AppSharedPreference
 import com.zariya.zariya.core.network.NetworkResult
 import com.zariya.zariya.utils.COL_WORKSHOPS
+import com.zariya.zariya.utils.TYPE
 import com.zariya.zariya.workshop.data.model.Workshop
 import com.zariya.zariya.workshop.domain.repository.WorkshopRepository
 import kotlinx.coroutines.channels.awaitClose
@@ -19,9 +20,13 @@ class WorkshopRepositoryImpl @Inject constructor(
     private val preference: AppSharedPreference?
 ) : WorkshopRepository {
 
-    override suspend fun getWorkshopsList() = callbackFlow {
-        val listener = firestore.collection(COL_WORKSHOPS)
-            .get()
+    override suspend fun getWorkshopsList(type: String?) = callbackFlow {
+        val query = if (type.isNullOrEmpty().not()) {
+            firestore.collection(COL_WORKSHOPS).whereEqualTo(TYPE, type)
+        } else {
+            firestore.collection(COL_WORKSHOPS)
+        }
+        val listener = query.get()
             .addOnCompleteListener {
                 val result = if (it.isSuccessful) {
                     try {
@@ -38,7 +43,6 @@ class WorkshopRepositoryImpl @Inject constructor(
                 }
                 trySend(result)
             }
-
         awaitClose { listener }
     }
 }

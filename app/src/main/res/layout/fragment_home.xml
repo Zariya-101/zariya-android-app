@@ -44,7 +44,7 @@
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:background="@drawable/bg_edit_text"
                         android:drawableStart="@drawable/ic_search"
-                        android:drawableEnd="@drawable/ic_filter"
+                        android:drawableEnd="@drawable/ic_search"
                         android:drawablePadding="@dimen/_10sdp"
                         android:drawableTint="@color/dark_blue"
                         android:hint="@string/search"
@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/transparent"
-                        android:src="@drawable/ic_filter"
+                        android:src="@drawable/ic_search"
                         app:layout_constraintEnd_toStartOf="@id/ivNotification"
                         app:layout_constraintTop_toTopOf="parent"
                         app:tint="@color/white" />

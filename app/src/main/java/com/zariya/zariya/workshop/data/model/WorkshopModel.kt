@@ -16,5 +16,6 @@ data class Workshop(
     val endDate: String = "",
     val enrolledUsers: List<String> = emptyList(),
     val likes: Int = 0,
-    val reviews: List<String> = emptyList()
+    val reviews: List<String> = emptyList(),
+    val rating: Float = 0f
 ) : Parcelable
