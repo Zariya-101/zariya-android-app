@@ -1,131 +1,129 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/yellow_background"
-    tools:context=".auth.presentation.fragment.LocationFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvTop"
+    <data>
+
+        <variable
+            name="currentCity"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/dark_blue"
-        app:cardCornerRadius="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@color/yellow_background"
+        tools:context=".auth.presentation.fragment.LocationFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvTop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_blue"
+            app:cardCornerRadius="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvPickRegion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/pick_a_region"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_15sdp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/searchEditText"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginVertical="@dimen/_10sdp"
-                android:background="@drawable/bg_et_white"
-                android:drawableStart="@drawable/ic_search"
-                android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/dark_blue"
-                android:hint="@string/search_for_your_city"
-                android:inputType="text|textCapWords"
-                android:padding="@dimen/_10sdp"
-                android:textSize="@dimen/_15sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPickRegion" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+                android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvAutoDetect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:drawableStart="@drawable/outline_my_location_24"
-        android:drawablePadding="@dimen/_10sdp"
-        android:elevation="@dimen/_10sdp"
-        android:paddingHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_10sdp"
-        android:text="@string/auto_detect_my_location"
-        android:textColor="@color/dark_blue"
-        android:textSize="@dimen/_13sdp"
-        app:drawableTint="@color/dark_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvTop" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvPickRegion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@{currentCity != null ? currentCity: @string/pick_a_region}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/pick_a_region" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvPopularCities"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_10sdp"
-        android:text="@string/popular_cities"
-        android:textSize="@dimen/_14sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAutoDetect" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:background="@drawable/bg_et_white"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/search_for_your_city"
+                    android:inputType="text|textCapWords"
+                    android:padding="@dimen/_10sdp"
+                    android:textSize="@dimen/_15sdp"
+                    app:drawableTint="@color/dark_blue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPickRegion" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPopularCities"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_popular_city"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPopularCities"
-        app:spanCount="4" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvAutoDetect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableStart="@drawable/outline_my_location_24"
+            android:drawablePadding="@dimen/_10sdp"
+            android:elevation="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:text="@string/auto_detect_my_location"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/_13sdp"
+            app:drawableTint="@color/dark_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvTop" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvOtherCities"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_10sdp"
-        android:text="@string/other_cities"
-        android:textSize="@dimen/_14sdp"
-        app:layout_constraintTop_toBottomOf="@+id/rvPopularCities" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPopularCities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:text="@string/popular_cities"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAutoDetect" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvOtherCities"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/tvOtherCities"
-        tools:itemCount="4"
-        tools:listitem="@layout/item_other_city" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPopularCities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPopularCities"
+            app:spanCount="4"
+            tools:listitem="@layout/item_popular_city" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabSelectCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:backgroundTint="@color/dark_blue"
-        android:src="@drawable/ic_arrow_right"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/yellow_background" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvOtherCities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:text="@string/other_cities"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintTop_toBottomOf="@+id/rvPopularCities" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOtherCities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/tvOtherCities"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_other_city" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
