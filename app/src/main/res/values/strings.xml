@@ -195,6 +195,16 @@ That is the major difference between an actor which fits into reality and an act
         <item>Any</item>
     </string-array>
 
+    <string-array name="popular_cities_array">
+        <item>Mumbai</item>
+        <item>Delhi-NCR</item>
+        <item>Bengaluru</item>
+        <item>Hyderabad</item>
+        <item>Ahmedabad</item>
+        <item>Chandigarh</item>
+        <item>Chennai</item>
+    </string-array>
+
     <string-array name="agency_profile_tab">
         <item>ABOUT</item>
         <item>CASTING CALLS</item>

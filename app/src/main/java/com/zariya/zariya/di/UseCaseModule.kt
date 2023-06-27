@@ -9,6 +9,8 @@ import com.zariya.zariya.profile.domain.repository.ProfileRepository
 import com.zariya.zariya.profile.domain.usecase.ProfileUseCase
 import com.zariya.zariya.upload.domain.repository.UploadRepository
 import com.zariya.zariya.upload.domain.usecase.UploadUseCase
+import com.zariya.zariya.workshop.domain.repository.WorkshopRepository
+import com.zariya.zariya.workshop.domain.usecase.WorkshopUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,4 +42,10 @@ object UseCaseModule {
         profileRepository: ProfileRepository,
         preference: AppSharedPreference?
     ) = ProfileUseCase(profileRepository, preference)
+
+    @Provides
+    @ViewModelScoped
+    fun provideWorkshopUseCase(
+        workshopRepository: WorkshopRepository
+    ) = WorkshopUseCase(workshopRepository)
 }

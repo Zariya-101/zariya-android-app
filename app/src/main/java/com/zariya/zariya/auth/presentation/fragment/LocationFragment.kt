@@ -3,7 +3,6 @@ package com.zariya.zariya.auth.presentation.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ import com.zariya.zariya.utils.toCitiesList
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 
-
 @AndroidEntryPoint
 class LocationFragment : BaseFragment() {
 
@@ -34,17 +32,6 @@ class LocationFragment : BaseFragment() {
             R.drawable.mumbai, R.drawable.banglore, R.drawable.banglore,
             R.drawable.hyderabad, R.drawable.ahemdabad,
             R.drawable.chennai, R.drawable.chennai
-        )
-
-    private val cityNames =
-        arrayOf(
-            "Mumbai",
-            "Delhi-NCR",
-            "Bengaluru",
-            "Hyderabad",
-            "Ahmedabad",
-            "Chandigarh",
-            "Chennai"
         )
 
     override fun onCreateView(
@@ -64,16 +51,18 @@ class LocationFragment : BaseFragment() {
 
     private fun initView() {
         binding.rvPopularCities.apply {
-            adapter = PopularCitiesAdapter(cityNames, cityImages, onItemClick = {
-                authViewModel.currentCity = it
-            })
+            adapter = PopularCitiesAdapter(
+                resources.getStringArray(R.array.popular_cities_array), cityImages
+            ) {
+                authViewModel.updateCurrentCity(it)
+            }
         }
         binding.rvOtherCities.apply {
             context.getCities()?.let { cities ->
                 val jsonObject = JSONObject(cities)
                 val citiesList = jsonObject.getJSONArray("array").toCitiesList()
                 adapter = OtherCitiesAdapter(citiesList, onItemClick = {
-                    authViewModel.currentCity = it
+                    authViewModel.updateCurrentCity(it)
                 })
             }
         }
@@ -81,6 +70,14 @@ class LocationFragment : BaseFragment() {
 
     private fun setUpListeners() {
         uiEventListener()
+        authViewModel.currentCityLiveData.observe(viewLifecycleOwner) {
+            binding.currentCity = it
+            it?.let { city ->
+                authViewModel.updateUserLocation(city)
+            } ?: run {
+                Toast.makeText(context, "Please Select City", Toast.LENGTH_LONG).show()
+            }
+        }
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
@@ -88,13 +85,6 @@ class LocationFragment : BaseFragment() {
         })
         binding.tvAutoDetect.setOnClickListener {
 
-        }
-        binding.fabSelectCity.setOnClickListener {
-            if (authViewModel.currentCity.isNullOrEmpty().not()) {
-                authViewModel.updateUserLocation(authViewModel.currentCity!!)
-            } else {
-                Toast.makeText(context, "Please Select City", Toast.LENGTH_LONG).show()
-            }
         }
     }
 

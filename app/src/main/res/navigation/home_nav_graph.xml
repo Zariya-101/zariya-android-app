@@ -147,6 +147,11 @@
         android:name="com.zariya.zariya.workshop.presentation.fragment.WorkshopDetailsFragment"
         android:label="WorkshopDetailsFragment"
         tools:layout="@layout/fragment_workshop_details">
+        <argument
+            android:name="workshop"
+            android:defaultValue="@null"
+            app:argType="com.zariya.zariya.workshop.data.model.Workshop"
+            app:nullable="true" />
         <action
             android:id="@+id/actionWorkshopDetailtoCheckout"
             app:destination="@id/checkoutDetailsFragment" />

@@ -14,7 +14,7 @@
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_300sdp"
         android:layout_marginEnd="@dimen/_20sdp"
-        android:backgroundTint="@color/yellow_background"
+        android:backgroundTint="@color/white"
         app:cardCornerRadius="@dimen/_20sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:text="@{workshop.price}"
+                android:text="@{String.valueOf(workshop.discountedPrice)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="₹ 100" />
@@ -62,10 +62,10 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/transparent"
-                android:src="@drawable/ic_heart"
+                android:src="@drawable/ic_liked"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white" />
+                app:tint="@color/dark_blue" />
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                 android:src="@drawable/ic_add"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:tint="@color/dark_blue" />
+                app:tint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

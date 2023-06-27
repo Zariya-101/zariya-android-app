@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:src="@drawable/ic_heart"
+            android:src="@drawable/ic_liked"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cvPost"
             app:tint="@color/dark_blue" />

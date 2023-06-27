@@ -8,8 +8,10 @@ import com.zariya.zariya.R
 import com.zariya.zariya.databinding.ItemFilterWorkshopBinding
 import com.zariya.zariya.workshop.data.model.FilterWorkshops
 
-class FilterWorkshopsAdapter(private val list: List<FilterWorkshops>) :
-    RecyclerView.Adapter<FilterWorkshopsAdapter.FilterWorkshopsViewHolder>() {
+class FilterWorkshopsAdapter(
+    private val list: List<FilterWorkshops>,
+    private val onItemClicked: (FilterWorkshops) -> Unit
+) : RecyclerView.Adapter<FilterWorkshopsAdapter.FilterWorkshopsViewHolder>() {
 
     inner class FilterWorkshopsViewHolder(val binding: ItemFilterWorkshopBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -26,5 +28,13 @@ class FilterWorkshopsAdapter(private val list: List<FilterWorkshops>) :
 
     override fun onBindViewHolder(holder: FilterWorkshopsViewHolder, position: Int) {
         holder.binding.filter = list[position]
+        holder.binding.root.setOnClickListener {
+            list.forEach {
+                it.isSelected = false
+            }
+            list[position].isSelected = true
+            notifyDataSetChanged()
+            onItemClicked(list[position])
+        }
     }
 }

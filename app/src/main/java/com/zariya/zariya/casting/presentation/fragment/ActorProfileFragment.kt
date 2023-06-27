@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.zariya.zariya.casting.data.model.ActorProfile
 import com.zariya.zariya.casting.presentation.adapter.ActorImagesAdapter
@@ -31,10 +33,23 @@ class ActorProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
+        setUpListeners()
+    }
+
+    private fun initView() {
         args.actor?.let {
             populateActorDetails(it)
+            binding.fabFeeds.isVisible = false
         } ?: run {
             getActorData()
+            binding.fabFeeds.isVisible = true
+        }
+    }
+
+    private fun setUpListeners() {
+        binding.ivBack.setOnClickListener {
+            Navigation.findNavController(binding.root).popBackStack()
         }
     }
 
