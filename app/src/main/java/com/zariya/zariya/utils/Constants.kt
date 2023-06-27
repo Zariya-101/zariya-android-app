@@ -9,6 +9,7 @@ const val COL_AGENCIES = "agencies"
 const val COL_VOLUNTEERS = "volunteers"
 const val COL_CASTING_CALLS = "castingCalls"
 const val COL_WORKSHOPS = "workshops"
+const val COL_WORKSHOP_LIKES = "workshopLikes"
 
 //Fields
 const val ID = "id"
@@ -20,6 +21,8 @@ const val ROLE = "role"
 const val LOCATION = "location"
 const val WORKS_FOR = "worksFor"
 const val TYPE = "type"
+const val LIKES = "likes"
+const val WORKSHOP_ID = "workshopId"
 
 const val RC_SIGN_IN = 123
 

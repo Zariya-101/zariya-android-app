@@ -1,6 +1,8 @@
 package com.zariya.zariya.workshop.data.model
 
 import android.os.Parcelable
+import com.google.firebase.firestore.Exclude
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -18,4 +20,8 @@ data class Workshop(
     val likes: Int = 0,
     val reviews: List<String> = emptyList(),
     val rating: Float = 0f
-) : Parcelable
+) : Parcelable {
+    @IgnoredOnParcel
+    @get:Exclude
+    var workshopId: String? = ""
+}
